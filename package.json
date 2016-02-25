@@ -11,7 +11,8 @@
         "build": "NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
         "start-dev": "node server/development",
         "start": "node server/production",
-        "test": "./node_modules/.bin/tsc && ./node_modules/.bin/mocha  --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js"
+        "test": "./node_modules/.bin/tsc && ./node_modules/.bin/mocha  --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js",
+        "tt": "asd"
     },
     "dependencies": {
         "classnames": "2.2.3",
