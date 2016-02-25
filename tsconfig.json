@@ -1,16 +1,17 @@
 {
-  "version": "1.8.2",
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "jsx": "react",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "outDir": "dist"
-  },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+    "version": "1.8.2",
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "outDir": "dist"
+    },
+    "exclude": [
+        "dist",
+        "typings",
+        "node_modules"
+    ]
 }

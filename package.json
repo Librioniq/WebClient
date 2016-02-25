@@ -11,8 +11,7 @@
         "build": "NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
         "start-dev": "node server/development",
         "start": "node server/production",
-        "test": "./node_modules/.bin/tsc && ./node_modules/.bin/mocha  --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js",
-        "tt": "asd"
+        "test": "./node_modules/.bin/tsc && ./node_modules/.bin/mocha  --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js"
     },
     "dependencies": {
         "classnames": "2.2.3",
@@ -23,7 +22,8 @@
         "react-dom": "0.14.7",
         "react-redux": "4.4.0",
         "react-router": "2.0.0",
-        "react-router-redux": "^4.0.0",
+        "history": "2.0.0",
+        "react-router-redux": "4.0.0",
         "redux": "3.3.1",
         "redux-actions": "0.9.1",
         "serve-static": "1.10.0",

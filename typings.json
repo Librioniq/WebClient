@@ -1,0 +1,16 @@
+{
+  "ambientDependencies": {
+    "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#800a7047cf275cc9f695cbd116748cd408a09d6d",
+    "classnames": "github:DefinitelyTyped/DefinitelyTyped/classnames/classnames.d.ts#8287192198a14bcb31533afe381aa24ac7eed4c6",
+    "history": "github:DefinitelyTyped/DefinitelyTyped/react-router/history.d.ts#99f6493ffb1ef5479c6154ec9f82a47178bbf8b6",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#7b7aa2027a8fb6219a8bcf1b6bb12bcd0ff9539d",
+    "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
+    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#f407264835650f5f38d4bb2c515a79e7a835916b",
+    "react-dom": "github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts#ca5bfe76d2d9bf6852cbc712d9f3e0047c93486e",
+    "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#a513c4df6eb8505da8eef432891c8b69b73535d9",
+    "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#07feae11780495b90145451d48d4a50923762ef1",
+    "react-router-redux": "github:isman-usoh/DefinitelyTyped/react-router-redux/react-router-redux.d.ts#48f543f2e44fc7b5cebabb3ed18f5a064945b59a",
+    "redux": "github:DefinitelyTyped/DefinitelyTyped/redux/redux.d.ts#a820bbdead70913f0c750802b367ed54cb99b442",
+    "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/redux-actions.d.ts#c491b84f7aa7ebcc1c9b286f1aa085f29c79c1d6"
+  }
+}

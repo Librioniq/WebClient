@@ -4,5 +4,7 @@ node_modules/
 npm-debug.log
 build/stats-dev.json*
 tmp/
+typings/
+build/
 dist/
 .sw[a-z]

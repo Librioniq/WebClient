@@ -9,7 +9,7 @@ module.exports = function (options) {
 
     if (options.development) {
         entry = {
-            todos: [
+            bundle: [
                 'webpack-dev-server/client?http://0.0.0.0:2992',
                 'webpack/hot/only-dev-server',
                 './client/index'
@@ -17,7 +17,7 @@ module.exports = function (options) {
         };
     } else {
         entry = {
-            todos: './client/index'
+            bundle: './client/index'
         }
     }
 

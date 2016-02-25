@@ -14,7 +14,7 @@ module.exports = function(options) {
 
   var renderer = new Renderer({
     styleUrl: options.separateStylesheet && (publicPath + "todos.css?" + stats.hash),
-    scriptUrl: publicPath + [].concat(stats.assetsByChunkName.todos)[0]
+    scriptUrl: publicPath + [].concat(stats.assetsByChunkName.bundle)[0]
   });
 
   var app = express();
