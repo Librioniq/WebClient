@@ -28,11 +28,15 @@ module.exports = function (options) {
         },
         "ts|tsx": {
             loaders: ['react-hot', 'ts-loader']
+        },
+        "woff|woff2|ttf|eot|svg|png": {
+            loaders: ['file']
         }
     };
 
     var stylesheetLoaders = {
-        "css": 'css-loader'
+        "css": 'css-loader',
+        "scss": 'css-loader!sass'
     };
 
     var publicPath = options.development

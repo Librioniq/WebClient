@@ -13,7 +13,7 @@ module.exports = function(options) {
   var publicPath = stats.publicPath;
 
   var renderer = new Renderer({
-    styleUrl: options.separateStylesheet && (publicPath + "todos.css?" + stats.hash),
+    styleUrl: options.separateStylesheet && (publicPath + "bundle.css?" + stats.hash),
     scriptUrl: publicPath + [].concat(stats.assetsByChunkName.bundle)[0]
   });
 

@@ -7,15 +7,33 @@ import { Store, compose, createStore, bindActionCreators, combineReducers} from 
 import { connect, Provider} from 'react-redux';
 import { Action } from 'redux-actions';
 import { createHistory } from 'history'
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+
+import App  from './component/App';
+import Home  from './component/Home';
+import Test1  from './component/Test1';
+import Test2  from './component/Test2';
 
 
 const initialState = {};
+const reducer = combineReducers({
+    routing: routerReducer
+});
+const store: Store = createStore(reducer, initialState);
+const history = syncHistoryWithStore(browserHistory, store);
 
-// const store: Store = createStore(rootReducer, initialState);
-
-// ReactDOM.render(
-//     <Provider store={store}></Provider>,
-//     document.getElementById('app')
-// );
+ReactDOM.render(
+    (
+        <Provider store={store}>
+        <Router history={history}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Home}/>
+          <Route path="t1" component={Test1}/>
+          <Route path="t2" component={Test2}/>
+            </Route>
+            </Router>
+            </Provider>
+    ),
+    document.getElementById('app')
+);
