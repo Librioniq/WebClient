@@ -1,0 +1,12 @@
+.text {
+    color: #222426;
+}
+
+a {
+    color: #0077CC;
+    text-decoration: none;
+}
+
+.date, .time {
+  color: #999;
+}

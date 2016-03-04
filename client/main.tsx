@@ -14,7 +14,7 @@ import App  from './component/App';
 import Home  from './component/Home';
 import Test1  from './component/Test1';
 import Test2  from './component/Test2';
-import Comment from './component/Comment';
+import Comment from './component/comment/Comment';
 
 
 const initialState = {};

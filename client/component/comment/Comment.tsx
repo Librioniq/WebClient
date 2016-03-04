@@ -19,10 +19,10 @@ class Comment extends React.Component<{
   }
 
     render() {
-        const author = 'KobeJohn',
-              content = 'If you come back to this, maybe you should change the accepted answer from diaspora.',
-              date = 'Feb 5 12',
-              time = '13:35';
+        const author = this.props.author || 'KobeJohn',
+              content = this.props.content || 'If you come back to this, maybe you should change the accepted answer from diaspora.',
+              date = this.props.date || 'Feb 5 12',
+              time = this.props.time || '13:35';
         return (
             <div className="comment">
               <span className={styles.text}>{content} - </span>
