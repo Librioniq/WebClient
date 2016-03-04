@@ -35,7 +35,7 @@ module.exports = function (options) {
     };
 
     var stylesheetLoaders = {
-        "css": 'css-loader',
+        "css": 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         "scss": 'css-loader!sass'
     };
 

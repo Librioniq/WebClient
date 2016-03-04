@@ -8,9 +8,9 @@ interface ContentProperties extends ParentProperties<any, any> {
 class Content extends React.Component<ContentProperties, void>{
     render() {
         return (
-            <div className="row">
-            {this.props.children}
-                </div>
+            <div>
+              {this.props.children}
+            </div>
         );
     }
 }

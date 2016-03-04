@@ -11,11 +11,11 @@ class App extends React.Component<AppProperties, void>{
         console.log(this.props.children);
         return (
             <section className="main">
-            <NavigationBar/>
-            <Content>
-            {this.props.children}
-            </Content>
-                </section>
+              <NavigationBar/>
+              <Content>
+                {this.props.children}
+              </Content>
+            </section>
         );
     }
 }

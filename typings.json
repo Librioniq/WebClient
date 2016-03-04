@@ -11,6 +11,7 @@
     "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#07feae11780495b90145451d48d4a50923762ef1",
     "react-router-redux": "github:isman-usoh/DefinitelyTyped/react-router-redux/react-router-redux.d.ts#48f543f2e44fc7b5cebabb3ed18f5a064945b59a",
     "redux": "github:DefinitelyTyped/DefinitelyTyped/redux/redux.d.ts#a820bbdead70913f0c750802b367ed54cb99b442",
-    "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/redux-actions.d.ts#c491b84f7aa7ebcc1c9b286f1aa085f29c79c1d6"
+    "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/redux-actions.d.ts#c491b84f7aa7ebcc1c9b286f1aa085f29c79c1d6",
+    "require": "github:DefinitelyTyped/DefinitelyTyped/requirejs/require.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c"
   }
 }
