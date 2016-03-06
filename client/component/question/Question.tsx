@@ -1,5 +1,7 @@
 import * as React from "react";
 import Comment from '../comment/Comment';
+import Tags from '../Tags';
+const color:any = require('../../css/color.css');
 
 interface CommentProps {
   author?: string;
@@ -10,13 +12,23 @@ interface CommentProps {
 
 interface CommentArray {
     [index: number]: CommentProps;
+    length: number;
+}
+
+interface Tag {
+    name: string;
+}
+
+interface TagArray {
+    [index: number]: string;
+    length: number;
 }
 
 interface QuestionProps {
     comments?: CommentArray;
     title?: string;
     content?: string;
-    tags?: string;
+    tags?: string[];
     author?: string;
 }
 
@@ -50,9 +62,9 @@ class Question extends React.Component<QuestionProps, QuestionState>{
         this.props.title = 'Why shouldnt I use mysql_* functions in PHP?';
         this.props.content = 'Why should I use something else even if they work on my site?';
         this.props.author = 'Madara Uchiha';
-        this.props.tags = 'HLO DVO mysql database';
+        this.props.tags = ['HLO', 'DVO', 'mysql', 'database'];
 
-        const hasComments = comments.length > 0
+        const hasComments = comments.length > 0;
         const nodes = !hasComments ?
           <em></em> :
           comments.map(comment =>
@@ -68,7 +80,7 @@ class Question extends React.Component<QuestionProps, QuestionState>{
               <h1>{this.props.title}</h1>
               <hr />
               <div>{this.props.content}</div>
-              <div>{this.props.tags}</div>
+              <Tags tags={this.props.tags}/>
               <div>{this.props.author}</div>
               <hr />
               <div>{nodes}</div>

@@ -18,6 +18,12 @@ h1 {
     font-size: 2vw;
 }
 
+.box {
+    margin: .5em;
+    padding: .4em .5em;
+    display: inline-block;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
