@@ -20,10 +20,12 @@ class Tags extends React.Component<TagsProps, any> {
     }
 
     render() {
+        var classes = 'box ' + color.secondary;
+        var tags = this.props.tags.map(tag => <div className={classes}>{tag}</div>);
         return (
             <div>
-                this.props.tags.map(tag => <div className='box {color.secondary}'>tag</div>)
-            {this.props.tags}</div>
+                {tags}
+            </div>
         );
     }
 }
