@@ -1,22 +1,22 @@
 import * as React from "react";
-// import * as styles from 'comment.css';
+const color:any = require('../../css/color.css');
 
-// declare var require: {
-//     <T>(path: string): T;
-// };
+interface CommentProps {
+  author?: string;
+  content?: string,
+  date?: string;
+  time?: string;
+}
 
-const styles:any = require('./comment.css');
+interface CommentState {
+  text: string;
+}
 
-class Comment extends React.Component<{
-  author: 'KobeJohn',
-  content: 'If you come back to this, maybe you should change the accepted answer from diaspora.',
-  date: 'Feb 5 12',
-  time: '13:35'
-}, void>{
+class Comment extends React.Component<CommentProps, CommentState>{
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         const author = this.props.author || 'KobeJohn',
@@ -25,10 +25,10 @@ class Comment extends React.Component<{
               time = this.props.time || '13:35';
         return (
             <div className="comment">
-              <span className={styles.text}>{content} - </span>
-              <a href="link_to_user" className="author">{author}</a>
-              <span className={styles.date}> {date}</span>
-              <span className={styles.time}> at {time}</span>
+              <span>{content} - </span>
+              <a href="link_to_user" className={color.link}>{author}</a>
+              <span className={color.light}> {date}</span>
+              <span className={color.light}> at {time}</span>
             </div>
         );
     }

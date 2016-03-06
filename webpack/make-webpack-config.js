@@ -117,6 +117,7 @@ module.exports = function (options) {
             sourceMapFilename: "debugging/[file].map",
             pathinfo: options.debug
         },
+        watch: true,
         target: 'web',
         module: {
             loaders: loadersByExtension(loaders).concat(loadersByExtension(stylesheetLoaders))

@@ -15,6 +15,7 @@ import Home  from './component/Home';
 import Test1  from './component/Test1';
 import Test2  from './component/Test2';
 import Comment from './component/comment/Comment';
+import Question from './component/question/Question';
 
 
 const initialState = {};
@@ -32,6 +33,7 @@ ReactDOM.render(
             <IndexRoute component={Home}/>
             <Route path="t1" component={Test1}/>
             <Route path="comment" component={Comment}/>
+            <Route path="question" component={Question}/>
               <Route path="t2" component={Test2}/>
               </Route>
           </Router>
