@@ -14,8 +14,8 @@ import App  from './component/App';
 import Home  from './component/Home';
 import Test1  from './component/Test1';
 import Test2  from './component/Test2';
-import Comment from './component/comment/Comment';
-import Question from './component/question/Question';
+import Comment from './component/Comment';
+import Question from './component/Question';
 import Answer from './component/Answer';
 
 

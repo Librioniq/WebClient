@@ -1,7 +1,7 @@
 import * as React from "react";
-import Comment from '../comment/Comment';
-import Tags from '../Tags';
-const color:any = require('../../css/color.css');
+import Comment from './Comment';
+import Tag from './Tag';
+const color:any = require('../css/color.css');
 
 interface CommentProps {
   author?: string;
@@ -12,15 +12,6 @@ interface CommentProps {
 
 interface CommentArray {
     [index: number]: CommentProps;
-    length: number;
-}
-
-interface Tag {
-    name: string;
-}
-
-interface TagArray {
-    [index: number]: string;
     length: number;
 }
 
@@ -47,7 +38,7 @@ class Question extends React.Component<QuestionProps, QuestionState>{
 
     render() {
         // var comments = this.props.comments;
-        var comments = [{
+        const comments = [{
             author: 'KobeJohn',
             content: 'If you come back to this, maybe you should change the accepted answer from diaspora.',
             date: 'Feb 5 12',
@@ -62,7 +53,14 @@ class Question extends React.Component<QuestionProps, QuestionState>{
         this.props.title = 'Why shouldnt I use mysql_* functions in PHP?';
         this.props.content = 'Why should I use something else even if they work on my site?';
         this.props.author = 'Madara Uchiha';
-        this.props.tags = ['HLO', 'DVO', 'mysql', 'database'];
+        const tags = ['HLO', 'DVO', 'mysql', 'database'];
+
+        const hasTags = tags.length > 0;
+        const tagNodes = !hasTags ?
+            <em></em> :
+            tags.map(tag =>
+                <Tag name={tag} />
+            );
 
         const hasComments = comments.length > 0;
         const nodes = !hasComments ?
@@ -73,14 +71,14 @@ class Question extends React.Component<QuestionProps, QuestionState>{
               content={comment.content}
               date={comment.date}
               time={comment.time} />
-        )
+          );
 
         return (
             <div>
               <h1>{this.props.title}</h1>
               <hr />
               <div>{this.props.content}</div>
-              <Tags tags={this.props.tags}/>
+              <div>{tagNodes}</div>
               <div>{this.props.author}</div>
               <hr />
               <div>{nodes}</div>

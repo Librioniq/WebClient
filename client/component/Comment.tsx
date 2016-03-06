@@ -1,5 +1,5 @@
 import * as React from "react";
-const color:any = require('../../css/color.css');
+const color:any = require('../css/color.css');
 
 interface CommentProps {
   author?: string;

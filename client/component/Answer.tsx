@@ -1,5 +1,5 @@
 import * as React from "react";
-import Comment from './comment/Comment';
+import Comment from './Comment';
 const color:any = require('../css/color.css');
 
 interface CommentProps {
@@ -11,11 +11,6 @@ interface CommentProps {
 
 interface CommentArray {
     [index: number]: CommentProps;
-    length: number;
-}
-
-interface TagArray {
-    [index: number]: string;
     length: number;
 }
 
