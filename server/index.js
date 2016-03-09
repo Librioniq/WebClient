@@ -1,18 +1,28 @@
-var path = require('path');
+
+var fs = require("fs");
+var path = require("path");
+var html = fs.readFileSync(path.resolve(__dirname, "../src/index.html"), "utf-8");
 var express = require('express');
 var http = require('http');
 var serveStatic = require('serve-static');
 var config = require('./config');
 
 module.exports = function(options) {
-    var Renderer = require("../config/SimpleRenderer.js");
+    function SimpleRenderer(options) {
+        this.html = html
+            .replace("STYLE_URL", options.styleUrl)
+            .replace("SCRIPT_URL", options.scriptUrl);
+    }
 
+    SimpleRenderer.prototype.render = function(_path, callback) {
+        callback(null, this.html);
+    };
     // load bundle information from stats
     var stats = options.devServer ? require("../static/dist/stats.json") : require("../static/dist/stats.json");
 
     var publicPath = stats.publicPath;
 
-    var renderer = new Renderer({
+    var renderer = new SimpleRenderer({
         styleUrl: options.separateStylesheet && ("_assets/" + [].concat(stats.assetsByChunkName.main)[1]),
         scriptUrl: "_assets/" + [].concat(stats.assetsByChunkName.main)[0]
     });
