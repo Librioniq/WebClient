@@ -8,4 +8,5 @@ tmp/
 typings/
 build/
 dist/
+web
 .sw[a-z]

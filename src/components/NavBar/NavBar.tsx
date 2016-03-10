@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-class NavigationBar extends React.Component<{}, void> {
-    render() {
+export class NavBar extends React.Component<{}, void> {
+    public render() {
         return (
             <nav className="navbar navbar-default" role="navigation">
                 <div className="container">
@@ -11,15 +11,15 @@ class NavigationBar extends React.Component<{}, void> {
                             <span className="icon-bar"/>
                             <span className="icon-bar"/>
                             <span className="icon-bar"/>
-                            </button>
+                        </button>
                         <a className="navbar-brand" href="#/">
                             <span className="navbar-version">v0.0.1</span>
-                            </a>
+                        </a>
                     </div>
-                    </div>
+                </div>
             </nav>
         );
     }
 }
 
-export default NavigationBar;
+export default NavBar;
