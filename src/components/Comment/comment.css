@@ -1,3 +1,11 @@
 .comment {
-    border-bottom: 0 solid #ccc;
+    border-bottom: solid 1px #DEE2E7;
+    padding: 0vw 5vw 2vw;
+
+}
+
+@media (min-width: 421) {
+    .comment {
+        padding: 0vw 3vw 3vw;
+    }
 }

@@ -1,6 +1,9 @@
+'use strict';
+
 import * as React from "react";
 
-const styles: any = require('./Comment.scss');
+const styles: any = require('./comment.css');
+const color: any = require('../../theme/color.css');
 
 export class Comment extends React.Component<{
     author: 'KobeJohn',
@@ -19,11 +22,11 @@ export class Comment extends React.Component<{
             date = 'Feb 5 12',
             time = '13:35';
         return (
-            <div className="comment">
-                <span className={styles.text}>{content} - </span>
-                <a href="link_to_user" className="author">{author}</a>
-                <span className={styles.date}> {date}</span>
-                <span className={styles.time}> at {time}</span>
+            <div className={styles.comment}>
+                <span>{content} - </span>
+                <a href="link_to_user" className={color.link}>{author}</a>
+                <span className={color.helper}> {date}</span>
+                <span className={color.helper}> at {time}</span>
             </div>
         );
     }
