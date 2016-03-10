@@ -18,19 +18,19 @@ module.exports = function(options) {
         callback(null, this.html);
     };
     // load bundle information from stats
-    var stats = options.devServer ? require("../static/dist/stats.json") : require("../static/dist/stats.json");
+    var stats = require("../webpack-assets.json")
 
     var publicPath = stats.publicPath;
 
     var renderer = new SimpleRenderer({
-        styleUrl: options.separateStylesheet && ("_assets/" + [].concat(stats.assetsByChunkName.main)[1]),
-        scriptUrl: "_assets/" + [].concat(stats.assetsByChunkName.main)[0]
+        styleUrl: "_assets" + stats.styles.main,
+        scriptUrl: "_assets" + stats.javascript.main
     });
 
     var app = express();
 
     // serve the static assets
-    app.use("/_assets", express.static(path.join(__dirname, "..", "static", "dist"), {
+    app.use("/_assets/dist", express.static(path.join(__dirname, "..", "static", "dist"), {
         maxAge: "200d" // We can cache them as they include hashes
     }));
     app.use("/", express.static(path.join(__dirname, ".."), {

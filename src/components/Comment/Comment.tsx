@@ -12,13 +12,13 @@ export class Comment extends React.Component<{
     content: 'If you come back to this, maybe you should change the accepted answer from diaspora.',
     date: 'Feb 5 12',
     time: '13:35'
-}, void>{
+}, void> {
 
     constructor(props) {
         super(props);
     }
 
-    render() {
+    public render() {
         const author = 'KobeJohn',
             content = 'If you come back to this, maybe you should change the accepted answer from diaspora.',
             date = 'Feb 5 12',

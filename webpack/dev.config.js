@@ -80,7 +80,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader'] },
+            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader', 'tslint'] },
             { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'] },
             { test: /\.json$/, loader: 'json-loader' },
             { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
@@ -103,6 +103,17 @@ module.exports = {
         ],
         extensions: ['', '.json', '.ts', '.tsx', '.js']
     },
+    tslint: {
+        emitErrors: false,
+        failOnHint: true,
+        fileOutput: {
+            dir: path.resolve(assetsPath, "lint"),
+            ext: "xml",
+            clean: true,
+            header: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<checkstyle version=\"5.7\">",
+            footer: "</checkstyle>"
+        }
+    },
     plugins: [
         // hot reload
         new webpack.HotModuleReplacementPlugin(),
@@ -112,10 +123,6 @@ module.exports = {
             __SERVER__: false,
             __DEVELOPMENT__: true,
             __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
-        }),
-
-        new StatsPlugin(path.join(assetsPath, "stats-dev.json"), {
-            chunkModules: true
         }),
 
         webpackIsomorphicToolsPlugin.development()

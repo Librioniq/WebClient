@@ -6,7 +6,6 @@ var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
-var StatsPlugin = require("stats-webpack-plugin");
 
 var projectRootPath = path.resolve(__dirname, '../');
 var assetsPath = path.resolve(projectRootPath, './static/dist');
@@ -34,7 +33,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel'] },
-            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader'] },
+            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader', 'tslint'] },
             { test: /\.json$/, loader: 'json-loader' },
             { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
             { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
@@ -55,6 +54,17 @@ module.exports = {
             'bower_components'
         ],
         extensions: ['', '.json', '.ts', '.tsx', '.js']
+    },
+    tslint: {
+        emitErrors: false,
+        failOnHint: false,
+        fileOutput: {
+            dir: path.resolve(assetsPath, "..", "lint"),
+            ext: "xml",
+            clean: true,
+            header: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<checkstyle version=\"5.7\">",
+            footer: "</checkstyle>"
+        }
     },
     plugins: [
         new CleanPlugin([assetsPath], { root: projectRootPath }),
@@ -82,10 +92,6 @@ module.exports = {
             compress: {
                 warnings: false
             }
-        }),
-
-        new StatsPlugin(path.join(assetsPath, "stats.json"), {
-            chunkModules: true
         }),
 
         webpackIsomorphicToolsPlugin

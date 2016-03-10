@@ -2,15 +2,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Store, compose, createStore, bindActionCreators, combineReducers} from 'redux';
-import { connect, Provider} from 'react-redux';
+import { Store, compose, createStore, bindActionCreators, combineReducers } from 'redux';
+import { connect, Provider } from 'react-redux';
 import { Action } from 'redux-actions';
-import { createHistory } from 'history'
+import { createHistory } from 'history';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
-import {App, Home}  from './containers';
-import {Comment} from './components';
+import { App, Home }  from './containers';
+import { Comment } from './components';
 
 
 const initialState = {};

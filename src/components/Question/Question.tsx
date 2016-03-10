@@ -1,12 +1,12 @@
 import * as React from "react";
 
-export class Question extends React.Component<{}, void>{
+export class Question extends React.Component<{}, void> {
 
     constructor(props) {
         super(props);
     }
 
-    render() {
+    public render() {
         const author = 'KobeJohn',
             content = 'If you come back to this, maybe you should change the accepted answer from diaspora.',
             date = 'Feb 5 12',
