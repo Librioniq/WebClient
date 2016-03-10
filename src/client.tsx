@@ -2,19 +2,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Store, compose, createStore, bindActionCreators, combineReducers } from 'redux';
-import { connect, Provider } from 'react-redux';
-import { Action } from 'redux-actions';
-import { createHistory } from 'history';
+import { Store } from 'redux';
+import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import reducer from './redux/modules/reducer';
+import configureStore from './redux/create';
+
 import { App, Home }  from './containers';
-import { Comment } from './components';
+import { Comment, Question } from './components';
 
 
 const initialState = {};
-const store: Store = createStore(reducer, initialState);
+const store: Store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
@@ -24,6 +23,7 @@ ReactDOM.render(
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
                     <Route path="comment" component={Comment}/>
+                    <Route path="question" component={Question}/>
                 </Route>
             </Router>
         </Provider>

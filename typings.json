@@ -12,6 +12,10 @@
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160225231409",
     "redux": "registry:dt/redux#1.0.0+20160201195450",
     "redux-actions": "registry:dt/redux-actions#0.8.0+20150915051529",
+    "redux-devtools": "registry:dt/redux-devtools#3.0.0+20151215130854",
+    "redux-devtools-dock-monitor": "registry:dt/redux-devtools-dock-monitor#1.0.1+20151216103641",
+    "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641",
+    "redux-thunk": "registry:dt/redux-thunk#0.0.0+20160124074431",
     "require": "registry:dt/require#2.1.20+20160215162030"
   }
 }
