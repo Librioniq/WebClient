@@ -7,16 +7,14 @@ import { connect, Provider } from 'react-redux';
 import { Action } from 'redux-actions';
 import { createHistory } from 'history';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore } from 'react-router-redux';
+import reducer from './redux/modules/reducer';
 
 import { App, Home }  from './containers';
 import { Comment } from './components';
 
 
 const initialState = {};
-const reducer = combineReducers({
-    routing: routerReducer
-});
 const store: Store = createStore(reducer, initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
