@@ -1,9 +1,4 @@
 import * as React from "react";
-// import * as styles from 'comment.css';
-
-// declare var require: {
-//     <T>(path: string): T;
-// };
 
 const styles: any = require('./Comment.scss');
 
