@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<checkstyle version="5.7">[5, 17]: unused variable: 'compose'
-[5, 39]: unused variable: 'bindActionCreators'
-[5, 59]: unused variable: 'combineReducers'
-[6, 10]: unused variable: 'connect'
-[7, 10]: unused variable: 'Action'
-[8, 10]: unused variable: 'createHistory'
-</checkstyle>

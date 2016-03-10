@@ -3,10 +3,9 @@
 node_modules/
 bower_components/
 npm-debug.log
-build/stats-dev.json*
+webpack-assets.json*
 tmp/
 typings/
-build/
-dist/
+static/
 web
 .sw[a-z]

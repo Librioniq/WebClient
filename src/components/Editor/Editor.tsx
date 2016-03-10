@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {onChangeContent} from  '../../redux/modules/editor';
 
-// const styles = require("Editor.scss");
+const styles = require("./Editor.scss");
 
 interface EditorProps extends React.Props<Editor> {
     content?: string;
@@ -20,7 +20,7 @@ export class Editor extends React.Component<EditorProps, void> {
         return (
             <section>
                 <div>
-                    <textarea className="form-control" rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
+                    <textarea className={`form-control ${styles.editor__textarea}`} rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
                 </div>
                 <div className="well">{content}</div>
             </section>

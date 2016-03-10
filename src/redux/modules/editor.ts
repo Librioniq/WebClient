@@ -1,4 +1,3 @@
-import {assign} from 'lodash';
 const CONTENT_CHANGED = 'editor/CONTENT_CHANGED';
 
 interface EditorState {
@@ -12,9 +11,9 @@ const initialState: EditorState = {
 export function reducer(state: EditorState = initialState, action: any = {}): EditorState {
     switch (action.type) {
         case CONTENT_CHANGED:
-            return assign(state, {
+            return {
                 content: action.content
-            }) as EditorState;
+            };
         default:
             return state;
     }
