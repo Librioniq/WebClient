@@ -1,7 +1,9 @@
 {
   "ambientDependencies": {
-    "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#800a7047cf275cc9f695cbd116748cd408a09d6d",
-    "classnames": "github:DefinitelyTyped/DefinitelyTyped/classnames/classnames.d.ts#8287192198a14bcb31533afe381aa24ac7eed4c6",
+    "assertion-error": "registry:dt/assertion-error#1.0.0+20141105053942",
+    "classnames": "registry:dt/classnames#0.0.0+20150923160543",
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160221190517",
+    "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160218094246",
     "lodash": "registry:dt/lodash#3.10.0+20160127144039",
     "mocha": "registry:dt/mocha#2.2.5+20151023103246",
     "react": "registry:dt/react#0.14.0+20160302224448",
