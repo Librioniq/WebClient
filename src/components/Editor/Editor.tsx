@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {onChangeContent} from  '../../redux/modules/editor';
 
-// const styles = require("Editor.scss");
+const styles = require("./Editor.scss");
 
 interface EditorProps extends React.Props<Editor> {
     content?: string;
@@ -12,19 +12,25 @@ interface EditorProps extends React.Props<Editor> {
 
 @connect(
     state => ({ content: state.editor.content }),
-    dispatch => bindActionCreators({ onChangeContent }, dispatch))
-export class Editor extends React.Component<EditorProps, void>{
+    dispatch => bindActionCreators({ onChangeContent }, dispatch)
+)
+export class Editor extends React.Component<EditorProps, void> {
     public render() {
-        const {content, onChangeContent} = this.props;
+        const {content} = this.props;
         return (
             <section>
                 <div>
-                    <textarea className="form-control" rows="3" onChange={onChangeContent} value={content}/>
+                    <textarea className={`form-control ${styles.editor__textarea}`} rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
                 </div>
-                <div class="well">{content}</div>
+                <div className="well">{content}</div>
             </section>
         );
     }
+
+    private onChangeContent(e: Event) {
+        const {onChangeContent} = this.props;
+        onChangeContent((e.currentTarget as HTMLTextAreaElement).value);
+    };
 }
 
 export default Comment;
