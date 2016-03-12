@@ -1,7 +1,16 @@
+html {
+    display: flex;
+}
+
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222426;
+    display: flex;
+
+    > * {
+        dispal: flex;
+    }
 }
 
 a {
@@ -9,13 +18,7 @@ a {
 }
 
 h1 {
-    font-size: 2vw;
-}
-
-.box {
-    margin: .5em;
-    padding: .4em .5em;
-    display: inline-block;
+    font-size: 5vw;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
