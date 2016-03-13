@@ -19,9 +19,9 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
     entry: {
         'main': [
-            'bootstrap-sass!./src/theme/bootstrap.config.prod.js',
-            'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
-            './src/client.tsx'
+            'bootstrap-sass!./src/main/client/theme/bootstrap.config.prod.js',
+            'font-awesome-webpack!./src/main/client/theme/font-awesome.config.prod.js',
+            './src/main/client.tsx'
         ]
     },
     output: {

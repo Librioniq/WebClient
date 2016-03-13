@@ -67,9 +67,9 @@ module.exports = {
     entry: {
         'main': [
             'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-            'bootstrap-sass!./src/theme/bootstrap.config.js',
-            'font-awesome-webpack!./src/theme/font-awesome.config.js',
-            './src/client.tsx'
+            'bootstrap-sass!./src/main/client/theme/bootstrap.config.js',
+            'font-awesome-webpack!./src/main/client/theme/font-awesome.config.js',
+            './src/main/client.tsx'
         ]
     },
     output: {
@@ -80,7 +80,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader', 'tslint'] },
+            { test: /\.tsx?$/, exclude: [/node_modules/, /typings/], loaders: ['ts-loader', 'tslint'] },
             { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'] },
             { test: /\.json$/, loader: 'json-loader' },
             { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },

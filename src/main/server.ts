@@ -22,7 +22,7 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }));
 app.use(bodyParser.json());
-app.use(...api);
+app.use("/api", ...api);
 
 // app.use((req, res) => {
 //     const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);

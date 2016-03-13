@@ -7,7 +7,6 @@
         "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outFile": "bin/app.js",
         "outDir": "bin/"
     },
     "exclude": [
