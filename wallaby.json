@@ -1,9 +1,9 @@
 {
     "files": [
-        "src/main/**/*.js"
+        "src/main/**/*.ts"
     ],
     "tests": [
-        "src/test/**/*.test.ts"
+        "src/test/**/*.ts"
     ],
     "testFramework": "mocha",
     "env": {

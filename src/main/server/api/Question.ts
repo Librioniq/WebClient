@@ -14,7 +14,7 @@ const dummyQuestion: Question = {
 export const router = Router();
 
 router.get("/questions", () => [dummyQuestion]);
-router.get("/questions/:id", (req, res, id) => (!req.body && id) ? res.status(200).json(dummyQuestion) : res.status(404).end('NOT FOUND'));
+router.get("/questions/:id", (req, res, id) => (id) ? res.status(200).json(dummyQuestion).end() : res.status(404).end('NOT FOUND'));
 router.post("/questions", (req, res) => (req.body && req.body.id === undefined) ? res.status(200).json(dummyQuestion) : res.status(404).end('NOT FOUND'));
 router.put("/questions", (req, res) => (req.body && req.body.id !== undefined) ? res.status(200).json(dummyQuestion) : res.status(404).end('NOT FOUND'));
 router.delete("/questions/:id", (req, res, id) => (!req.body && id) ? res.status(200).json(dummyQuestion) : res.status(404).end('NOT FOUND'));
