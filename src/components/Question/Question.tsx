@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import Comment from '../Comment/Comment.tsx';
+import Editor from '../Editor/Editor.tsx';
 
 const css: any = require('./question.scss');
 const color: any = require('../../theme/color.css');
@@ -78,6 +79,7 @@ export class Question extends React.Component<QuestionProps, void> {
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{author}</section>
                 <section className={css.comments}>{comments}</section>
+                <Editor />
             </div>
         );
     }

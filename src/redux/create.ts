@@ -12,9 +12,11 @@ const enhancer = compose(
         String(window.location.href.match(
             /[?&]debug_session=([^&#]+)\b/
         ))
-    ),
-    DevTools.instrument()
+    )
 );
+
+// ,
+// DevTools.instrument()
 
 console.log(enhancer);
 console.log(thunk);
