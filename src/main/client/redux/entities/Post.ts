@@ -3,6 +3,7 @@ export interface Post {
     content: string;
     createdDate?: Date;
     createdBy?: any;
-    modifiedDate?: Date;
-    modifiedBy?: any;
+    lastModifiedDate?: Date;
+    lastModifiedBy?: any;
+    rating: number;
 }
