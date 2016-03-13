@@ -15,28 +15,6 @@
     }
 }
 
-.title {
-    display: flex;
-    font-size: 5vw;
-}
-
-.tags {
-    display: flex;
-}
-
-.tag {
-    margin: 2px 2px 2px 0;
-    padding: 0 2vw;
-
-    background: #f7fdff;
-    border: 1px solid #c0d4db;
-    border-radius: 14px;
-
-    color: #566e76;
-    text-align: center;
-    font-weight: normal;
-}
-
 .content {
     padding: 2vw;
     border-bottom: 1px solid #DEE6EF;
@@ -54,10 +32,6 @@
 }
 
 @media screen and (min-width: 841px) {
-    .title {
-        font-size: 3vw;
-    }
-
     .content {
         font-size: 2vw;
     }

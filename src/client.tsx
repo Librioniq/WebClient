@@ -9,7 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './redux/create';
 
 import { App, Home }  from './containers';
-import { Comment, Question } from './components';
+import { Comment, Question, Answer } from './components';
 
 
 const initialState = {};
@@ -24,6 +24,7 @@ ReactDOM.render(
                     <IndexRoute component={Home}/>
                     <Route path="comment" component={Comment}/>
                     <Route path="question" component={Question}/>
+                    <Route path="answer" component={Answer}/>
                 </Route>
             </Router>
         </Provider>
