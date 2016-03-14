@@ -25,10 +25,10 @@ export function put(obj: any): RequestInit {
 
 
 export function remove(url: string, obj?: any): IRequest {
-    return new Request(`${url}?${Object.keys(obj).map(key => `${key}=${obj[key]}`).join("&")}`, { method: "delete" });
+    return new Request(`${url}?${obj && Object.keys(obj).map(key => `${key}=${obj[key]}`).join("&")}`, { method: "delete" });
 }
 
 
 export function get(url: string, obj?: any): IRequest {
-    return new Request(`${url}?${Object.keys(obj).map(key => `${key}=${obj[key]}`).join("&")}`);
+    return new Request(`${url}?${obj && Object.keys(obj).map(key => `${key}=${obj[key]}`).join("&")}`);
 }

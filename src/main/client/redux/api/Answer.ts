@@ -4,7 +4,7 @@ import {Answer} from '../entities';
 
 export class AnswerApi extends PostApi<Answer> {
     constructor() {
-        super("");
+        super("http://localhost:8082/api/answer");
     }
 }
 

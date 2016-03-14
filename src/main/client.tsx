@@ -8,7 +8,7 @@ import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './client/redux/create';
 
-import Routes from './client/routes';
+import routes from './client/routes';
 
 const initialState = {};
 const store: Store = configureStore(initialState);
@@ -17,9 +17,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 ReactDOM.render(
     (
         <Provider store={store}>
-            <Router history={history}>
-                <Routes/>
-            </Router>
+            <Router history={history} routes={routes}/>
         </Provider>
     ),
     document.getElementById('app')

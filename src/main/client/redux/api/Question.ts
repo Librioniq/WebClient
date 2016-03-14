@@ -4,7 +4,7 @@ import {Question} from '../entities';
 
 export class QuestionApi extends PostApi<Question> {
     constructor() {
-        super("");
+        super("http://localhost:8082/api/questions");
     }
 }
 

@@ -1,4 +1,5 @@
 import {Question} from '../entities';
+import {Question as Api} from '../api';
 import {merge} from 'lodash';
 
 const GET_QUESTION = 'api/QUESTIONS:GET';
@@ -7,19 +8,13 @@ const CREATE_QUESTION = 'api/QUESTIONS:POST';
 const UPDATE_QUESTION = 'api/QUESTIONS:PUT';
 const DELETE_QUESTION = 'api/QUESTIONS:DELETE';
 
-interface EditorState {
-    content: string;
-}
-
-const initialState: EditorState = {
-    content: ""
-};
+const questionApi = new Api();
 
 
 // Updates an entity cache in response to any action with response.entities.
-export function reducer(state = { users: {}, repos: {} }, action) {
-    if (action.response && action.response.entities) {
-        return merge({}, state, action.response.entities);
+export function reducer(state = [], action) {
+    if (action.status === 1 && action.questions) {
+        return [].concat(...action.questions);
     }
 
     return state;
@@ -28,34 +23,35 @@ export function reducer(state = { users: {}, repos: {} }, action) {
 export function getQuestion(id: number) {
     return {
         type: GET_QUESTION,
-        id
+        payload: () => questionApi.get(id)
     };
 }
 
 export function listQuestion() {
     return {
-        type: LIST_QUESTIONS
+        type: LIST_QUESTIONS,
+        payload: () => questionApi.list()
     };
 }
 
 export function createQuestion(element: Question) {
     return {
         type: CREATE_QUESTION,
-        element
+        payload: () => questionApi.post(element)
     };
 }
 
 export function updateQuestion(element: Question) {
     return {
         type: UPDATE_QUESTION,
-        element
+        payload: () => questionApi.put(element)
     };
 }
 
 export function deleteQuestion(id: number) {
     return {
         type: DELETE_QUESTION,
-        id
+        payload: () => questionApi.delete(id)
     };
 }
 

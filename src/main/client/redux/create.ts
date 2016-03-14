@@ -1,13 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
+import middleware from './middleware/Post';
 import reducer from './modules/reducer';
 import {DevTools} from '../containers';
 
 declare const module: any;
 
 const enhancer = compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, middleware),
     persistState(
         String(window.location.href.match(
             /[?&]debug_session=([^&#]+)\b/
