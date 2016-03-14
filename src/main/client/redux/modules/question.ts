@@ -1,6 +1,5 @@
 import {Question} from '../entities';
 import {Question as Api} from '../api';
-import {merge} from 'lodash';
 
 const GET_QUESTION = 'api/QUESTIONS:GET';
 const LIST_QUESTIONS = 'api/QUESTIONS:LIST';

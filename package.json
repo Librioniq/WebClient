@@ -12,7 +12,8 @@
         "start-ts": "ts-node src/main/server",
         "start-prod": "better-npm-run start-prod",
         "start-prod-api": "better-npm-run start-prod-api",
-        "build": "better-npm-run build-dev",
+        "build": "npm run build:prod",
+        "build:dev": "better-npm-run build-dev",
         "build:prod": "better-npm-run build-prod",
         "postinstall": "npm run build",
         "lint": "tsconfig-lint",
@@ -74,7 +75,7 @@
             }
         },
         "build-dev": {
-            "command": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+            "command": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
             "env": {
                 "NODE_ENV": "production"
             }
