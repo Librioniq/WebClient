@@ -7,10 +7,10 @@
         "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "bin/"
+        "outDir": "static/out"
     },
     "exclude": [
-        "static/dist",
+        "static/*",
         "typings",
         "node_modules",
         "bower_components"
