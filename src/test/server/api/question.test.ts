@@ -2,14 +2,14 @@
 
 import {expect} from 'chai';
 import * as request from 'supertest';
-import * as Server from '../../../main/server';
+import Server from '../../../main/server/index';
 
 
 describe("Routes", function() {
     const url = "http://localhost:8082/api";
 
     before(done => {
-        Server.run();
+        Server.Api.run();
         done();
     });
 
