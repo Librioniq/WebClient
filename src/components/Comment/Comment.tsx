@@ -1,15 +1,11 @@
 import * as React from "react";
 
+import { CommentModel } from '../../models/comment';
+
 const styles: any = require('./comment.css');
 const color: any = require('../../theme/color.css');
 
-interface CommentProps {
-    author: string;
-    content: string;
-    date: string;
-}
-
-export class Comment extends React.Component<CommentProps, void> {
+export class Comment extends React.Component<CommentModel, void> {
 
     constructor(props) {
         super(props);

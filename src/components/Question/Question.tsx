@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { QuestionModel } from '../../models/question';
+
 import Comment from '../Comment/Comment.tsx';
 import Editor from '../Editor/Editor.tsx';
 
@@ -7,23 +9,7 @@ const css: any = require('./question.scss');
 const color: any = require('../../theme/color.css');
 // const commonCSS: any = require('../../theme/common.scss');
 
-interface CommentProps {
-    author: string;
-    content: string;
-    date: string;
-}
-
-interface QuestionProps extends React.Props<Question> {
-    title?: string;
-    content?: string;
-    author?: string;
-    date?: string;
-    tags?: string[];
-    comments?: CommentProps[];
-    onAddComment?: (val: string) => any;
-}
-
-export class Question extends React.Component<QuestionProps, void> {
+export class Question extends React.Component<QuestionModel, void> {
 
     constructor(props) {
         super(props);
