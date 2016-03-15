@@ -27,12 +27,7 @@ app.use("/dist", express.static(path.join(__dirname, "..", "..", "..", "static",
 app.use("/", express.static(path.join(__dirname, ".."), {
 }));
 
-app.get("/*", (req, res) => res.header({
-    "Access-Control-Allow-Origin": "*",
-    'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
-    'Access-Control-Request-Method': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-}).contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../webpack-assets.json"), "utf-8")))));
+app.get("/*", (req, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../webpack-assets.json"), "utf-8")))));
 
 export const run = () => {
     if (config.port) {

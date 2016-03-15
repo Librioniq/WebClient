@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as session from 'express-session';
+import headers from './utils/headers';
 import * as bodyParser from 'body-parser';
 // import config from '../src/config';
 // import * as actions from './actions/index';
@@ -19,15 +20,12 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 60000 }
 }));
-app.use((req, res, next) => {
-    res.header({
-        "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
-        'Access-Control-Request-Method': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    });
-    next();
-})
+app.use(headers({
+    "Access-Control-Allow-Origin": "*",
+    'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
+    'Access-Control-Request-Method': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+}));
 app.use(bodyParser.json());
 app.use("/api", ...api);
 

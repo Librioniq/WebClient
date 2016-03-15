@@ -27,7 +27,8 @@ export default store => next => action => {
     next(actionWith({ status: Status.REQUEST }));
 
     return (action.payload() as Promise<IResponse>)
-        .then(response => response.json(), error => next(actionWith({
+        .then(response => response.json())
+        .catch(error => next(actionWith({
             status: Status.FAILURE,
             error: error.message || 'Something bad happened'
         })))

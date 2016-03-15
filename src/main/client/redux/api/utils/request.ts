@@ -1,13 +1,5 @@
-class RequestConverter {
-    public static convert(obj: any) {
-        if (obj instanceof FormData || obj instanceof Blob) {
-            return JSON.stringify(obj);
-        } else {
-            return obj;
-        }
-    }
-}
-
+import RequestConverter from './RequestConverter';
+import * as Url from './Url';
 export function post(obj: any): RequestInit {
     return {
         method: "post",
