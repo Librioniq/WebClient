@@ -1,0 +1,12 @@
+{
+    "files": [
+        "src/main/**/*.ts"
+    ],
+    "tests": [
+        "src/test/**/*.ts"
+    ],
+    "testFramework": "mocha",
+    "env": {
+        "type": "node"
+    }
+}
