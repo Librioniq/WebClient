@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {listQuestion} from  '../../redux/modules/question';
 
-import {Question} from '../../redux/entities';
+import {Question} from '../../entities';
 
 interface QuestionsProps extends React.Props<Questions> {
     questions: Array<Question>;

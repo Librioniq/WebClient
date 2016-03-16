@@ -1,25 +1,23 @@
 import * as React from "react";
+import {assign} from 'lodash';
 
-import { QuestionModel } from '../../models/question';
+import * as Entities from '../../entities';
 
 import Comment from '../Comment/Comment.tsx';
 import Editor from '../Editor/Editor.tsx';
 
 const css: any = require('./question.scss');
 const color: any = require('../../theme/color.css');
-// const commonCSS: any = require('../../theme/common.scss');
 
-export class Question extends React.Component<QuestionModel, void> {
+export class Question extends React.Component<Entities.Question, void> {
 
     constructor(props) {
         super(props);
     }
 
     public render() {
-        const author = this.props.author || 'Madara Uchiha',
-            title = this.props.title || 'Why shouldnt I use mysql_* functions in PHP?',
-            content = this.props.content || 'Why should I use something else even if they work on my site?',
-            date = this.props.date || 'Feb 5 12';
+        const { createdBy, title, content, createdDate } = this.props;
+
         const fakeComment1 = {
             author: 'Sergiy Kojedubov',
             content: 'Да, все так и есть.',
@@ -44,16 +42,10 @@ export class Question extends React.Component<QuestionModel, void> {
         const hasComments = false; // const hasComments = this.props.comments.length > 0;
         const comments = hasComments
                 ? this.props.comments.map(function(comment) {
-                    return <Comment
-                                author={comment.author}
-                                content={comment.content}
-                                date={comment.date} />
+                    return <Comment {...comment} />
                 })
                 : [fakeComment1, fakeComment2].map(function(comment) {
-                    return <Comment
-                                author={comment.author}
-                                content={comment.content}
-                                date={comment.date} />
+                    return <Comment {...comment}/>
                 });
 
         return (
@@ -63,7 +55,7 @@ export class Question extends React.Component<QuestionModel, void> {
                     <section>{tags}</section>
                 </header>
                 <div className={css.content}>{content}</div>
-                <section className={css.owner}>{author}</section>
+                <section className={css.owner}>{createdBy}</section>
                 <section className={css.comments}>{comments}</section>
                 <Editor />
             </div>
