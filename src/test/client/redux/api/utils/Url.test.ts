@@ -1,7 +1,7 @@
 /// <reference path='../../../../../../typings/main.d.ts'/>
 
 import {expect} from 'chai';
-import * as Url from '../../../../../../src/main/client/redux/api/utils/url';
+import * as Url from '../../../../../../src/main/client/api/utils/url';
 
 describe("Redux Api Utils", () => {
     const input = "http://localhost:8082/api/post/:postId/comment/:commentId";

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import * as Entities from '../../entities';
 
-const styles: any = require('./comment.css');
+const styles: any = require('./Comment.scss');
 const color: any = require('../../theme/color.css');
 
 export class Comment extends React.Component<Entities.Comment, void> {

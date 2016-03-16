@@ -1,8 +1,8 @@
 /// <reference path='../../../../../typings/main.d.ts'/>
 
 import {expect} from 'chai';
-import QuestionApi from '../../../../../src/main/client/redux/api/Question';
-import {Question} from '../../../../../src/main/client/redux/entities';
+import QuestionApi from '../../../../../src/main/client/api/Question';
+import {Question} from '../../../../../src/main/client/entities';
 import Server from '../../../../main/server/index';
 import {assign} from 'lodash';
 

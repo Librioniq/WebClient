@@ -2,7 +2,7 @@
 
 import {expect} from 'chai';
 import * as fetch from 'isomorphic-fetch';
-import {remove, get, post, put, convert} from '../../../../../../src/main/client/redux/api/utils/request';
+import {remove, get, post, put, convert} from '../../../../../../src/main/client/api/utils/request';
 
 
 describe("Redux Api Utils", () => {
