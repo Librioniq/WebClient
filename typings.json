@@ -1,11 +1,17 @@
 {
   "ambientDependencies": {
     "assertion-error": "registry:dt/assertion-error#1.0.0+20141105053942",
+    "body-parser": "registry:dt/body-parser#0.0.0+20160112113357",
+    "chai": "registry:dt/chai#3.4.0+20160216071402",
     "classnames": "registry:dt/classnames#0.0.0+20150923160543",
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160221190517",
+    "express": "registry:dt/express#4.0.0+20160208031452",
+    "express-session": "registry:dt/express-session#0.0.0+20160227204118",
     "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160218094246",
     "lodash": "registry:dt/lodash#3.10.0+20160127144039",
+    "mime": "registry:dt/mime#0.0.0+20151204023458",
     "mocha": "registry:dt/mocha#2.2.5+20151023103246",
+    "node": "registry:dt/node#4.0.0+20160311162451",
     "react": "registry:dt/react#0.14.0+20160302224448",
     "react-dom": "registry:dt/react-dom#0.0.0+20151118193745",
     "react-redux": "registry:dt/react-redux#4.4.0+20160226053734",
@@ -17,7 +23,10 @@
     "redux-devtools": "registry:dt/redux-devtools#3.0.0+20151215130854",
     "redux-devtools-dock-monitor": "registry:dt/redux-devtools-dock-monitor#1.0.1+20151216103641",
     "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641",
-    "redux-thunk": "registry:dt/redux-thunk#0.0.0+20160124074431",
-    "require": "registry:dt/require#2.1.20+20160215162030"
+    "redux-thunk": "registry:dt/redux-thunk#2.0.1+20160308210923",
+    "serve-static": "registry:dt/serve-static#0.0.0+20160104095738",
+    "sinon": "registry:dt/sinon#1.16.0+20151027143416",
+    "superagent": "registry:dt/superagent#1.4.0+20151124102505",
+    "supertest": "registry:dt/supertest#1.1.0+20151124102745"
   }
 }
