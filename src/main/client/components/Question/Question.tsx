@@ -1,63 +1,26 @@
 import * as React from "react";
-import {assign} from 'lodash';
-
 import * as Entities from '../../entities';
+import {Comment} from '../../components';
 
-import Comment from '../Comment/Comment.tsx';
-import Editor from '../Editor/Editor.tsx';
+const css = require('./Question.scss');
 
-const css: any = require('./question.scss');
-const color: any = require('../../theme/color.css');
+interface QuestionProps extends React.Props<Question>, Entities.Question {
+    comments?: Entities.Comment[];
+}
 
-export class Question extends React.Component<Entities.Question, void> {
-
-    constructor(props) {
-        super(props);
-    }
-
+export class Question extends React.Component<QuestionProps, void> {
     public render() {
-        const { createdBy, title, content, createdDate } = this.props;
-
-        const fakeComment1 = {
-            author: 'Sergiy Kojedubov',
-            content: 'Да, все так и есть.',
-            date: 'Jan 13 16 at 13:14'
-        };
-
-        const fakeComment2 = {
-            author: 'Андрей Поддубный',
-            content: 'Nothing like that, I know better solutions',
-            date: 'May 13 16 at 09:11'
-        };
-
-        const hasTags = false; // const hasTags = this.props.tags.length > 0;
-        const tags = hasTags
-                ? this.props.tags.map(function(tag) {
-                    return <a href="#" className={css.tag}>tag</a>
-                })
-                : ['slq', 'php', 'databases'].map(function(tag) {
-                    return <a href="#" className={css.tag}>{tag}</a>
-                });
-
-        const hasComments = false; // const hasComments = this.props.comments.length > 0;
-        const comments = hasComments
-                ? this.props.comments.map(function(comment) {
-                    return <Comment {...comment} />
-                })
-                : [fakeComment1, fakeComment2].map(function(comment) {
-                    return <Comment {...comment}/>
-                });
+        const { createdBy, title, content, createdDate, comments, tags } = this.props;
 
         return (
             <div className={css.root}>
                 <header>
                     <a href="#" className={css.title}>{title}</a>
-                    <section>{tags}</section>
+                    <section>{tags && tags.map(tag => <a href="#" className={css.tag}>{tag}</a>) }</section>
                 </header>
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{createdBy}</section>
-                <section className={css.comments}>{comments}</section>
-                <Editor />
+                <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
             </div>
         );
     }

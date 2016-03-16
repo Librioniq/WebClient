@@ -1,7 +1,6 @@
-import * as Entities from '../entities';
+import {Post} from '../entities';
 
-export interface Question extends Entities.Post {
+export interface Question extends Post {
     tags?: string[];
     title?: string;
-    comments?: Entities.Comment[];
 }
