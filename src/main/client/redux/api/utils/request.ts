@@ -1,28 +1,31 @@
 import * as Url from './Url';
+import {assign} from 'lodash';
 
-export function convert(obj: any) {
+export function convert(obj: any): RequestInit {
     if (!obj) {
-        return obj;
+        return {};
     } else if (obj instanceof FormData || obj instanceof Blob) {
-        return obj;
+        return {
+            body: obj
+        };
     } else {
-        return JSON.stringify(obj);
+        return {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        };
     }
 }
 
 export function post(obj?: any): RequestInit {
-    return {
-        method: "POST",
-        body: convert(obj),
-    };
+    return assign({}, { method: "POST" }, convert(obj));
 }
 
 
 export function put(obj?: any): RequestInit {
-    return {
-        method: "PUT",
-        body: convert(obj),
-    };
+    return assign({}, { method: "PUT" }, convert(obj));
 }
 
 
