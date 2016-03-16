@@ -1,21 +1,18 @@
-.normal {
-  color: red
+@import "../../theme/color.scss";
+
+.comment {
+    border-bottom: solid 1px #DEE2E7;
+    padding: 2vw 5vw 2vw;
 }
 
-.disabled { color: 'asdasasdasdasdasd' }
-.asdadsdasadsads { color: white }
-.error { /* all styles for Error */ }
-.inProgress { /* all styles for In Progress */ }
-
-.text {
-    color: #222426;
+@media screen and (min-width: 481px) {
+    .comment {
+        padding: 2vw 3vw 2vw;
+    }
 }
 
-a {
-    color: #0077CC;
-    text-decoration: none;
-}
-
-.date, .time {
-  color: #999;
+@media screen and (min-width: 841px) {
+    .comment {
+        padding: 1vw 3vw 1vw;
+    }
 }

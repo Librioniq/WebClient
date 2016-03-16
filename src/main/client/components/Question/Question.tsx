@@ -1,22 +1,26 @@
 import * as React from "react";
+import * as Entities from '../../entities';
+import {Comment} from '../../components';
 
-export class Question extends React.Component<{}, void> {
+const css = require('./Question.scss');
 
-    constructor(props) {
-        super(props);
-    }
+interface QuestionProps extends React.Props<Question>, Entities.Question {
+    comments?: Entities.Comment[];
+}
 
+export class Question extends React.Component<QuestionProps, void> {
     public render() {
-        const author = 'KobeJohn',
-            content = 'If you come back to this, maybe you should change the accepted answer from diaspora.',
-            date = 'Feb 5 12',
-            time = '13:35';
+        const { createdBy, title, content, createdDate, comments, tags } = this.props;
+
         return (
-            <div className="comment">
-                <span className="text">{content} - </span>
-                <a href="link_to_user" className="author">{author}</a>
-                <span className="date"> {date}</span>
-                <span className="time"> at {time}</span>
+            <div className={css.root}>
+                <header>
+                    <a href="#" className={css.title}>{title}</a>
+                    <section>{tags && tags.map(tag => <a href="#" className={css.tag}>{tag}</a>) }</section>
+                </header>
+                <div className={css.content}>{content}</div>
+                <section className={css.owner}>{createdBy}</section>
+                <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
             </div>
         );
     }

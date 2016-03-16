@@ -33,4 +33,4 @@ export class Editor extends React.Component<EditorProps, void> {
     };
 }
 
-export default Comment;
+export default Editor;
