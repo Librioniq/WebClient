@@ -3,7 +3,8 @@ import * as React from "react";
 import * as Entities from '../../entities';
 import Comment from '../comment/Comment';
 
-const css: any = require('./answer.scss');
+// const css: any = require('./answer.scss');
+const css: any = require('./Answer.css');
 const color: any = require('../../theme/color.css');
 
 interface AnswerProps extends Entities.Answer {

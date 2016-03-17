@@ -12,7 +12,8 @@
         "start-ts": "ts-node src/main/server",
         "start-prod": "better-npm-run start-prod",
         "start-prod-api": "better-npm-run start-prod-api",
-        "build": "npm run build:prod",
+        "build": "npm run build-prod",
+        "build-prod": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
         "build:dev": "better-npm-run build-dev",
         "build:prod": "better-npm-run build-prod",
         "lint": "tsconfig-lint",
@@ -93,8 +94,7 @@
         "react-router-redux": "^4.0.0",
         "redux": "^3.3.1",
         "redux-actions": "^0.9.1",
-        "redux-thunk": "^2.0.1",
-        "typescript": "^1.8.7"
+        "redux-thunk": "^2.0.1"
     },
     "devDependencies": {
         "ts-node": "latest",

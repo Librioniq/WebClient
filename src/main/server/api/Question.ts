@@ -1,4 +1,4 @@
-import {Question} from '../../client/redux/entities';
+import {Question} from '../../client/entities';
 import {Router} from 'express';
 import {assign} from 'lodash';
 
