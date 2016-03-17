@@ -7,5 +7,5 @@ import questions from './question';
 export default combineReducers({
     routing,
     editor,
-    questions
+    list: 
 });

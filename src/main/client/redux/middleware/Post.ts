@@ -1,8 +1,7 @@
 import {assign} from 'lodash';
+import {Status} from './Status';
 
-enum Status {
-    REQUEST, SUCCESS, FAILURE
-}
+
 
 export default store => next => action => {
     const regex = /^api\/(\w+|\d+):(GET|POST|PUT|DELETE|LIST)?$/i;

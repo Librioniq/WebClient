@@ -1,5 +1,6 @@
 import {Question} from '../../entities';
-import {Question as Api} from '../../api';
+import * as Api from '../../api';
+import {Status} from '../middleware/Status';
 
 const GET_QUESTION = 'api/QUESTIONS:GET';
 const LIST_QUESTIONS = 'api/QUESTIONS:LIST';
@@ -7,13 +8,16 @@ const CREATE_QUESTION = 'api/QUESTIONS:POST';
 const UPDATE_QUESTION = 'api/QUESTIONS:PUT';
 const DELETE_QUESTION = 'api/QUESTIONS:DELETE';
 
-const questionApi = new Api();
+
+const questionApi = new Api.Question();
 
 
 // Updates an entity cache in response to any action with response.entities.
-export function reducer(state = [], action) {
-    if (action.status === 1 && action.questions) {
+export function list(state = [], action) {
+    if (action.status === Status.SUCCESS && action.questions) {
         return [].concat(...action.questions);
+    } else {
+        if
     }
 
     return state;
@@ -54,4 +58,4 @@ export function deleteQuestion(id: number) {
     };
 }
 
-export default reducer;
+export default list;
