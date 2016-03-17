@@ -7,11 +7,15 @@ import Server from '../../../main/server/index';
 
 describe("Routes", function() {
     const url = "http://localhost:8082/api";
+    let server;
 
     before(done => {
-        Server.Api.run();
+        server = Server.Api.run();
+
         done();
     });
+
+    after(() => server.close());
 
     describe("Questions API", function() {
 

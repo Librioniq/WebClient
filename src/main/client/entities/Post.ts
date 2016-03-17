@@ -5,5 +5,5 @@ export interface Post {
     createdBy?: any;
     lastModifiedDate?: Date;
     lastModifiedBy?: any;
-    rating: number;
+    rating?: number;
 }

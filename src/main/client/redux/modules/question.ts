@@ -1,5 +1,5 @@
-import {Question} from '../entities';
-import {Question as Api} from '../api';
+import {Question} from '../../entities';
+import {Question as Api} from '../../api';
 
 const GET_QUESTION = 'api/QUESTIONS:GET';
 const LIST_QUESTIONS = 'api/QUESTIONS:LIST';

@@ -7,7 +7,7 @@ import * as bodyParser from 'body-parser';
 // import {mapUrl} from 'utils/url.js';
 // import PrettyError from 'pretty-error';
 import {createServer} from 'http';
-import api from './api';
+import routers from './routers';
 
 // const pretty = new PrettyError();
 const app = express();
@@ -27,7 +27,7 @@ app.use(headers({
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 }));
 app.use(bodyParser.json());
-app.use("/api", ...api);
+app.use("/api", ...routers);
 
 export const run = () => {
     if (config.port) {

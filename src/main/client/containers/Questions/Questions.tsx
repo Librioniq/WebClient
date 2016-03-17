@@ -2,11 +2,11 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {listQuestion} from  '../../redux/modules/question';
-
-import {Question} from '../../redux/entities';
+import * as Entities from '../../entities';
+import * as Components from '../../components';
 
 interface QuestionsProps extends React.Props<Questions> {
-    questions: Array<Question>;
+    questions: Array<Entities.Question>;
     listQuestion: () => any;
 }
 @connect(
@@ -19,20 +19,13 @@ export class Questions extends React.Component<QuestionsProps, void> {
     }
 
     public render() {
+        const {questions} = this.props;
+
         return (
             <div className="container">
                 <p>Questions</p>
                 <div>
-                    {this.props.questions.map(question =>
-                        (
-                            <div className="question">
-                                <span className="text">{ question.content } - </span>
-                                <a href="link_to_user" className="author">{ question.createdBy }</a>
-                                <span className="date">{ question.createdDate }</span>
-                                <span className="time"> at { question.createdDate }</span>
-                            </div>
-                        )
-                    ) }
+                    {questions && questions.map(question => <Components.Question {...question}/>) }
                 </div>
             </div>
         );

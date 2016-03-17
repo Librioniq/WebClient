@@ -1,12 +1,15 @@
 import * as React from "react";
 import { Editor } from "../../components";
 
-export class Home extends React.Component<{}, void> {
+interface HomeProperties extends React.Props<Home> {
+}
+
+export class Home extends React.Component<HomeProperties, void> {
     public render() {
         return (
             <div className="container">
                 <p>Home</p>
-                <Editor/>
+                {this.props.children}
             </div>
         );
     }

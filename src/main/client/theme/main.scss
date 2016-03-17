@@ -1,7 +1,16 @@
+html {
+    display: flex;
+}
+
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222426;
+    display: flex;
+
+    > * {
+        display: flex;
+    }
 }
 
 a {
@@ -9,13 +18,7 @@ a {
 }
 
 h1 {
-    font-size: 2vw;
-}
-
-.box {
-    margin: .5em;
-    padding: .4em .5em;
-    display: inline-block;
+    font-size: 5vw;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -30,7 +33,7 @@ h1 {
     left: 0;
     border: 0;
     z-index: 1000;
-    background-image: url("images/development_ribbon.png");
+    background-image: url("./images/development_ribbon.png");
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -73,7 +76,7 @@ h1 {
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("images/hipster.png") no-repeat center top;
+    background: url("./images/hipster.png") no-repeat center top;
     background-size: contain;
 }
 
@@ -90,7 +93,7 @@ only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
     .hipster {
-        background: url("images/hipster2x.png") no-repeat center top;
+        background: url("./images/hipster2x.png") no-repeat center top;
         background-size: contain;
     }
 }

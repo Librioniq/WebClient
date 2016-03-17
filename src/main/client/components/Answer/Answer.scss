@@ -1,0 +1,38 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+
+    > * {
+        display: flex;
+    }
+
+    header {
+        flex-direction: column;
+        padding: 2vw;
+        border-bottom: 1px solid #DEE6EF;
+    }
+}
+
+.content {
+    padding: 2vw;
+    border-bottom: 1px solid #DEE6EF;
+    font-size: 4vw;
+}
+
+.owner {
+    padding: 2vw;
+    border-bottom: 1px solid #DEE6EF;
+    background: #E3F8FF;
+}
+
+.comments {
+    flex-direction: column;
+}
+
+@media screen and (min-width: 841px) {
+    .content {
+        font-size: 2vw;
+    }
+}
