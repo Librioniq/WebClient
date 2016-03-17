@@ -5,7 +5,7 @@ enum Status {
 }
 
 export default store => next => action => {
-    const regex = /^(api)\/+(\w+|\d+)+:(GET|POST|PUT|DELETE|LIST)+?$/i;
+    const regex = /^api\/(\w+|\d+):(GET|POST|PUT|DELETE|LIST)?$/i;
     const isAPICall = regex.test(action.type);
 
     console.log("entered");
@@ -28,7 +28,7 @@ export default store => next => action => {
 
     return (action.payload() as Promise<IResponse>)
         .then(response => response.json().then(data => next(actionWith({
-            [`${regex.exec(action.type)[2].toLocaleLowerCase()}`]: data,
+            [`${regex.exec(action.type)[1].toLocaleLowerCase()}`]: data,
             status: Status.SUCCESS
         }))), error => next(actionWith({
             status: Status.FAILURE,
