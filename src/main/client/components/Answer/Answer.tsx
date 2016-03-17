@@ -4,7 +4,6 @@ import {Comment} from '../../components';
 
 
 const css: any = require('./answer.scss');
-const color: any = require('../../theme/color.css');
 
 interface AnswerProps extends React.Props<Answer>, Entities.Answer {
     comments?: Entities.Comment[];
