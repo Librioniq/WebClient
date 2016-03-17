@@ -1,16 +1,7 @@
-html {
-    display: flex;
-}
-
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222426;
-    display: flex;
-
-    > * {
-        display: flex;
-    }
 }
 
 a {

@@ -2,8 +2,11 @@ import * as React from 'react';
 
 export class NavBar extends React.Component<{}, void> {
     public render() {
+        const css :any = require('./NavBar.scss');
+        const navigationClass = 'navbar navbar-default ' + css.main;
+
         return (
-            <nav className="navbar navbar-default" role="navigation">
+            <nav className={navigationClass} role="navigation">
                 <div className="container">
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
