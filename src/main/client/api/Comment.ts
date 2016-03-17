@@ -1,44 +1,45 @@
-import {PostApi} from './Post';
-import {Comment} from '../entities';
+import {Post, Response} from './Post';
+import * as Entities from '../entities';
 import {post, get, put, remove} from './utils/request';
+import {expand} from './utils/url';
 
 
-export class CommentApi extends PostApi<Comment> {
+export class Comment extends Post<Entities.Comment> {
     constructor() {
-        super("");
+        super("http://localhost:8082/api/posts/:postId/comments");
     }
 
     /**
      * List elements
      */
-    public list(): Promise<IResponse> {
-        return fetch(get(`${this.endpoint}`));
+    public list(postId: number): Promise<Response<Entities.Comment>> {
+        return fetch(get(`${expand(this.endpoint, { postId })}`));
     }
     /**
      * Get special element from web storage
      * @param id identifier of element 
      */
-    public get(id: number): Promise<IResponse> {
-        return fetch(get(`${this.endpoint}/${id}`));
+    public get(postId: number, id: number): Promise<Response<Entities.Comment>> {
+        return fetch(get(`${expand(this.endpoint, { postId })}/${id}`));
     }
     /**
      * Create special element from given entity
      */
-    public post(element: Comment): Promise<IResponse> {
-        return fetch(this.endpoint, post(element));
+    public post(postId: number, element: Entities.Comment): Promise<Response<Entities.Comment>> {
+        return fetch(expand(this.endpoint, { postId }), post(element));
     }
     /**
      * Update special element
      */
-    public put(element: Comment): Promise<IResponse> {
-        return fetch(this.endpoint, put(element));
+    public put(postId: number, element: Entities.Comment): Promise<Response<Entities.Comment>> {
+        return fetch(expand(this.endpoint, { postId }), put(element));
     }
     /**
      * Delete special element
      */
-    public delete(id: number): Promise<IResponse> {
-        return fetch(remove(`${this.endpoint}/${id}`));
+    public delete(postId: number, id: number): Promise<Response<Entities.Comment>> {
+        return fetch(remove(`${expand(this.endpoint, { postId })}/${id}`));
     }
 }
 
-export default CommentApi;
+export default Comment;

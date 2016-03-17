@@ -1,11 +1,11 @@
-import {PostApi} from './Post';
-import {Answer} from '../entities';
+import {Post} from './Post';
+import* as Entities from '../entities';
 
 
-export class AnswerApi extends PostApi<Answer> {
+export abstract class Answer extends Post<Entities.Answer> {
     constructor() {
-        super("http://localhost:8082/api/answer");
+        super("http://localhost:8082/api/questions/:questionId/answers");
     }
 }
 
-export default AnswerApi;
+export default Answer;
