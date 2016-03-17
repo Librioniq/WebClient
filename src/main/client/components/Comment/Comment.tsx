@@ -6,14 +6,13 @@ const styles: any = require('./Comment.scss');
 
 export class Comment extends React.Component<Entities.Comment, void> {
     public render() {
-        const author = this.props.createdBy || 'KobeJohn',
-            content = this.props.content || 'If you come back to this, maybe you should change the accepted answer from diaspora.',
-            date = this.props.createdDate || 'Feb 5 12 at 13:35';
+        const { createdBy, createdDate, content} = this.props;
+
         return (
             <div className={styles.comment}>
                 <span>{content} - </span>
-                <a href="#" className={styles.link}>{author}</a>
-                <span className={styles.helper}> {date}</span>
+                <a href="#" className={styles.link}>{createdBy}</a>
+                <span className={styles.helper}> {createdDate}</span>
             </div>
         );
     }
