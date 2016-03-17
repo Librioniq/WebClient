@@ -1,4 +1,3 @@
-import * as Url from './Url';
 import {assign} from 'lodash';
 
 export function convert(obj: any): RequestInit {

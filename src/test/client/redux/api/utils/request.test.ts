@@ -13,8 +13,6 @@ describe("Redux Api Utils", () => {
         const fetchKey = "fetch";
 
         global[fetchKey] = fetch;
-        // global[formDataKey] = () => { console.log("FormData"); };
-        // global[blobKey] = () => { console.log("Blob"); };
     });
 
     describe("Request Uitls", () => {

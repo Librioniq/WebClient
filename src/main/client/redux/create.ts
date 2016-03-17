@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
-import middleware from './middleware/Post';
+import middleware from './middleware/post';
 import reducer from './modules/reducer';
 import {DevTools} from '../containers';
 
@@ -13,11 +13,10 @@ const enhancer = compose(
         String(window.location.href.match(
             /[?&]debug_session=([^&#]+)\b/
         ))
-    )
+    ),
+    DevTools.instrument()
 );
 
-// ,
-// DevTools.instrument()
 
 console.log(enhancer);
 console.log(thunk);
