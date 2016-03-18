@@ -1,9 +1,9 @@
 /**
  * replace arg
  */
-export function match(url: string, ...params: any[]);
-export function match(url: string, named: any);
-export function match(url: string, obj: any) {
+export function expand(url: string, ...params: any[]);
+export function expand(url: string, named: any);
+export function expand(url: string, obj: any) {
     let replacer: (...args: any[]) => any;
 
     if (obj instanceof Array) {

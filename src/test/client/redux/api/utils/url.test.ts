@@ -10,11 +10,11 @@ describe("Redux Api Utils", () => {
     describe(`Url#match should return '${expected}' for input '${input}'`, () => {
 
         it("and object {commentId: 1, postId: 0}", () =>
-            expect(Url.match(input, { commentId: 1, postId: 0 })).to.be.equal(expected)
+            expect(Url.expand(input, { commentId: 1, postId: 0 })).to.be.equal(expected)
         );
 
         it("and array [0, 1]", () =>
-            expect(Url.match(input, { commentId: 1, postId: 0 })).to.be.equal(expected)
+            expect(Url.expand(input, { commentId: 1, postId: 0 })).to.be.equal(expected)
         );
     });
 });

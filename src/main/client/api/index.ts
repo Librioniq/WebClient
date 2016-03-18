@@ -1,3 +1,3 @@
-export {AnswerApi as Answer} from './Answer'
-export {QuestionApi as Question} from './Question'
-export {CommentApi as Comment} from './Comment'
+export {Answer} from './Answer'
+export {Question} from './Question'
+export {Comment} from './Comment'

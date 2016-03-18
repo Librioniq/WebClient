@@ -1,19 +1,68 @@
 import {Question} from '../../entities';
-import {Question as Api} from '../../api';
+import * as Api from '../../api';
+import {Status} from '../middleware/Status';
+import {assign} from 'lodash';
 
-const GET_QUESTION = 'api/QUESTIONS:GET';
+const GET_QUESTION = 'api/QUESTION:GET';
 const LIST_QUESTIONS = 'api/QUESTIONS:LIST';
-const CREATE_QUESTION = 'api/QUESTIONS:POST';
-const UPDATE_QUESTION = 'api/QUESTIONS:PUT';
-const DELETE_QUESTION = 'api/QUESTIONS:DELETE';
+const CREATE_QUESTION = 'api/QUESTION:POST';
+const UPDATE_QUESTION = 'api/QUESTION:PUT';
+const DELETE_QUESTION = 'api/QUESTION:DELETE';
 
-const questionApi = new Api();
+interface QeustionState {
+    list: Array<Question>;
+    one: Question;
+    error?: string;
+}
+
+const initialState: QeustionState = {
+    list: [],
+    one: {
+        title: "",
+        content: ""
+    },
+    error: ""
+};
+const questionApi = new Api.Question();
+
 
 
 // Updates an entity cache in response to any action with response.entities.
-export function reducer(state = [], action) {
-    if (action.status === 1 && action.questions) {
-        return [].concat(...action.questions);
+export function list(state: QeustionState = initialState, action): QeustionState {
+    if (action.status === Status.SUCCESS && action.questions && action.type === LIST_QUESTIONS) {
+        return assign({}, state, { list: [].concat(...action.questions).concat(...state.list), error: "" }) as QeustionState;
+    }
+
+    return state;
+}
+
+export function failure(state: QeustionState = initialState, action) {
+    if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
+        return assign({}, state, { error: action.error }) as QeustionState;
+    }
+
+    return state;
+}
+
+export function get(state: QeustionState = initialState, action) {
+    if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
+        return assign({}, state, { error: action.error }) as QeustionState;
+    }
+
+    return state;
+}
+
+export function create(state: QeustionState = initialState, action) {
+    if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
+        return assign({}, state, { error: action.error }) as QeustionState;
+    }
+
+    return state;
+}
+
+export function remove(state: QeustionState = initialState, action) {
+    if (type => type === action.type && action.status === Status.FAILURE) {
+        return assign({}, state, { error: action.error }) as QeustionState;
     }
 
     return state;
@@ -54,4 +103,4 @@ export function deleteQuestion(id: number) {
     };
 }
 
-export default reducer;
+export default list;
