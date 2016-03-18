@@ -14,7 +14,7 @@ interface EditorProps extends React.Props<Editor> {
     state => ({ content: state.editor.content }),
     dispatch => bindActionCreators({ onChangeContent }, dispatch)
 )
-export class Editor extends React.Component<EditorProps, void> {
+export class Editor extends React.Component<EditorProps, {}> {
     public render() {
         const {content} = this.props;
         return (

@@ -11,11 +11,11 @@ export class App extends React.Component<AppProperties, void> {
     public render() {
         return (
             <section className={css.main}>
-                <NavBar/>
+                <NavBar />
                 <div className={css.container}>
                     {this.props.children}
                 </div>
-                <DevTools/>
+                <DevTools />
             </section>
         );
     }
