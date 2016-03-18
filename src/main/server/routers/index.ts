@@ -1,4 +1,6 @@
 import question from './question';
+import comment from './comment';
+import answer from './answer';
 
 
-export default [question];
+export default [question, comment, answer];

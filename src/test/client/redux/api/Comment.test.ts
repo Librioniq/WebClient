@@ -7,15 +7,13 @@ import Server from '../../../../main/server/index';
 import {assign} from 'lodash';
 
 describe("Redux Api", () => {
-    const questionsApi = new Api.Question();
-    const stubRequestData: Entities.Question = {
-        title: "hi World",
+    const commentsApi = new Api.Comment();
+    const stubRequestData: Entities.Comment = {
         content: "Some Content"
     };
-    const updatedRequestData: Entities.Question = {
+    const updatedRequestData: Entities.Comment = {
         id: 0,
-        title: "hi World Updated",
-        content: "Some Content"
+        content: "Some Content Updated"
     };
     let server;
 
@@ -31,10 +29,10 @@ describe("Redux Api", () => {
     });
     after(() => server.close());
 
-    describe(`Question`, () => {
+    describe(`Comment`, () => {
 
         it("#list method should respond", (done) => {
-            questionsApi.list()
+            commentsApi.list(0)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
@@ -49,7 +47,7 @@ describe("Redux Api", () => {
         });
 
         it("#get method should respond", (done) => {
-            questionsApi.get(0)
+            commentsApi.get(0, 0)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
@@ -63,14 +61,13 @@ describe("Redux Api", () => {
         });
 
         it("#post method should respond", (done) => {
-            questionsApi.post(stubRequestData)
+            commentsApi.post(0, stubRequestData)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
                         expect(data).is.not.empty;
                         expect(data).to.have.property("id").equal(1);
-                        expect(data.title).to.be.equal(stubRequestData.title);
                         expect(data.content).to.be.equal(stubRequestData.content);
 
                         done();
@@ -80,12 +77,12 @@ describe("Redux Api", () => {
         });
 
         it("#put method should respond", (done) => {
-            questionsApi.put(updatedRequestData)
+            commentsApi.put(0, updatedRequestData)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
-                        const expected = assign({}, data, updatedRequestData) as Entities.Question;
+                        const expected = assign({}, data, updatedRequestData) as Entities.Comment;
 
                         expect(data).is.not.empty;
                         expect(data).to.be.deep.equal(expected);
@@ -97,7 +94,7 @@ describe("Redux Api", () => {
         });
 
         it("#delete method should respond", (done) => {
-            questionsApi.delete(0)
+            commentsApi.delete(0, 0)
                 .then((res) => {
                     expect(res.status).to.be.equal(204);
                     done();
