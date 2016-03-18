@@ -10,7 +10,7 @@ interface QuestionsProps extends React.Props<Questions> {
     listQuestion: () => any;
 }
 @connect(
-    state => ({ questions: state.questions }),
+    state => ({ questions: state.question.list }),
     dispatch => bindActionCreators({ listQuestion }, dispatch)
 )
 export class Questions extends React.Component<QuestionsProps, void> {
