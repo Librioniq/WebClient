@@ -18,6 +18,10 @@ export class Question extends React.Component<QuestionProps, {}> {
         }
     }
 
+    handleAddComment(text) {
+        // this.props.addTodo(text);
+    }
+
     public render() {
         const { createdBy, title, content, createdDate, comments, tags } = this.props;
 
@@ -37,7 +41,7 @@ export class Question extends React.Component<QuestionProps, {}> {
                         //     type: 'ADD_COMMENT',
                         //     text: 'test'
                         // });
-                    }}>Add comment</button>
+                    }}>Add comment asdasdasd</button>
                 </section>
 
             </div>
