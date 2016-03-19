@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reduceReducers } from './utils';
 import { routerReducer as routing } from 'react-router-redux';
 import { Reducers as QuestionReducers } from './Question';
+import { Reducers as AnswerReducers } from './Answer';
 
 /**
  * Here we combine all our reducer to next pesudo-fructal structure
@@ -9,7 +10,6 @@ import { Reducers as QuestionReducers } from './Question';
  * state
  *   |       
  *   |-------questions : Array of Question
- *   |
  *   |-------question : is Question
  *               |
  *               |-------id
@@ -19,14 +19,11 @@ import { Reducers as QuestionReducers } from './Question';
  *               ~-------skip another params
  *               ~
  *               |-------comments : Array of Comments
- *               |
  *               |-------answers : Array of Answers
  *                          |
  *                          |-------[0] 
- *                          |
  *                          ~
  *                          ~
- *                          |
  *                          |-------[N] : is Answer
  *                                   |
  *                                   |-------id
@@ -46,7 +43,10 @@ export default combineReducers({
         QuestionReducers.update,
         combineReducers({
             answers: reduceReducers(
-                undefined,
+                AnswerReducers.create,
+                AnswerReducers.failure,
+                AnswerReducers.get,
+                AnswerReducers.update,
                 combineReducers({
                     comments: undefined
                 })

@@ -6,7 +6,7 @@ import * as Constants from './constants';
 export function list(state = [], action) {
     if (action.status === Status.SUCCESS && action.questions && action.type === Constants.LIST) {
         return [
-            ...action.questions,
+            ...action.answers,
             ...state
         ];
     }
@@ -16,7 +16,7 @@ export function list(state = [], action) {
 
 export function get(state = {}, action) {
     if (Constants.GET === action.type && action.status === Status.SUCCESS) {
-        return assign({}, state, action.question);
+        return assign({}, state, action.answer);
     }
 
     return state;
@@ -24,7 +24,7 @@ export function get(state = {}, action) {
 
 export function create(state = {}, action) {
     if (Constants.CREATE === action.type && action.status === Status.SUCCESS) {
-        return assign({}, state, action.question);
+        return assign({}, state, action.answer);
     }
 
     return state;
@@ -32,7 +32,7 @@ export function create(state = {}, action) {
 
 export function update(state = {}, action) {
     if (Constants.UPDATE === action.type && action.status === Status.SUCCESS) {
-        return assign({}, state, action.question);
+        return assign({}, state, action.answer);
     }
 
     return state;
@@ -40,7 +40,7 @@ export function update(state = {}, action) {
 
 export function remove(state = {}, action) {
     if (Constants.DELETE === action.type && action.status === Status.SUCCESS) {
-        return assign({}, state, action.question);
+        return assign({}, state, action.answer);
     }
 
     return state;

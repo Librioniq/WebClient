@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Route, IndexRoute} from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import { App, Home, Questions }  from '../containers';
-import { Comment, Question } from '../components';
+import { Question } from '../components';
 
 export const routes = (
     <Route path="/" component={App}>
-        <IndexRoute component={Home}/>
-        <Route path="comment" component={Comment}/>
-        <Route path="question" component={Question}/>
+        <IndexRoute component={Questions}/>
         <Route path="questions" component={Questions}/>
+        <Route path="question/:id" component={Question}/>
+        <Route path="about" component={Home}/>
     </Route>
 );
 

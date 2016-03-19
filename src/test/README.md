@@ -12,7 +12,6 @@
  - supertest
  
 **Example**
-
 ```ts
 // reference to definition
 /// <reference path='../../../../typings/main.d.ts'/>

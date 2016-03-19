@@ -2,40 +2,40 @@ import {Question} from '../../../entities';
 import * as Api from '../../../api';
 import * as Constants from './constants';
 
-const questionApi = new Api.Question();
+const api = new Api.Question();
 
 
-export function getQuestion(id: number) {
+export function get(id: number) {
     return {
         type: Constants.GET,
-        payload: () => questionApi.get(id)
+        payload: () => api.get(id)
     };
 }
 
-export function listQuestion() {
+export function list() {
     return {
         type: Constants.LIST,
-        payload: () => questionApi.list()
+        payload: () => api.list()
     };
 }
 
-export function createQuestion(element: Question) {
+export function create(element: Question) {
     return {
         type: Constants.CREATE,
-        payload: () => questionApi.post(element)
+        payload: () => api.post(element)
     };
 }
 
-export function updateQuestion(element: Question) {
+export function update(element: Question) {
     return {
         type: Constants.UPDATE,
-        payload: () => questionApi.put(element)
+        payload: () => api.put(element)
     };
 }
 
-export function deleteQuestion(id: number) {
+export function remove(id: number) {
     return {
         type: Constants.DELETE,
-        payload: () => questionApi.delete(id)
+        payload: () => api.delete(id)
     };
 }
