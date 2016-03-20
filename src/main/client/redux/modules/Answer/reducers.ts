@@ -4,7 +4,7 @@ import * as Constants from './constants';
 
 
 export function list(state = [], action) {
-    if (action.status === Status.SUCCESS && action.questions && action.type === Constants.LIST) {
+    if (action.status === Status.SUCCESS && action.answers && action.type === Constants.LIST) {
         return [
             ...action.answers,
             ...state

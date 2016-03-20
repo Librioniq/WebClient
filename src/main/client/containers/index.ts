@@ -1,4 +1,5 @@
 export {App} from './App/App'
 export {Home} from './Home/Home'
 export {Questions} from './Questions/Questions'
+export {Question} from './Question/Question'
 export {DevTools} from './DevTools/DevTools'
