@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reduceReducers } from './utils';
+import { reduceReducers, mapToCollection } from './utils';
 import { routerReducer as routing } from 'react-router-redux';
 import { Reducers as QuestionReducers } from './Question';
 import { Reducers as AnswerReducers } from './Answer';
@@ -42,14 +42,16 @@ export default combineReducers({
         QuestionReducers.get,
         QuestionReducers.update,
         combineReducers({
-            answers: reduceReducers(
-                AnswerReducers.create,
-                AnswerReducers.failure,
-                AnswerReducers.get,
-                AnswerReducers.update,
-                combineReducers({
-                    comments: undefined
-                })
+            answers: mapToCollection(
+                reduceReducers(
+                    AnswerReducers.create,
+                    AnswerReducers.failure,
+                    AnswerReducers.get,
+                    AnswerReducers.update,
+                    combineReducers({
+                        comments: undefined
+                    })
+                )
             ),
             comments: undefined
         })
