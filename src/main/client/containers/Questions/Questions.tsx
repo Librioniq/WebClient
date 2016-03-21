@@ -1,21 +1,23 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {listQuestion} from  '../../redux/modules/question';
+import {Reducers} from  '../../redux/modules/Question';
 import * as Entities from '../../entities';
 import * as Components from '../../components';
 
 interface QuestionsProps extends React.Props<Questions> {
     questions: Array<Entities.Question>;
-    listQuestion: () => any;
+    list: () => any;
 }
+
+
 @connect(
     state => ({ questions: state.questions }),
-    dispatch => bindActionCreators({ listQuestion }, dispatch)
+    dispatch => bindActionCreators({ list: Reducers.list }, dispatch)
 )
 export class Questions extends React.Component<QuestionsProps, void> {
     public componentWillMount() {
-        this.props.listQuestion();
+        this.props.list();
     }
 
     public render() {
