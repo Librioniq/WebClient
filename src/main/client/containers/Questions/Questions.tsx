@@ -27,7 +27,7 @@ export class Questions extends React.Component<QuestionsProps, void> {
             <div className="container">
                 <p>Questions</p>
                 <div>
-                    {questions && questions.map(question => <Components.Question {...question}/>) }
+                    {questions && questions.map((question:any )=> <Components.Question {...question}/>) }
                 </div>
             </div>
         );

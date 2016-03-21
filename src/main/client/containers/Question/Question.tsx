@@ -33,7 +33,7 @@ export class Question extends React.Component<QuestionProps, void> {
     }
 
     public render() {
-        const {answers} = this.props;
+        const { answers } = this.props;
 
         return (
             <div>
