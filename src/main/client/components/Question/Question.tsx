@@ -1,25 +1,51 @@
 import * as React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as Entities from '../../entities';
 import { Comment, Editor } from '../../components';
+import { createComment } from '../../redux/modules/comment';
 
 const css = require('./Question.scss');
 
 interface QuestionProps extends React.Props<Question>, Entities.Question {
     comments?: Entities.Comment[];
+    createComment?: Function;
+    text?: string;
+    actions?: any;
 }
 
-export class Question extends React.Component<QuestionProps, {}> {
+interface QuestionState {
+    commentsID: number;
+}
+
+@connect(
+    state => ({
+        comments: state.comments,
+        text: state.editor.content
+     }),
+    dispatch => bindActionCreators({ createComment }, dispatch)
+)
+
+export class Question extends React.Component<QuestionProps, QuestionState> {
 
     constructor(props, context) {
-        console.log(props, context);
-        super(props, context)
+        super(props, context);
         this.state = {
-            createdBy: 'Derebasov'
+            commentsID: 0
         }
     }
 
+    addComment() {
+        let comment: Entities.Comment = {
+            content: this.props.text,
+            id: this.state.commentsID
+        }
+        this.setState({'commentsID': ++this.state.commentsID})
+        this.props.createComment(comment);
+    }
+
     public render() {
-        const { createdBy, title, content, createdDate, comments, tags } = this.props;
+        const { createdBy, title, content, createdDate, comments, tags, actions } = this.props;
 
         return (
             <div className={css.root}>
@@ -30,16 +56,10 @@ export class Question extends React.Component<QuestionProps, {}> {
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{createdBy}</section>
                 <section className={css.comments}>
-                    {comments && comments.map(comment => <Comment {...comment} />) }
+                    {comments && comments.map(comment => <Comment key={comment.id} comment={comment} {...actions}/>) }
                     <Editor />
-                    <button onClick={() => {
-                        // store.dispatch({
-                        //     type: 'ADD_COMMENT',
-                        //     text: 'test'
-                        // });
-                    }}>Add comment</button>
+                    <button onClick={this.addComment.bind(this)}>Add comment</button>
                 </section>
-
             </div>
         );
     }

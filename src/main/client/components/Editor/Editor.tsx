@@ -1,7 +1,7 @@
 import * as React from "react";
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {onChangeContent} from  '../../redux/modules/editor';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { onChangeContent } from  '../../redux/modules/editor';
 
 const styles = require("./Editor.scss");
 
@@ -28,7 +28,7 @@ export class Editor extends React.Component<EditorProps, {}> {
     }
 
     private onChangeContent(e: Event) {
-        const {onChangeContent} = this.props;
+        const { onChangeContent } = this.props;
         onChangeContent((e.currentTarget as HTMLTextAreaElement).value);
     };
 }

@@ -16,7 +16,7 @@ export class Question extends Post<Entities.Question> {
     }
     /**
      * Get special element from web storage
-     * @param id identifier of element 
+     * @param id identifier of element
      */
     public get(id: number): Promise<Response<Entities.Question>> {
         return fetch(get(`${this.endpoint}/${id}`));

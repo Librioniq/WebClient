@@ -9,13 +9,13 @@ const CREATE_QUESTION = 'api/QUESTION:POST';
 const UPDATE_QUESTION = 'api/QUESTION:PUT';
 const DELETE_QUESTION = 'api/QUESTION:DELETE';
 
-interface QeustionState {
+interface QuestionState {
     list: Array<Question>;
     one: Question;
     error?: string;
 }
 
-const initialState: QeustionState = {
+const initialState: QuestionState = {
     list: [],
     one: {
         title: "",
@@ -26,43 +26,42 @@ const initialState: QeustionState = {
 const questionApi = new Api.Question();
 
 
-
 // Updates an entity cache in response to any action with response.entities.
-export function list(state: QeustionState = initialState, action): QeustionState {
+export function list(state: QuestionState = initialState, action): QuestionState {
     if (action.status === Status.SUCCESS && action.questions && action.type === LIST_QUESTIONS) {
-        return assign({}, state, { list: [].concat(...action.questions).concat(...state.list), error: "" }) as QeustionState;
+        return assign({}, state, { list: [].concat(...action.questions).concat(...state.list), error: "" }) as QuestionState;
     }
 
     return state;
 }
 
-export function failure(state: QeustionState = initialState, action) {
+export function failure(state: QuestionState = initialState, action) {
     if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
-        return assign({}, state, { error: action.error }) as QeustionState;
+        return assign({}, state, { error: action.error }) as QuestionState;
     }
 
     return state;
 }
 
-export function get(state: QeustionState = initialState, action) {
+export function get(state: QuestionState = initialState, action) {
     if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
-        return assign({}, state, { error: action.error }) as QeustionState;
+        return assign({}, state, { error: action.error }) as QuestionState;
     }
 
     return state;
 }
 
-export function create(state: QeustionState = initialState, action) {
+export function create(state: QuestionState = initialState, action) {
     if ([GET_QUESTION, LIST_QUESTIONS, CREATE_QUESTION, UPDATE_QUESTION, DELETE_QUESTION].some(type => type === action.type) && action.status === Status.FAILURE) {
-        return assign({}, state, { error: action.error }) as QeustionState;
+        return assign({}, state, { error: action.error }) as QuestionState;
     }
 
     return state;
 }
 
-export function remove(state: QeustionState = initialState, action) {
+export function remove(state: QuestionState = initialState, action) {
     if (type => type === action.type && action.status === Status.FAILURE) {
-        return assign({}, state, { error: action.error }) as QeustionState;
+        return assign({}, state, { error: action.error }) as QuestionState;
     }
 
     return state;
