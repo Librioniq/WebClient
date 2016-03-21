@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Entities from '../../entities';
-import {Comment} from '../../components';
+import { Comment } from '../../components';
 
 const css = require('./Question.scss');
 
@@ -9,6 +9,10 @@ interface QuestionProps extends React.Props<Question>, Entities.Question {
 }
 
 export class Question extends React.Component<QuestionProps, void> {
+    public test() {
+        console.log('ttt');
+    }
+
     public render() {
         const { createdBy, title, content, createdDate, comments, tags } = this.props;
 
@@ -21,7 +25,7 @@ export class Question extends React.Component<QuestionProps, void> {
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{createdBy}</section>
                 <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
-                <button></button>
+                <button>Add</button>
             </div>
         );
     }
