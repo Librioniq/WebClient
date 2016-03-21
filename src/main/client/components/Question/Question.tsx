@@ -8,7 +8,7 @@ import { Actions as CommentActions } from '../../redux/modules/Comment';
 
 const css = require('./Question.scss');
 
-interface QuestionProps extends React.Props<any>, Entities.Question {
+interface QuestionProps extends React.Props<Question>, Entities.Question {
     comments?: Entities.Comment[];
     create?: (id, comment) => void;
 }
