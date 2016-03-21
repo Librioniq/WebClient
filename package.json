@@ -7,12 +7,15 @@
         "url": ""
     },
     "scripts": {
+        "clean": "rimraf node_modules bower_components typings static",
+        "clean-install": "npm run clean && typings i && bower i && npm i",
+        "clean-start": "npm run clean && npm start",
         "star-old": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-        "start": "node server/production",
+        "start": "better-npm-run start-dev",
         "start-ts": "ts-node src/main/server",
         "start-prod": "better-npm-run start-prod",
         "start-prod-api": "better-npm-run start-prod-api",
-        "build": "npm run build:prod",
+        "build": "npm run build:prod && tsc",
         "build:dev": "better-npm-run build-dev",
         "build:prod": "better-npm-run build-prod",
         "postinstall": "npm run build",
@@ -26,9 +29,9 @@
     },
     "betterScripts": {
         "start-prod": {
-            "command": "node ./bin/server.js",
+            "command": "node ./static/out/main/server.js",
             "env": {
-                "NODE_PATH": "./src",
+                "NODE_PATH": "./",
                 "NODE_ENV": "production",
                 "PORT": 8080,
                 "APIPORT": 3030
@@ -43,9 +46,9 @@
             }
         },
         "start-dev": {
-            "command": "node ./bin/server.js",
+            "command": "node ./static/out/main/server.js",
             "env": {
-                "NODE_PATH": "./src",
+                "NODE_PATH": "./",
                 "NODE_ENV": "development",
                 "PORT": 3000,
                 "APIPORT": 3030
@@ -150,7 +153,8 @@
         "webpack": "1.12.10",
         "webpack-dev-middleware": "^1.4.0",
         "webpack-dev-server": "1.14.0",
-        "webpack-hot-middleware": "^2.5.0"
+        "webpack-hot-middleware": "^2.5.0",
+        "rimraf": "^2.5.2"
     },
     "engines": {
         "node": "5.8.0"

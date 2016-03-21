@@ -21,13 +21,15 @@ const app = express();
 const server = createServer(app);
 const config = { port: 8080, host: "localhost" };
 
-app.use("/dist", express.static(path.join(__dirname, "..", "..", "..", "static", "dist"), {
+console.log(__dirname);
+
+app.use("/dist", express.static(path.join(process.env.NODE_PATH, "static", "dist"), {
     maxAge: "200d" // We can cache them as they include hashes
 }));
 app.use("/", express.static(path.join(__dirname, ".."), {
 }));
 
-app.get("/*", (req, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../webpack-assets.json"), "utf-8")))));
+app.get("/*", (req, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(process.env.NODE_PATH, "webpack-assets.json"), "utf-8")))));
 
 export const run = () => {
     if (config.port) {
@@ -36,7 +38,7 @@ export const run = () => {
                 console.error(err);
             }
 
-            console.info('----\n==> 🌎  API is running on port %s', config.port);
+            console.info('----\n==> 🌎  Client is running on port %s', config.port);
             console.info('==> 💻  Send requests to http://%s:%s', config.host, config.port);
         });
 
