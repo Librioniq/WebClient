@@ -37,7 +37,7 @@ export class Question extends React.Component<QuestionProps, void> {
 
         return (
             <div>
-                <Components.Question {...this.props}/>
+                <Components.Question {...(this.props as any)}/>
                 <div>
                     {answers && answers.map(answer => <Components.Answer {...answer}/>) }
                 </div>
