@@ -13,7 +13,7 @@ export function mapToCollection(reducer: Redux.Reducer): Redux.Reducer {
         if (!action.payload || !action.payload.filter) {
             const result = reducer(undefined, action);
 
-            return isEmpty(result) ? [...state] : [, ...state];
+            return isEmpty(result) ? [...state] : [result, ...state];
         }
 
         const filter = action.payload.filter;

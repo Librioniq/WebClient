@@ -19,7 +19,7 @@ const render = (assets) =>
     </html>`;
 const app = express();
 const server = createServer(app);
-const config = { port: 8080, host: "localhost" };
+const config = { port: 8083, host: "localhost" };
 
 console.log(__dirname);
 

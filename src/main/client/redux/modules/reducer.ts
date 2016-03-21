@@ -3,12 +3,13 @@ import { reduceReducers, mapToCollection, mergeState } from './utils';
 import { routerReducer as routing } from 'react-router-redux';
 import { Reducers as QuestionReducers } from './Question';
 import { Reducers as AnswerReducers } from './Answer';
+import { Reducers as CommentReducers } from './Comment';
 
 /**
  * Here we combine all our reducer to next pesudo-fructal structure
- * 
+ *
  * state
- *   |       
+ *   |
  *   |-------questions : Array of Question
  *   |-------question : is Question
  *               |
@@ -21,13 +22,13 @@ import { Reducers as AnswerReducers } from './Answer';
  *               |-------comments : Array of Comments
  *               |-------answers : Array of Answers
  *                          |
- *                          |-------[0] 
+ *                          |-------[0]
  *                          ~
  *                          ~
  *                          |-------[N] : is Answer
  *                                   |
  *                                   |-------id
- *                                   |-------content   
+ *                                   |-------content
  *                                   ~
  *                                   ~-------skip another params
  *                                   ~
@@ -59,7 +60,18 @@ export default combineReducers({
                         )
                     )
                 ),
-                comments: undefined
+                comments: reduceReducers(
+                    CommentReducers.list,
+                    mapToCollection(
+                        reduceReducers(
+                            CommentReducers.get,
+                            CommentReducers.create,
+                            CommentReducers.update,
+                            CommentReducers.remove,
+                            CommentReducers.failure
+                        )
+                    )
+                )
             })
         )
     )
