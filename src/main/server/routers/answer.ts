@@ -6,7 +6,7 @@ const questionId = 0;
 const dummyAnswer: Answer = {
     id: 0,
     content: "So you should do that or this or anythings",
-    createdBy: "string",
+    createdBy: "Oleh Dokuka",
     createdDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
     lastModifiedBy: "string",
     lastModifiedDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
