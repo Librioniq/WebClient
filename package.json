@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "rimraf node_modules bower_components typings static",
         "clean-install": "npm run clean && typings i && bower i && npm i",
-        "clean-start": "npm run clean && npm start",
+        "clean-start": "npm run clean-install && npm start",
         "star-old": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
         "start": "better-npm-run start-dev",
         "start-ts": "ts-node src/main/server",
