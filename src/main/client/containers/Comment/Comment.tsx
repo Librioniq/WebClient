@@ -1,9 +1,8 @@
 import * as React from "react";
+
 import * as Entities from '../../entities';
 
 const css: any = require('./Comment.scss');
-
-interface CommentProps
 
 export class Comment extends React.Component<Entities.Comment, void> {
     public render() {
@@ -20,3 +19,6 @@ export class Comment extends React.Component<Entities.Comment, void> {
 }
 
 export default Comment;
+
+                <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
+                <button onClick={() => this.onAddComment()}>Add</button>
