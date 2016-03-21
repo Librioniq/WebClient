@@ -6,9 +6,9 @@ import { Reducers as AnswerReducers } from './Answer';
 
 /**
  * Here we combine all our reducer to next pesudo-fructal structure
- * 
+ *
  * state
- *   |       
+ *   |
  *   |-------questions : Array of Question
  *   |-------question : is Question
  *               |
@@ -21,13 +21,13 @@ import { Reducers as AnswerReducers } from './Answer';
  *               |-------comments : Array of Comments
  *               |-------answers : Array of Answers
  *                          |
- *                          |-------[0] 
+ *                          |-------[0]
  *                          ~
  *                          ~
  *                          |-------[N] : is Answer
  *                                   |
  *                                   |-------id
- *                                   |-------content   
+ *                                   |-------content
  *                                   ~
  *                                   ~-------skip another params
  *                                   ~

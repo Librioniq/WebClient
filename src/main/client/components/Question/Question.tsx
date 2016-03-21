@@ -21,6 +21,7 @@ export class Question extends React.Component<QuestionProps, void> {
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{createdBy}</section>
                 <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
+                <button></button>
             </div>
         );
     }

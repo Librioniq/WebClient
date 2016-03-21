@@ -19,7 +19,7 @@ const render = (assets) =>
     </html>`;
 const app = express();
 const server = createServer(app);
-const config = { port: 8080, host: "localhost" };
+const config = { port: 8083, host: "localhost" };
 
 app.use("/dist", express.static(path.join(__dirname, "..", "..", "..", "static", "dist"), {
     maxAge: "200d" // We can cache them as they include hashes
