@@ -1,19 +1,50 @@
 import * as React from "react";
-
 import * as Entities from '../../entities';
+import { Editor } from '../../components';
 
 const styles: any = require('./Comment.scss');
 
-export class Comment extends React.Component<Entities.Comment, void> {
+interface CommentProps {
+    comment?: Entities.Comment;
+    onAddComment?: Function;
+    onEditComment?: Function;
+    editing?: boolean;
+}
+
+interface CommentState {
+    content?: string;
+    editing?: boolean;
+}
+
+export class Comment extends React.Component<CommentProps, CommentState> {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            content: this.props.comment.content || '',
+            editing: this.props.editing || false
+        };
+    }
     public render() {
-        const { createdBy, createdDate, content} = this.props;
+        const { comment } = this.props;
+        const { content, createdBy, createdDate } = comment;
+
+        let element;
+        if (!this.state.editing) {
+            element = (<Editor content={this.state.content} />);
+        } else {
+            element = (
+                <div className={styles.comment}>
+                    <span>{content} - </span>
+                    <a href="#" className={styles.link}>{createdBy}</a>
+                    <span className={styles.helper}> {createdDate}</span>
+                    <button onClick={() => console.log('aaa')}>Add</button>
+                </div>
+            );
+        }
+
 
         return (
-            <div className={styles.comment}>
-                <span>{content} - </span>
-                <a href="#" className={styles.link}>{createdBy}</a>
-                <span className={styles.helper}> {createdDate}</span>
-            </div>
+            element
         );
     }
 }
