@@ -32,7 +32,7 @@ export class Question extends React.Component<QuestionProps, any> {
                 </header>
                 <div className={css.content}>{content}</div>
                 <section className={css.owner}>{createdBy}</section>
-                <section className={css.comments}>{comments && comments.map(comment => <Comment {...comment} />) }</section>
+                <section className={css.comments}>{comments && comments.map(comment => <Comment comment={comment} />) }</section>
                 <button onClick={() => this.onAddComment()}>Add</button>
             </div>
         );
