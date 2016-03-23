@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as fs from 'fs';
 import {createServer} from 'http';
+import environment from './environment';
 
 
 const render = (assets) =>
@@ -19,9 +20,6 @@ const render = (assets) =>
     </html>`;
 const app = express();
 const server = createServer(app);
-const config = { port: 8083, host: "localhost" };
-
-console.log(__dirname);
 
 app.use("/dist", express.static(path.join(process.env.NODE_PATH, "static", "dist"), {
     maxAge: "200d" // We can cache them as they include hashes
@@ -32,14 +30,14 @@ app.use("/", express.static(path.join(__dirname, ".."), {
 app.get("/*", (req, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(process.env.NODE_PATH, "webpack-assets.json"), "utf-8")))));
 
 export const run = () => {
-    if (config.port) {
-        const runnable = server.listen(config.port, (err) => {
+    if (environment.server.port) {
+        const runnable = server.listen(environment.server.port, (err) => {
             if (err) {
                 console.error(err);
             }
 
-            console.info('----\n==> 🌎  Client is running on port %s', config.port);
-            console.info('==> 💻  Send requests to http://%s:%s', config.host, config.port);
+            console.info('----\n==> 🌎  Client is running on port %s', environment.server.port);
+            console.info('==> 💻  Send requests to http://%s:%s', environment.server.host, environment.server.port);
         });
 
         return runnable;
