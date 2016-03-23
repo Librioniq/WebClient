@@ -3,9 +3,8 @@ import * as Entities from '../../entities';
 
 const css: any = require('./Comment.scss');
 
-interface CommentProps
 
-export class Comment extends React.Component<Entities.Comment, void> {
+export class Comment extends React.Component<Entities.Comment, any> {
     public render() {
         const { createdBy, createdDate, content} = this.props;
 

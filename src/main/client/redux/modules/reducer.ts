@@ -54,7 +54,18 @@ export default combineReducers({
                             AnswerReducers.update,
                             mergeState(
                                 combineReducers({
-                                    comments: undefined
+                                    comments: reduceReducers(
+                                        CommentReducers.list,
+                                        mapToCollection(
+                                            reduceReducers(
+                                                CommentReducers.get,
+                                                CommentReducers.create,
+                                                CommentReducers.update,
+                                                CommentReducers.remove,
+                                                CommentReducers.failure
+                                            )
+                                        )
+                                    )
                                 })
                             )
                         )

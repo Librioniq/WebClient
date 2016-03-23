@@ -1,28 +1,12 @@
 import * as React from "react";
 import * as Entities from '../../entities';
-import { Comment, Editor } from '../../components';
-
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Actions as CommentActions } from '../../redux/modules/Comment';
 
 const css = require('./Question.scss');
 
-interface QuestionProps extends React.Props<Question>, Entities.Question {
-    comments?: Entities.Comment[];
-    create?: (id, comment) => void;
-}
 
-@connect(
-    state => ({
-        comments: state.question.comments,
-        text: 'state.editor.content'
-     }),
-    dispatch => bindActionCreators({ create: CommentActions.create }, dispatch)
-)
-export class Question extends React.Component<QuestionProps, any> {
+export class Question extends React.Component<Entities.Question, any> {
     public render() {
-        const { title, tags, content, createdBy, comments } = this.props;
+        const { title, tags, content, createdBy } = this.props;
 
         return (
             <div className={css.root}>
@@ -34,10 +18,6 @@ export class Question extends React.Component<QuestionProps, any> {
                 <section className={css.owner}>{createdBy}</section>
             </div>
         );
-    }
-
-    public onAddComment() {
-        this.props.create(0, {content: "asdasda"});
     }
 }
 

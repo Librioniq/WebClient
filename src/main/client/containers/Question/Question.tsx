@@ -3,8 +3,9 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { assign } from 'lodash';
-import Modules from  '../../redux/modules';
+import { Actions } from  '../../redux/modules/Question';
 import * as Entities from '../../entities';
+import * as Containers from '../../containers';
 import * as Components from '../../components';
 
 interface QestionRoutingProps {
@@ -12,34 +13,33 @@ interface QestionRoutingProps {
 }
 
 interface QuestionProps extends React.Props<Question>, RouteComponentProps<QestionRoutingProps, QestionRoutingProps>, Entities.Question {
-    answers?: Array<Entities.Answer>;
-    comments?: Array<Entities.Comment>;
     children?: React.ReactElement<any>;
-    list: (questionId) => void;
     get: (questionId) => void;
+    create?: (id, comment) => void;
 }
-
 
 @connect(
     state => assign({}, state.question),
-    dispatch => bindActionCreators({ list: Modules.Answer.Actions.list, get: Modules.Question.Actions.get }, dispatch)
+    dispatch => bindActionCreators({ get: Actions.get }, dispatch)
 )
 export class Question extends React.Component<QuestionProps, void> {
     public componentWillMount() {
-        const {list, get, params: {id}} = this.props;
+        const {get, params: {id}} = this.props;
 
         get(id);
-        list(id);
     }
 
     public render() {
-        const { answers } = this.props;
-
         return (
             <div>
-                <Components.Question {...(this.props as any)}/>
                 <div>
-                    {answers && answers.map(answer => <Components.Answer {...answer}/>) }
+                    <Components.Question {...this.props}/>
+                    <section>
+                        <Containers.Comments {...this.props}/>
+                    </section>
+                </div>
+                <div>
+                    <Containers.Answers {...this.props}/>
                 </div>
             </div>
         );
