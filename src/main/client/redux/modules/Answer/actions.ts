@@ -5,37 +5,52 @@ import * as Constants from './constants';
 const api = new Api.Answer();
 
 
-export function get(questionId: number, id: number) {
+export function get(parentId: number, id: number) {
     return {
         type: Constants.GET,
-        payload: () => api.get(questionId, id)
+        payload: {
+            request: () => api.get(parentId, id),
+            body: { id, parentId }
+        }
     };
 }
 
-export function list(questionId: number) {
+export function list(parentId: number) {
     return {
         type: Constants.LIST,
-        payload: () => api.list(questionId)
+        payload: {
+            request: () => api.list(parentId),
+            body: { parentId }
+        }
     };
 }
 
-export function create(questionId: number, element: Answer) {
+export function create(parentId: number, answer: Answer) {
     return {
         type: Constants.CREATE,
-        payload: () => api.post(questionId, element)
+        payload: {
+            request: () => api.post(parentId, answer),
+            body: { parentId, answer }
+        }
     };
 }
 
-export function update(questionId: number, element: Answer) {
+export function update(parentId: number, answer: Answer) {
     return {
         type: Constants.UPDATE,
-        payload: () => api.put(questionId, element)
+        payload: {
+            request: () => api.put(parentId, answer),
+            body: { parentId, answer }
+        }
     };
 }
 
-export function remove(questionId: number, id: number) {
+export function remove(parentId: number, id: number) {
     return {
         type: Constants.DELETE,
-        payload: () => api.delete(questionId, id)
+        payload: {
+            request: () => api.delete(parentId, id),
+            body: { id, parentId }
+        }
     };
 }

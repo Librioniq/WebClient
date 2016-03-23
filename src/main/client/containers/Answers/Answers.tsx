@@ -7,17 +7,20 @@ import * as Containers from '../../containers';
 
 
 interface AnswersProps extends React.Props<Answers> {
+    parentId: number;
     answers?: Array<Entities.Answer>;
     list?: (id: number) => any;
 }
 
 @connect(
-    () => ({}),
+    (s, p) => ({ answers: s.answers.filter(it => it.parentId === p.parentId) }),
     dispatch => bindActionCreators({ list: Actions.list }, dispatch)
 )
 export class Answers extends React.Component<AnswersProps, any> {
     public componentWillMount() {
-        this.props.list(0);
+        const {parentId, list} = this.props;
+
+        list(parentId);
     }
 
     public render() {

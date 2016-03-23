@@ -6,18 +6,20 @@ import * as Entities from '../../entities';
 import * as Containers from '../../containers';
 
 interface CommentsProps extends React.Props<Comments> {
+    parentId: number;
     comments?: Array<Entities.Comment>;
     list?: (id: number) => void;
 }
 
-
 @connect(
-    () => ({}),
+    (s, p) => ({ comments: s.comments.filter(it => it.parentId === p.parentId) }),
     dispatch => bindActionCreators({ list: Actions.list }, dispatch)
 )
 export class Comments extends React.Component<CommentsProps, any> {
     public componentWillMount() {
-        this.props.list(0);
+        const {parentId, list} = this.props;
+
+        list(parentId);
     }
 
     public render() {

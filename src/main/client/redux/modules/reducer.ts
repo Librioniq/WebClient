@@ -36,54 +36,26 @@ import { Reducers as CommentReducers } from './Comment';
  */
 export default combineReducers({
     routing,
-    questions: QuestionReducers.list,
-    question: reduceReducers(
+    questions: reduceReducers(
+        QuestionReducers.list,
         QuestionReducers.create,
         QuestionReducers.failure,
         QuestionReducers.get,
-        QuestionReducers.update,
-        mergeState(
-            combineReducers({
-                answers: reduceReducers(
-                    AnswerReducers.list,
-                    mapToCollection(
-                        reduceReducers(
-                            AnswerReducers.create,
-                            AnswerReducers.failure,
-                            AnswerReducers.get,
-                            AnswerReducers.update,
-                            mergeState(
-                                combineReducers({
-                                    comments: reduceReducers(
-                                        CommentReducers.list,
-                                        mapToCollection(
-                                            reduceReducers(
-                                                CommentReducers.get,
-                                                CommentReducers.create,
-                                                CommentReducers.update,
-                                                CommentReducers.remove,
-                                                CommentReducers.failure
-                                            )
-                                        )
-                                    )
-                                })
-                            )
-                        )
-                    )
-                ),
-                comments: reduceReducers(
-                    CommentReducers.list,
-                    mapToCollection(
-                        reduceReducers(
-                            CommentReducers.get,
-                            CommentReducers.create,
-                            CommentReducers.update,
-                            CommentReducers.remove,
-                            CommentReducers.failure
-                        )
-                    )
-                )
-            })
-        )
+        QuestionReducers.update
+    ),
+    answers: reduceReducers(
+        AnswerReducers.list,
+        AnswerReducers.create,
+        AnswerReducers.failure,
+        AnswerReducers.get,
+        AnswerReducers.update
+    ),
+    comments: reduceReducers(
+        CommentReducers.list,
+        CommentReducers.get,
+        CommentReducers.create,
+        CommentReducers.update,
+        CommentReducers.remove,
+        CommentReducers.failure
     )
 });

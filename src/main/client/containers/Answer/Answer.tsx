@@ -1,6 +1,7 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {assign} from 'lodash';
 import {Actions} from  '../../redux/modules/Answer';
 import * as Entities from '../../entities';
 import * as Components from '../../components';
@@ -20,7 +21,7 @@ interface AnswerState {
 }
 
 @connect(
-    () => ({}),
+    (s, {params: {id} = { id: undefined }}) => assign({}, s.answers.filter(it => it.id === Number(id))[0]),
     dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
 )
 export class Answer extends React.Component<AnswerProps, AnswerState> {
@@ -38,10 +39,16 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
             <div>
                 <Components.Answer {...this.props}/>
                 <section>
-                    <Containers.Comments comments = {this.props.comments}/>
+                    {this.renderComments() }
                 </section>
             </div>
         );
+    }
+
+    private renderComments() {
+        const {id} = this.props;
+
+        return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
     }
 
     private onEdit() {

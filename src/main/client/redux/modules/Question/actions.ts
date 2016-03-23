@@ -8,34 +8,49 @@ const api = new Api.Question();
 export function get(id: number) {
     return {
         type: Constants.GET,
-        payload: () => api.get(id)
+        payload: {
+            request: () => api.get(id),
+            body: { id }
+        }
     };
 }
 
 export function list() {
     return {
         type: Constants.LIST,
-        payload: () => api.list()
+        payload: {
+            request: () => api.list(),
+            body: {}
+        }
     };
 }
 
-export function create(element: Question) {
+export function create(question: Question) {
     return {
         type: Constants.CREATE,
-        payload: () => api.post(element)
+        payload: {
+            request: () => api.post(question),
+            body: { question }
+        }
     };
 }
 
-export function update(element: Question) {
+export function update(question: Question) {
     return {
         type: Constants.UPDATE,
-        payload: () => api.put(element)
+        payload: {
+            request: () => api.put(question),
+            body: { question }
+        }
     };
 }
 
 export function remove(id: number) {
     return {
         type: Constants.DELETE,
-        payload: () => api.delete(id)
+        payload: {
+            request: () => api.delete(id),
+            body: { id }
+        }
     };
 }
