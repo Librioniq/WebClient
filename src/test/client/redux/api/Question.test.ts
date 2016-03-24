@@ -4,34 +4,39 @@ import {expect} from 'chai';
 import * as Api from '../../../../../src/main/client/api';
 import * as Entities from '../../../../../src/main/client/entities';
 import Server from '../../../../main/server/index';
+import environment from '../../../../main/server/environment';
 import {assign} from 'lodash';
 
 describe("Redux Api", () => {
-    const questionsApi = new Api.Question();
-    const stubRequestData: Entities.Question = {
-        title: "hi World",
-        content: "Some Content"
-    };
-    const updatedRequestData: Entities.Question = {
-        id: 0,
-        title: "hi World Updated",
-        content: "Some Content"
-    };
     let server;
+    let questionsApi: Api.Question;
 
     before(done => {
         const formDataKey = "FormData";
         const blobKey = "Blob";
+        const envKey = "environment";
 
-        server = Server.Api.run();
         global[formDataKey] = () => { console.log(formDataKey); };
         global[blobKey] = () => { console.log(blobKey); };
+        global[envKey] = environment;
+
+        server = Server.Api.run();
+        questionsApi = new Api.Question();
 
         done();
     });
     after(() => server.close());
 
     describe(`Question`, () => {
+        const stubRequestData: Entities.Question = {
+            title: "hi World",
+            content: "Some Content"
+        };
+        const updatedRequestData: Entities.Question = {
+            id: 0,
+            title: "hi World Updated",
+            content: "Some Content"
+        };
 
         it("#list method should respond", (done) => {
             questionsApi.list()

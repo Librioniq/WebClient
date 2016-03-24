@@ -2,11 +2,12 @@
 
 import {expect} from 'chai';
 import * as request from 'supertest';
+import environment from '../../../main/server/environment';
 import Server from '../../../main/server/index';
 
 
 describe("Routers", function() {
-    const url = "http://localhost:8082/api";
+    const url = `http${environment.server.isSecured ? "s" : ""}://${environment.server.host}:${environment.server.port}/api`;
     let server;
 
     before(done => {
@@ -27,11 +28,12 @@ describe("Routers", function() {
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+                        return;
                     }
 
                     expect(res.body).be.an("Array");
                     expect(res.body[0]).have.property('id');
-                    expect(res.body[0].id).to.be.equals(0);
+                    expect(res.body[0].id).to.be.equals(2);
 
                     done();
                 });
@@ -39,17 +41,18 @@ describe("Routers", function() {
 
         it("should respond with comment", done => {
             request(url)
-                .get('/posts/0/comments/0')
+                .get('/posts/0/comments/2')
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+                        return;
                     }
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(0);
+                    expect(res.body.id).to.be.equals(2);
 
                     done();
                 });
@@ -71,6 +74,7 @@ describe("Routers", function() {
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+                        return;
                     }
 
                     expect(res.body).to.be.not.undefined;
@@ -86,7 +90,7 @@ describe("Routers", function() {
             request(url)
                 .put('/posts/0/comments')
                 .send({
-                    id: 0,
+                    id: 2,
                     content: "Hello",
                     createdBy: "string",
                     createdDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
@@ -99,11 +103,12 @@ describe("Routers", function() {
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+                        return;
                     }
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(0);
+                    expect(res.body.id).to.be.equals(2);
                     expect(res.body.content).to.be.equals("Hello");
 
                     done();
@@ -112,7 +117,7 @@ describe("Routers", function() {
 
         it("should delete comment", done => {
             request(url)
-                .delete('/posts/0/comments/0')
+                .delete('/posts/0/comments/2')
                 .expect(204) // Status code
                 .end(function(err, res) {
                     if (err) {

@@ -4,7 +4,7 @@ import {assign} from 'lodash';
 
 const postId = 0;
 const dummyComment: Comment = {
-    id: 0,
+    id: 2,
     content: "Hello world",
     createdBy: "string",
     createdDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),

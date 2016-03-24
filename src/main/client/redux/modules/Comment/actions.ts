@@ -5,37 +5,52 @@ import * as Constants from './constants';
 const api = new Api.Comment();
 
 
-export function get(postId: number, id: number) {
+export function get(parentId: number, id: number) {
     return {
         type: Constants.GET,
-        payload: () => api.get(postId, id)
+        payload: {
+            request: () => api.get(parentId, id),
+            body: { id, parentId }
+        }
     };
 }
 
-export function list(postId: number) {
+export function list(parentId: number) {
     return {
         type: Constants.LIST,
-        payload: () => api.list(postId)
+        payload: {
+            request: () => api.list(parentId),
+            body: { parentId }
+        }
     };
 }
 
-export function create(postId: number, element: Comment) {
+export function create(parentId: number, comment: Comment) {
     return {
         type: Constants.CREATE,
-        payload: () => api.post(postId, element)
+        payload: {
+            request: () => api.post(parentId, comment),
+            body: { comment, parentId }
+        }
     };
 }
 
-export function update(postId: number, element: Comment) {
+export function update(parentId: number, comment: Comment) {
     return {
         type: Constants.UPDATE,
-        payload: () => api.put(postId, element)
+        payload: {
+            request: () => api.put(parentId, comment),
+            body: { comment, parentId }
+        }
     };
 }
 
-export function remove(postId: number, id: number) {
+export function remove(parentId: number, id: number) {
     return {
         type: Constants.DELETE,
-        payload: () => api.delete(postId, id)
+        payload: {
+            request: () => api.delete(parentId, id),
+            body: { id, parentId }
+        }
     };
 }

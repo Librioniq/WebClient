@@ -4,33 +4,16 @@ import { Editor } from '../../components';
 
 const css: any = require('./Comment.scss');
 
-interface CommentProps {
-    comment?: Entities.Comment;
+interface CommentProps extends Entities.Comment {
     onAddComment?: Function;
-    onEditComment?: Function;
-    editing?: boolean;
+    onEdit?: Function;
 }
 
-interface CommentState {
-    content?: string;
-    editing?: boolean;
-}
-
-export class Comment extends React.Component<CommentProps, CommentState> {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            content: this.props.comment.content || '',
-            editing: this.props.editing || false
-        };
-    }
+export class Comment extends React.Component<CommentProps, any> {
     public render() {
-        const { content, createdBy, createdDate } = this.props.comment;
+        const { content, createdBy, createdDate } = this.props;
 
         let element;
-        if (!this.state.editing) {
-            element = (<Editor content={this.state.content} />);
-        } else {
             element = (
                 <div className={css.comment}>
                     <span>{content} - </span>
@@ -40,12 +23,19 @@ export class Comment extends React.Component<CommentProps, CommentState> {
                     <button onClick={() => console.log('aaa')} className={css.addButton}>Add</button>
                 </div>
             );
-        }
-
 
         return (
-            element
+            <div className={css.comment}>
+                <span>{content} - </span>
+                <a href="#" className={css.link}>{createdBy}</a>
+                <span className={css.helper}> {createdDate}</span>
+                <button onClick={()=>this.edit()}>edit</button>
+            </div>
         );
+    }
+
+    private edit() {
+        this.props.onEdit();
     }
 }
 

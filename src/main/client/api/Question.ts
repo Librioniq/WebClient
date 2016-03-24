@@ -5,7 +5,7 @@ import * as Entities from '../entities';
 
 export class Question extends Post<Entities.Question> {
     constructor() {
-        super("http://localhost:8082/api/questions");
+        super("api/questions");
     }
 
     /**
