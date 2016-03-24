@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Entities from '../../entities';
 import { Editor } from '../../components';
 
-const styles: any = require('./Comment.scss');
+const css: any = require('./Comment.scss');
 
 interface CommentProps {
     comment?: Entities.Comment;
@@ -32,11 +32,11 @@ export class Comment extends React.Component<CommentProps, CommentState> {
             element = (<Editor content={this.state.content} />);
         } else {
             element = (
-                <div className={styles.comment}>
+                <div className={css.comment}>
                     <span>{content} - </span>
-                    <a href="#" className={styles.link}>{createdBy}</a>
-                    <span className={styles.helper}> {createdDate}</span>
-                    <button onClick={() => console.log('aaa')}>Add</button>
+                    <a href="#" className={css.link}>{createdBy}</a>
+                    <span className={css.helper}> {createdDate}</span>
+                    <button onClick={() => console.log('aaa')} className={css.addButton}>Add</button>
                 </div>
             );
         }
