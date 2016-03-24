@@ -1,12 +1,11 @@
-import {Status} from '../../middleware/Status';
-import {assign, merge} from 'lodash';
+import { Status } from '../../middleware/Status';
+import { assign, merge } from 'lodash';
 import * as Constants from './constants';
 
-
 export function list(state = [], action) {
-    if (action.status === Status.SUCCESS && action.answers && action.type === Constants.LIST) {
+    if (action.status === Status.SUCCESS && action.comments && action.type === Constants.LIST) {
         return [
-            ...action.answers.map(it => merge(it, { parentId: action.payload.body.parentId })),
+            ...action.comments.map(it => merge(it, { parentId: action.payload.body.parentId })),
             ...state
         ];
     }
@@ -17,8 +16,8 @@ export function list(state = [], action) {
 export function get(state = [], action) {
     if (Constants.GET === action.type && action.status === Status.SUCCESS) {
         return [
-            ...state.filter(it => it.id !== action.answer.id),
-            merge(action.answer, { parentId: action.payload.body.parentId })
+            ...state.filter(it => it.id !== action.comment.id),
+            merge(action.comment, { parentId: action.payload.body.parentId })
         ];
     }
 
@@ -29,7 +28,7 @@ export function create(state = [], action) {
     if (Constants.CREATE === action.type && action.status === Status.SUCCESS) {
         return [
             ...state,
-            merge(action.answer, { parentId: action.payload.body.parentId })
+            merge(action.comment, { parentId: action.payload.body.parentId })
         ];
     }
 
@@ -39,8 +38,8 @@ export function create(state = [], action) {
 export function update(state = [], action) {
     if (Constants.UPDATE === action.type && action.status === Status.SUCCESS) {
         return [
-            ...state.filter(it => it.id !== action.answer.id),
-            merge(action.answer, { parentId: action.payload.body.parentId })
+            ...state.filter(it => it.id !== action.comment.id),
+            merge(action.comment, { parentId: action.payload.body.parentId })
         ];
     }
 

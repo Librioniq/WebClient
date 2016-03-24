@@ -5,8 +5,6 @@ import middleware from './middleware/post';
 import reducer from './modules/reducer';
 import {DevTools} from '../containers';
 
-declare const module: any;
-
 const enhancer = compose(
     applyMiddleware(thunk, middleware),
     persistState(
@@ -17,14 +15,8 @@ const enhancer = compose(
     DevTools.instrument()
 );
 
-
-console.log(enhancer);
-console.log(thunk);
-
 export default function configureStore(initialState) {
     const store = createStore(reducer, initialState, enhancer as any);
-
-    console.log(store);
 
     // if (module.hot) {
     //     module.hot.accept('../reducers', () =>

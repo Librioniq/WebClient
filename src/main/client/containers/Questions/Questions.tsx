@@ -5,6 +5,8 @@ import {Actions} from  '../../redux/modules/Question';
 import * as Entities from '../../entities';
 import * as Components from '../../components';
 
+const css = require('./Questions.scss');
+
 interface QuestionsProps extends React.Props<Questions> {
     questions: Array<Entities.Question>;
     list: () => any;
@@ -24,8 +26,10 @@ export class Questions extends React.Component<QuestionsProps, void> {
         const {questions} = this.props;
 
         return (
-            <div className="container">
-                <p>Questions</p>
+            <div className={css.container}>
+                <header>
+                    <span className={css.title}>All questions</span>
+                </header>
                 <div>
                     {questions && questions.map(question => <Components.Question {...question}/>) }
                 </div>

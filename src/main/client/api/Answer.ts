@@ -6,7 +6,7 @@ import {expand} from './utils/url';
 
 export class Answer extends Post<Entities.Answer> {
     constructor() {
-        super("http://localhost:8082/api/questions/:questionId/answers");
+        super("api/questions/:questionId/answers");
     }
 
     /**

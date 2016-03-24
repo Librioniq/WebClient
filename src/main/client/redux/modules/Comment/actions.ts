@@ -1,8 +1,8 @@
-import { Answer } from '../../../entities';
+import { Comment } from '../../../entities';
 import * as Api from '../../../api';
 import * as Constants from './constants';
 
-const api = new Api.Answer();
+const api = new Api.Comment();
 
 
 export function get(parentId: number, id: number) {
@@ -25,22 +25,22 @@ export function list(parentId: number) {
     };
 }
 
-export function create(parentId: number, answer: Answer) {
+export function create(parentId: number, comment: Comment) {
     return {
         type: Constants.CREATE,
         payload: {
-            request: () => api.post(parentId, answer),
-            body: { parentId, answer }
+            request: () => api.post(parentId, comment),
+            body: { comment, parentId }
         }
     };
 }
 
-export function update(parentId: number, answer: Answer) {
+export function update(parentId: number, comment: Comment) {
     return {
         type: Constants.UPDATE,
         payload: {
-            request: () => api.put(parentId, answer),
-            body: { parentId, answer }
+            request: () => api.put(parentId, comment),
+            body: { comment, parentId }
         }
     };
 }

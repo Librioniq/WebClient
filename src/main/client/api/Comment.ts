@@ -6,7 +6,7 @@ import {expand} from './utils/url';
 
 export class Comment extends Post<Entities.Comment> {
     constructor() {
-        super("http://localhost:8082/api/posts/:postId/comments");
+        super(`api/posts/:postId/comments`);
     }
 
     /**

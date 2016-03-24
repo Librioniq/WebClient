@@ -7,7 +7,9 @@ export interface Response<T> extends IResponse {
 }
 
 export abstract class Post<T extends Entities.Post> {
-    constructor(protected endpoint: string) { }
+    constructor(protected endpoint: string) {
+        this.endpoint = `http${environment.server.isSecured ? "s" : ""}://${environment.server.host}:${environment.server.port}/${endpoint}`;
+    }
     /**
      * List elements
      */
