@@ -2,11 +2,12 @@
 
 import {expect} from 'chai';
 import * as request from 'supertest';
+import environment from '../../../main/server/environment';
 import Server from '../../../main/server/index';
 
 
 describe("Routers", function() {
-    const url = "http://localhost:8082/api";
+    const url = `http${environment.server.isSecured ? "s" : ""}://${environment.server.host}:${environment.server.port}/api`;
     let server;
 
     before(done => {

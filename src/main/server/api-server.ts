@@ -8,11 +8,11 @@ import * as bodyParser from 'body-parser';
 // import PrettyError from 'pretty-error';
 import {createServer} from 'http';
 import routers from './routers';
+import environment from './environment';
 
 // const pretty = new PrettyError();
 const app = express();
 const server = createServer(app);
-const config = { port: 8082, host: "localhost" };
 
 app.use(session({
     secret: 'react and redux rule!!!!',
@@ -30,14 +30,14 @@ app.use(bodyParser.json());
 app.use("/api", ...routers);
 
 export const run = () => {
-    if (config.port) {
-        const runnable = server.listen(config.port, (err) => {
+    if (environment.server.port) {
+        const runnable = server.listen(environment.server.port, (err) => {
             if (err) {
                 console.error(err);
             }
 
-            console.info('----\n==> 🌎  API is running on port %s', config.port);
-            console.info('==> 💻  Send requests to http://%s:%s', config.host, config.port);
+            console.info('----\n==> 🌎  API is running on port %s', environment.server.port);
+            console.info('==> 💻  Send requests to http://%s:%s', environment.server.host, environment.server.port);
         });
 
         return runnable;

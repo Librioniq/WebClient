@@ -1,25 +1,12 @@
-declare interface Config {
-    host: string;
-    port: number;
-    isSecured?: boolean;
-}
-
-declare interface Environment {
-    client: Config;
-    server: Config;
-}
-
-declare const environment: Environment;
-
-export const client: Config = process.env.client || {
-    host: "localhost",
-    port: 8085,
-    isSecured: false
+export const client: Config = {
+    host: process.env.NODE_CLIENT_HOST || "localhost",
+    port: Number(process.env.NODE_CLIENT_PORT) || 8085,
+    isSecured: Boolean(process.env.NODE_CLIENT_IS_SECURED) || false
 };
-export const server: Config = process.env.server || {
-    host: "localhost",
-    port: 8086,
-    isSecured: false
+export const server: Config = {
+    host: process.env.NODE_SERVER_HOST || "localhost",
+    port: Number(process.env.NODE_SERVER_PORT) || 8086,
+    isSecured: Boolean(process.env.NODE_SERVER_IS_SECURED) || false
 };
 
 

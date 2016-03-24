@@ -16,7 +16,7 @@ export const router = Router();
 
 router.get("/questions/:questionId/answers", (req, res) => (req.body && Number(req.params.questionId) === questionId) ? res.status(200).json([dummyAnswer]) : res.status(404).end('NOT FOUND'));
 router.get("/questions/:questionId/answers/:id", (req, res) => (req.body && Number(req.params.questionId) === questionId && dummyAnswer.id === Number(req.params.id)) ? res.status(200).json(dummyAnswer).end() : res.status(404).end('NOT FOUND'));
-router.post("/questions/:questionId/answers", (req, res) => (req.body && Number(req.params.questionId) === questionId && req.body.id === undefined) ? res.status(200).json(assign({}, dummyAnswer, req.body, { id: 1 })).end() : res.status(404).end('NOT FOUND'));
+router.post("/questions/:questionId/answers", (req, res) => (req.body && Number(req.params.questionId) === questionId && req.body.id === undefined) ? res.status(200).json(assign({}, dummyAnswer, req.body, { id: 2 })).end() : res.status(404).end('NOT FOUND'));
 router.put("/questions/:questionId/answers", (req, res) => (req.body && Number(req.params.questionId) === questionId && dummyAnswer.id === Number(req.body.id)) ? res.status(200).json(assign({}, dummyAnswer, req.body)).end() : res.status(404).end('NOT FOUND'));
 router.delete("/questions/:questionId/answers/:id", (req, res) => (req.body && Number(req.params.questionId) === questionId && dummyAnswer.id === Number(req.params.id)) ? res.status(204).end() : res.status(404).end('NOT FOUND'));
 
