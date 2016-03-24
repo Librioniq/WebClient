@@ -9,6 +9,7 @@
     "express-session": "registry:dt/express-session#0.0.0+20160227204118",
     "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160218094246",
     "lodash": "registry:dt/lodash#3.10.0+20160127144039",
+    "marked": "registry:dt/marked#0.0.0+20160316155526",
     "mime": "registry:dt/mime#0.0.0+20151204023458",
     "mocha": "registry:dt/mocha#2.2.5+20151023103246",
     "node": "registry:dt/node#4.0.0+20160311162451",
