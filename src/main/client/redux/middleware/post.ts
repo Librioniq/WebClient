@@ -24,10 +24,11 @@ export default store => next => action => {
     next(actionWith({ status: Status.REQUEST }));
 
     return (action.payload.request() as Promise<IResponse>)
-        .then(response => response.json().then(data => next(actionWith({
+        .then(response => response.status === 200 ? response.json().then(data => next(actionWith({
             [`${regex.exec(action.type)[1].toLocaleLowerCase()}`]: data,
             status: Status.SUCCESS
-        }))), error => next(actionWith({
+        }))) : next(actionWith({ status: Status.SUCCESS })),
+        error => next(actionWith({
             status: Status.FAILURE,
             error: error.message || 'Something bad happened'
         })));
