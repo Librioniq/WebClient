@@ -25,8 +25,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         };
     }
     public render() {
-        const { comment } = this.props;
-        const { content, createdBy, createdDate } = comment;
+        const { content, createdBy, createdDate } = this.props.comment;
 
         let element;
         if (!this.state.editing) {
