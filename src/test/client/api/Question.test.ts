@@ -1,15 +1,15 @@
-/// <reference path='../../../../../typings/main.d.ts'/>
+/// <reference path='../../../../typings/main.d.ts'/>
 
 import {expect} from 'chai';
-import * as Api from '../../../../../src/main/client/api';
-import * as Entities from '../../../../../src/main/client/entities';
-import Server from '../../../../main/server/index';
-import environment from '../../../../main/server/environment';
+import * as Api from '../../../../src/main/client/api';
+import * as Entities from '../../../../src/main/client/entities';
+import Server from '../../../main/server/index';
+import environment from '../../../main/server/environment';
 import {assign} from 'lodash';
 
 describe("Redux Api", () => {
     let server;
-    let commentsApi: Api.Comment;
+    let questionsApi: Api.Question;
 
     before(done => {
         const formDataKey = "FormData";
@@ -21,23 +21,25 @@ describe("Redux Api", () => {
         global[envKey] = environment;
 
         server = Server.Api.run();
-        commentsApi = new Api.Comment();
+        questionsApi = new Api.Question();
 
         done();
     });
     after(() => server.close());
 
-    describe(`Comment`, () => {
-        const stubRequestData: Entities.Comment = {
+    describe(`Question`, () => {
+        const stubRequestData: Entities.Question = {
+            title: "hi World",
             content: "Some Content"
         };
-        const updatedRequestData: Entities.Comment = {
-            id: 2,
-            content: "Some Content Updated"
+        const updatedRequestData: Entities.Question = {
+            id: 0,
+            title: "hi World Updated",
+            content: "Some Content"
         };
 
         it("#list method should respond", (done) => {
-            commentsApi.list(0)
+            questionsApi.list()
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
@@ -52,13 +54,13 @@ describe("Redux Api", () => {
         });
 
         it("#get method should respond", (done) => {
-            commentsApi.get(0, 2)
+            questionsApi.get(0)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
                         expect(data).to.be.not.empty.and.not.undefined;
-                        expect(data.id).to.be.equal(2);
+                        expect(data.id).to.be.equal(0);
                         done();
                     }).catch(err => done(err));
                 }, err => done(err))
@@ -66,13 +68,14 @@ describe("Redux Api", () => {
         });
 
         it("#post method should respond", (done) => {
-            commentsApi.post(0, stubRequestData)
+            questionsApi.post(stubRequestData)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
                         expect(data).is.not.empty;
                         expect(data).to.have.property("id").equal(1);
+                        expect(data.title).to.be.equal(stubRequestData.title);
                         expect(data.content).to.be.equal(stubRequestData.content);
 
                         done();
@@ -82,12 +85,12 @@ describe("Redux Api", () => {
         });
 
         it("#put method should respond", (done) => {
-            commentsApi.put(0, updatedRequestData)
+            questionsApi.put(updatedRequestData)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
-                        const expected = assign({}, data, updatedRequestData) as Entities.Comment;
+                        const expected = assign({}, data, updatedRequestData) as Entities.Question;
 
                         expect(data).is.not.empty;
                         expect(data).to.be.deep.equal(expected);
@@ -99,7 +102,7 @@ describe("Redux Api", () => {
         });
 
         it("#delete method should respond", (done) => {
-            commentsApi.delete(0, 2)
+            questionsApi.delete(0)
                 .then((res) => {
                     expect(res.status).to.be.equal(204);
                     done();

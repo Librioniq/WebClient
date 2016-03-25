@@ -1,10 +1,10 @@
-/// <reference path='../../../../../typings/main.d.ts'/>
+/// <reference path='../../../../typings/main.d.ts'/>
 
 import {expect} from 'chai';
-import * as Api from '../../../../../src/main/client/api';
-import * as Entities from '../../../../../src/main/client/entities';
-import Server from '../../../../main/server/index';
-import environment from '../../../../main/server/environment';
+import * as Api from '../../../../src/main/client/api';
+import * as Entities from '../../../../src/main/client/entities';
+import Server from '../../../main/server/index';
+import environment from '../../../main/server/environment';
 import {assign} from 'lodash';
 
 describe("Redux Api", () => {
