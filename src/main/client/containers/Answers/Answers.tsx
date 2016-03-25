@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Actions} from  '../../redux/modules/Answer';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
-
+/* tslint:enable:no-unused-variable */
 
 interface AnswersProps extends React.Props<Answers> {
     parentId: number;

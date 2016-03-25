@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Actions} from  '../../redux/modules/Question';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Components from '../../components';
+/* tslint:enable:no-unused-variable */
 
 const css = require('./Questions.scss');
 

@@ -1,6 +1,7 @@
 /**
  * replace arg
  */
+/* tslint:disable:no-unused-variable */
 export function expand(url: string, ...params: any[]);
 export function expand(url: string, named: any);
 export function expand(url: string, obj: any) {

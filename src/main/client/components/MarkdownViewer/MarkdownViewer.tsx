@@ -3,8 +3,8 @@ import * as marked from 'marked';
 import * as highlight from 'highlight.js';
 
 interface MarkdownViewerProps {
-    content: string;
-    className: string;
+    content?: string;
+    className?: string;
 }
 
 export class MarkdownViewer extends React.Component<MarkdownViewerProps, void> {

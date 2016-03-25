@@ -2,11 +2,12 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { assign } from 'lodash';
 import { Actions } from  '../../redux/modules/Question';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
 import * as Components from '../../components';
+/* tslint:enable:no-unused-variable */
 
 interface QestionRoutingProps {
     id: number;

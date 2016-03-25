@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Actions} from  '../../redux/modules/Comment';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
+/* tslint:enable:no-unused-variable */
 
 interface CommentsProps extends React.Props<Comments> {
     parentId: number;

@@ -2,7 +2,9 @@ import * as React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Components from '../../components';
+/* tslint:enable:no-unused-variable */
 import {Actions} from '../../redux/modules/Comment';
 
 interface CommentProps extends React.Props<Comment>, Entities.Comment {

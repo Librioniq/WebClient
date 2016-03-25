@@ -4,9 +4,10 @@ import {bindActionCreators} from 'redux';
 import {assign} from 'lodash';
 import {Actions} from  '../../redux/modules/Answer';
 import * as Entities from '../../entities';
+/* tslint:disable:no-unused-variable */
 import * as Components from '../../components';
 import * as Containers from '../../containers';
-
+/* tslint:enable:no-unused-variable */
 
 interface AnswerProps extends React.Props<Answer> {
     create?: (parentId: number, answer: Entities.Answer) => void;
@@ -44,13 +45,14 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
             <div>
                 { component }
                 <section>
+                    {this.renderComments() }
                 </section>
             </div>
         );
     }
 
     private renderComments() {
-        const {answer: {id}} = this.props;
+        const {answer: {id}} = this.state;
 
         return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
     }
