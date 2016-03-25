@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Editor } from "../../components";
 
 interface HomeProperties extends React.Props<Home> {
 }

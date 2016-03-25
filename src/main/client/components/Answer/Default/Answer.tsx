@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as Entities from '../../../entities';
+import { MarkdownViewer } from '../../../components';
 
 const css: any = require('./Answer.scss');
 
@@ -14,7 +15,7 @@ export class Answer extends React.Component<AnswerProps, any> {
 
         return (
             <div className={css.root}>
-                <div className={css.content}>{content}</div>
+                <MarkdownViewer className = {css.content} content = {content}/>
                 <section className={css.owner}>{createdBy}</section>
                 <div className = {"btn-group btn-group-xs"} role = {"group"}>
                     <button className = {"btn btn-link"} type = {"button"} onClick = {() => this.onEdit() }>Edit</button>

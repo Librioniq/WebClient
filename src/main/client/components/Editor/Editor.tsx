@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const styles = require("./Editor.scss");
+const css = require("./Editor.scss");
 
 interface EditorProps extends React.Props<Editor> {
     content?: string;
@@ -24,7 +24,7 @@ export class Editor extends React.Component<EditorProps, EditorState> {
         return (
             <section>
                 <div>
-                    <textarea className={`form-control ${styles.editor__textarea}`} rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
+                    <textarea className={`form-control ${css.editor__textarea}`} rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
                 </div>
             </section>
         );

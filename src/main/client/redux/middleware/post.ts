@@ -3,7 +3,7 @@ import {Status} from './Status';
 
 
 
-export default store => next => action => {
+export default () => next => action => { // can be used with sotre like store=>next=>actoion=>...
     const regex = /^api\/(\w+|\d+):(GET|POST|PUT|DELETE|LIST)?$/i;
     const isAPICall = regex.test(action.type);
 
