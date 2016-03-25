@@ -8,63 +8,69 @@ import * as Components from '../../components';
 import * as Containers from '../../containers';
 
 
-interface AnswerProps extends React.Props<Answer>, Entities.Answer {
+interface AnswerProps extends React.Props<Answer> {
     create?: (parentId: number, answer: Entities.Answer) => void;
     update?: (parentId: number, answer: Entities.Answer) => void;
     delete?: (parentId: number, answerId: number) => void;
-    comments?: Entities.Comment[];
+    answer?: Entities.Answer;
 }
 
 interface AnswerState {
     edit: boolean;
     create: boolean;
+    answer: Entities.Answer;
 }
 
 @connect(
-    (s, {params: {id} = { id: undefined }}) => assign({}, s.answers.filter(it => it.id === Number(id))[0]),
+    ({answers}, {answer, params: {id} = { id: undefined }}) => ({ answer: assign({}, answer, answers.filter(it => it.id === Number(id))[0]) }),
     dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
 )
 export class Answer extends React.Component<AnswerProps, AnswerState> {
-    constructor(props: AnswerProps, context) {
-        super(props, context);
+    public componentWillMount() {
+        this.state = { edit: false, create: false, answer: this.props.answer };
+    }
 
-        this.state = { edit: false, create: false };
+    public componentWillReceiveProps(props) {
+        this.setState(assign({}, this.state, { answer: props.answer }) as AnswerState);
     }
 
     public render() {
-        // const {edit, create} = this.state;
-        // const component = edit ? (<div/>) : create ? (<section/>) : ();
+        const {edit, create, answer} = this.state;
+        const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
+            create ? (<Components.Answer.Create {...answer}/>) :
+                (<Components.Answer.Default {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         return (
             <div>
-                <Components.Answer {...this.props}/>
+                { component }
                 <section>
-                    {this.renderComments() }
                 </section>
             </div>
         );
     }
 
     private renderComments() {
-        const {id} = this.props;
+        const {answer: {id}} = this.props;
 
         return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
     }
 
     private onEdit() {
-        this.setState({ edit: true, create: false });
+        this.setState(assign({}, this.state, { edit: true }) as AnswerState);
     }
 
-    private onSave() {
+    private onSave(answer: Entities.Answer) {
         if (this.state.create) {
-            this.props.create(0, {} as any);
+            this.props.create(0, answer);
         } else if (this.state.edit) {
-            this.props.update(0, {} as any);
+            this.props.update(0, answer);
         }
+
+        this.setState(assign({}, this.state, { edit: false, answer }) as AnswerState);
     }
 
     private onDelete() {
-        this.props.delete(0, 0);
+        this.props.delete(0, this.state.answer.id);
     }
 }
 

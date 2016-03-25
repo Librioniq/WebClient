@@ -30,15 +30,15 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     public render() {
         const {edit, create} = this.state;
         const component = edit
-        ? (<Components.Editor onSave={(t)=>this.onSave(t)}/>)
-        : create
-            ? (<section/>)
-            : (<Components.Comment {...(this.props as any)} onEdit={()=>this.onEdit()}/>);
+            ? (<Components.Editor/>)
+            : create
+                ? (<section/>)
+                : (<Components.Comment {...(this.props as any) } onEdit={() => this.onEdit() }/>);
 
         return (
             <div>
-            {component}
-            <button onClick={()=>this.onDelete()}>delete</button>
+                {component}
+                <button onClick={() => this.onDelete() }>delete </button>
             </div>
         );
     }
@@ -48,12 +48,12 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     }
 
     private onSave(content) {
-        this.setState({edit: false, create: false});
+        this.setState({ edit: false, create: false });
         this.props.content = content;
         if (this.state.create) {
-            this.props.create(0, {content} as any);
+            this.props.create(0, { content } as any);
         } else if (this.state.edit) {
-            this.props.update(0, {content, id: 2} as any);
+            this.props.update(0, { content, id: 2 } as any);
         }
     }
 

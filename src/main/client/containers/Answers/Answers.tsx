@@ -28,7 +28,7 @@ export class Answers extends React.Component<AnswersProps, any> {
 
         return (
             <div className="container">
-                {answers && answers.map(answer => <Containers.Answer {...answer}/>) }
+                {answers && answers.map(answer => <Containers.Answer answer = {answer}/>) }
             </div>
         );
     }

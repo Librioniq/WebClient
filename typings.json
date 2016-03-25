@@ -7,6 +7,7 @@
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160221190517",
     "express": "registry:dt/express#4.0.0+20160208031452",
     "express-session": "registry:dt/express-session#0.0.0+20160227204118",
+    "highlightjs": "registry:dt/highlightjs#9.1.0+20160317120654",
     "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160218094246",
     "lodash": "registry:dt/lodash#3.10.0+20160127144039",
     "marked": "registry:dt/marked#0.0.0+20160316155526",
