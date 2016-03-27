@@ -29,22 +29,6 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         this.state = { edit: false, create: false };
     }
 
-    public render() {
-        const {edit, create} = this.state;
-        const component = edit
-            ? (<Components.Editor/>)
-            : create
-                ? (<section/>)
-                : (<Components.Comment {...(this.props as any) } onEdit={() => this.onEdit() }/>);
-
-        return (
-            <div>
-                {component}
-                <button onClick={() => this.onDelete() }>delete </button>
-            </div>
-        );
-    }
-
     private onEdit() {
         this.setState({ edit: true, create: false });
     }
@@ -61,6 +45,22 @@ export class Comment extends React.Component<CommentProps, CommentState> {
 
     private onDelete() {
         this.props.delete(0, 2);
+    }
+
+    public render() {
+        const {edit, create} = this.state;
+        const component = edit
+            ? (<Components.Editor onChange={() => (console.log('a'))}/>)
+            : create
+                ? (<section/>)
+                : (<Components.Comment {...(this.props as any) } onEdit={() => this.onEdit() }/>);
+
+        return (
+            <div>
+                {component}
+                <button onClick={() => this.onDelete() }>delete </button>
+            </div>
+        );
     }
 }
 

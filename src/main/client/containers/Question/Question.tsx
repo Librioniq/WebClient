@@ -35,6 +35,18 @@ export class Question extends React.Component<QuestionProps, void> {
         get(id);
     }
 
+    private renderComments() {
+        const {question: {id}} = this.props;
+
+        return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
+    }
+
+    private renderAnswers() {
+        const {id} = this.props.question;
+
+        return id !== undefined ? (<Containers.Answers parentId = {id}/>) : (<div>Loading...</div>);
+    }
+
     public render() {
         return (
             <div>
@@ -47,18 +59,6 @@ export class Question extends React.Component<QuestionProps, void> {
                 </div>
             </div>
         );
-    }
-
-    private renderComments() {
-        const {question: {id}} = this.props;
-
-        return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
-    }
-
-    private renderAnswers() {
-        const {id} = this.props.question;
-
-        return id !== undefined ? (<Containers.Answers parentId = {id}/>) : (<div>Loading...</div>);
     }
 }
 

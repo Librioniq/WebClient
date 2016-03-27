@@ -35,22 +35,6 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
         this.setState(assign({}, this.state, { answer: props.answer }) as AnswerState);
     }
 
-    public render() {
-        const {edit, create, answer} = this.state;
-        const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
-            create ? (<Components.Answer.Create {...answer}/>) :
-                (<Components.Answer.Default {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
-
-        return (
-            <div>
-                { component }
-                <section>
-                    {this.renderComments() }
-                </section>
-            </div>
-        );
-    }
-
     private renderComments() {
         const {answer: {id}} = this.state;
 
@@ -74,6 +58,22 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     private onDelete() {
         this.props.delete(0, this.state.answer.id);
     }
+
+    public render() {
+        const {edit, create, answer} = this.state;
+        const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
+            create ? (<Components.Answer.Create {...answer}/>) :
+                (<Components.Answer.Default {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+
+        return (
+            <div>
+                { component }
+                <section>
+                    {this.renderComments() }
+                </section>
+            </div>
+        );
+    }
 }
 
-export default Comment; 
+export default Comment;
