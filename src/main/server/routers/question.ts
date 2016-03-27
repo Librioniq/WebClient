@@ -1,24 +1,39 @@
-import {Question} from '../../client/entities';
 import {Router} from 'express';
-import {assign} from 'lodash';
+import {isEmpty} from 'lodash';
+import * as Services from '../services';
 
-const dummyQuestion: Question = {
-    id: 0,
-    title: "How To getting sturted with Q&A in PlayTech",
-    content: "Hello world",
-    createdBy: "Oleh Dokuka",
-    createdDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
-    lastModifiedBy: "string",
-    lastModifiedDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
-    tags: ["Hello World", "Express", "Dev"],
-    rating: 0
-};
+const questionService = new Services.Question();
+
 export const router = Router();
 
-router.get("/questions", (req, res) => (req.body) ? res.status(200).json([dummyQuestion]) : res.status(404).end('NOT FOUND'));
-router.get("/questions/:id", (req, res) => (req.body && dummyQuestion.id === Number(req.params.id)) ? res.status(200).json(dummyQuestion).end() : res.status(404).end('NOT FOUND'));
-router.post("/questions", (req, res) => (req.body && req.body.id === undefined) ? res.status(200).json(assign({}, dummyQuestion, req.body, { id: 1 })).end() : res.status(404).end('NOT FOUND'));
-router.put("/questions", (req, res) => (req.body && dummyQuestion.id === Number(req.body.id)) ? res.status(200).json(assign({}, dummyQuestion, req.body)).end() : res.status(404).end('NOT FOUND'));
-router.delete("/questions/:id", (req, res) => (req.body && dummyQuestion.id === Number(req.params.id)) ? res.status(204).end() : res.status(404).end('NOT FOUND'));
+router.get("/questions", ({}, res) => res.status(200).json(questionService.list()));
+router.get("/questions/:id", (req, res) => {
+    let result;
+
+    isEmpty(result = questionService.findById(Number(req.params.id))) ? res.status(404).end('NOT FOUND') : res.status(200).json(result).end();
+});
+router.post("/questions", (req, res) => {
+    if (req.body && req.body.id === undefined) {
+        try {
+            res.status(201).json(questionService.add(req.body)).end();
+        } catch (e) {
+            res.status(500).end(e);
+        }
+    } else {
+        res.status(400).end('BAD REQUEST');
+    }
+});
+router.put("/questions", (req, res) => {
+    if (req.body && req.body.id !== undefined) {
+        try {
+            res.status(200).json(questionService.update(req.body)).end();
+        } catch (e) {
+            res.status(500).end(e);
+        }
+    } else {
+        res.status(400).end('BAD REQUEST');
+    }
+});
+router.delete("/questions/:id", (req, res) => questionService.remove(Number(req.params.id)) ? res.status(204).end() : res.status(400).end('BAD REQUEST, RESOURCE NOT FOUND'));
 
 export default router;

@@ -1,5 +1,6 @@
 /// <reference path='../../../../typings/main.d.ts'/>
 
+import {post, postToPosts} from '../../../main/server/database';
 import {expect} from 'chai';
 import * as request from 'supertest';
 import environment from '../../../main/server/environment';
@@ -16,7 +17,11 @@ describe("Routers", function() {
         done();
     });
 
-    after(() => server.close());
+    after(() => {
+        server.close();
+        post.clear();
+        postToPosts.clear();
+    });
 
     describe("Questions Router", function() {
 
@@ -32,7 +37,6 @@ describe("Routers", function() {
 
                     expect(res.body).be.a("Array");
                     expect(res.body[0]).have.property('id');
-                    expect(res.body[0].id).to.be.equals(0);
 
                     done();
                 });
@@ -40,7 +44,7 @@ describe("Routers", function() {
 
         it("should respond with question", done => {
             request(url)
-                .get('/questions/0')
+                .get('/questions/2')
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
@@ -50,7 +54,6 @@ describe("Routers", function() {
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(0);
 
                     done();
                 });
@@ -68,16 +71,16 @@ describe("Routers", function() {
                     lastModifiedDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
                     rating: 0
                 })
-                .expect(200) // Status code
+                .expect(201)
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+                        return;
                     }
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(1);
                     expect(res.body.title).to.be.equals("New 1");
 
                     done();
@@ -88,7 +91,7 @@ describe("Routers", function() {
             request(url)
                 .put('/questions')
                 .send({
-                    id: 0,
+                    id: 2,
                     title: "New 2",
                     content: "Hello world",
                     createdBy: "string",
@@ -102,11 +105,13 @@ describe("Routers", function() {
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+
+                        return;
                     }
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(0);
+                    expect(res.body.id).to.be.equals(2);
                     expect(res.body.title).to.be.equals("New 2");
 
                     done();
@@ -120,6 +125,8 @@ describe("Routers", function() {
                 .end(function(err, res) {
                     if (err) {
                         done(err);
+
+                        return;
                     }
 
                     expect(res.body).to.be.empty;

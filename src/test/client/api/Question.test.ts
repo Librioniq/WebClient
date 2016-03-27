@@ -1,5 +1,6 @@
 /// <reference path='../../../../typings/main.d.ts'/>
 
+import {post, postToPosts} from '../../../main/server/database';
 import {expect} from 'chai';
 import * as Api from '../../../../src/main/client/api';
 import * as Entities from '../../../../src/main/client/entities';
@@ -25,7 +26,11 @@ describe("Redux Api", () => {
 
         done();
     });
-    after(() => server.close());
+    after(() => {
+        server.close();
+        post.clear();
+        postToPosts.clear();
+    });
 
     describe(`Question`, () => {
         const stubRequestData: Entities.Question = {
@@ -33,7 +38,7 @@ describe("Redux Api", () => {
             content: "Some Content"
         };
         const updatedRequestData: Entities.Question = {
-            id: 0,
+            id: 1,
             title: "hi World Updated",
             content: "Some Content"
         };
@@ -54,13 +59,12 @@ describe("Redux Api", () => {
         });
 
         it("#get method should respond", (done) => {
-            questionsApi.get(0)
+            questionsApi.get(1)
                 .then((res) => {
                     expect(res.status).to.be.equal(200);
 
                     res.json().then(data => {
                         expect(data).to.be.not.empty.and.not.undefined;
-                        expect(data.id).to.be.equal(0);
                         done();
                     }).catch(err => done(err));
                 }, err => done(err))
@@ -70,11 +74,11 @@ describe("Redux Api", () => {
         it("#post method should respond", (done) => {
             questionsApi.post(stubRequestData)
                 .then((res) => {
-                    expect(res.status).to.be.equal(200);
+                    expect(res.status).to.be.equal(201);
 
                     res.json().then(data => {
                         expect(data).is.not.empty;
-                        expect(data).to.have.property("id").equal(1);
+                        expect(data).to.have.property("id");
                         expect(data.title).to.be.equal(stubRequestData.title);
                         expect(data.content).to.be.equal(stubRequestData.content);
 

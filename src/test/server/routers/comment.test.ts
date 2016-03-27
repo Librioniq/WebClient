@@ -1,5 +1,6 @@
 /// <reference path='../../../../typings/main.d.ts'/>
 
+import {post, postToPosts} from '../../../main/server/database';
 import {expect} from 'chai';
 import * as request from 'supertest';
 import environment from '../../../main/server/environment';
@@ -16,13 +17,17 @@ describe("Routers", function() {
         done();
     });
 
-    after(() => server.close());
+    after(() => {
+        server.close();
+        post.clear();
+        postToPosts.clear();
+    });
 
     describe("Comments Router", function() {
 
         it("should respond with list of comments", done => {
             request(url)
-                .get('/posts/0/comments')
+                .get('/posts/1/comments')
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
@@ -33,7 +38,6 @@ describe("Routers", function() {
 
                     expect(res.body).be.an("Array");
                     expect(res.body[0]).have.property('id');
-                    expect(res.body[0].id).to.be.equals(2);
 
                     done();
                 });
@@ -41,7 +45,7 @@ describe("Routers", function() {
 
         it("should respond with comment", done => {
             request(url)
-                .get('/posts/0/comments/2')
+                .get('/posts/1/comments/3')
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
@@ -52,7 +56,7 @@ describe("Routers", function() {
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(2);
+                    expect(res.body.id).to.be.equals(3);
 
                     done();
                 });
@@ -60,7 +64,7 @@ describe("Routers", function() {
 
         it("should create comment", done => {
             request(url)
-                .post('/posts/0/comments')
+                .post('/posts/1/comments')
                 .send({
                     content: "Hello world1231",
                     createdBy: "string",
@@ -69,7 +73,7 @@ describe("Routers", function() {
                     lastModifiedDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
                     rating: 0
                 })
-                .expect(200) // Status code
+                .expect(201) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
                     if (err) {
@@ -79,7 +83,6 @@ describe("Routers", function() {
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(1);
                     expect(res.body.content).to.be.equals("Hello world1231");
 
                     done();
@@ -88,9 +91,9 @@ describe("Routers", function() {
 
         it("should update comment", done => {
             request(url)
-                .put('/posts/0/comments')
+                .put('/posts/1/comments')
                 .send({
-                    id: 2,
+                    id: 3,
                     content: "Hello",
                     createdBy: "string",
                     createdDate: new Date(Date.parse("2016-03-12T20:25:47.800Z")),
@@ -108,7 +111,7 @@ describe("Routers", function() {
 
                     expect(res.body).to.be.not.undefined;
                     expect(res.body).have.property('id');
-                    expect(res.body.id).to.be.equals(2);
+                    expect(res.body.id).to.be.equals(3);
                     expect(res.body.content).to.be.equals("Hello");
 
                     done();
@@ -117,7 +120,7 @@ describe("Routers", function() {
 
         it("should delete comment", done => {
             request(url)
-                .delete('/posts/0/comments/2')
+                .delete('/posts/1/comments/2')
                 .expect(204) // Status code
                 .end(function(err, res) {
                     if (err) {
