@@ -25,11 +25,11 @@ export class Comments extends React.Component<CommentsProps, any> {
     }
 
     public render() {
-        const {comments} = this.props;
+        const {comments, parentId} = this.props;
 
         return (
-            <div className="container">
-                {comments && comments.map(comment => <Containers.Comment {...comment}/>) }
+            <div className = { "container" }>
+                { comments && comments.map(comment => <Containers.Comment { ...comment } parentId = { parentId }/>) }
             </div>
         );
     }

@@ -8,6 +8,7 @@ import * as Components from '../../components';
 import {Actions} from '../../redux/modules/Comment';
 
 interface CommentProps extends React.Props<Comment>, Entities.Comment {
+    parentId: number;
     create?: (parentId: number, comment: Entities.Comment) => void;
     update?: (parentId: number, comment: Entities.Comment) => void;
     delete?: (parentId: number, commentId: number) => void;
