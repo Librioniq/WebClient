@@ -82,20 +82,13 @@ describe("Services", function() {
         });
 
         it("should retrieved items", () => {
-            const retrievedComment = postService.findById(3);
-            const retrievedAnswer = postService.findById(4);
-            const retrievedQuestion = postService.findById(5);
+            const retrievedComment = postService.findOne(3);
+            const retrievedAnswer = postService.findOne(4);
+            const retrievedQuestion = postService.findOne(5);
 
             expect(retrievedComment).to.be.not.empty;
             expect(retrievedAnswer).to.be.not.empty;
             expect(retrievedQuestion).to.be.not.empty;
-        });
-
-        it("should retrieved items by given parent id ", () => {
-            const retrievedPosts = postService.findByParentId(1);
-
-            expect(retrievedPosts).to.be.instanceof(Array);
-            expect(retrievedPosts.length > 0).to.be.true;
         });
 
         it("should update item", () => {

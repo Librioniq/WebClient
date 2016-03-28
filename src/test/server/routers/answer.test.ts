@@ -45,7 +45,7 @@ describe("Routers", function() {
 
         it("should respond with answer", done => {
             request(url)
-                .get('/questions/0/answers/2')
+                .get('/questions/1/answers/2')
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {

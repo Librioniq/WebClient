@@ -10,7 +10,7 @@ router.get("/questions/:questionId/answers", (req, res) => res.status(200).json(
 router.get("/questions/:questionId/answers/:id", (req, res) => {
     let result;
 
-    isEmpty(result = answerService.findById(Number(req.params.id))) ? res.status(404).end('NOT FOUND') : res.status(200).json(result).end();
+    isEmpty(result = answerService.findOne(Number(req.params.id), Number(req.params.questionId))) ? res.status(404).end('NOT FOUND') : res.status(200).json(result).end();
 });
 router.post("/questions/:questionId/answers", (req, res) => {
     if (req.body && req.body.id === undefined) {

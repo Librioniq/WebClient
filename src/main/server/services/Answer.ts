@@ -11,4 +11,8 @@ export class Answer extends Post<Entities.Answer> {
     public add(parentId: number, entity: Entities.Answer): Entities.Answer {
         return super.add(parentId, assign({}, entity, { type: "ANSWER" }) as Entities.Answer);
     }
+
+    public findOne(id: number, parentId: number): Entities.Answer {
+        return super.findOne(id, parentId);
+    }
 }

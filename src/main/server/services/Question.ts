@@ -11,4 +11,8 @@ export class Question extends Post<Entities.Question> {
     public add(entity: Entities.Question): Entities.Question {
         return super.add(assign({}, entity, { type: "QUESTION" }));
     }
+
+    public findOne(id: number): Entities.Question {
+        return super.findOne(id);
+    }   
 }

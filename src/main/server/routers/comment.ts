@@ -11,7 +11,7 @@ router.get("/posts/:postId/comments", (req, res) => res.status(200).json(comment
 router.get("/posts/:postId/comments/:id", (req, res) => {
     let result;
 
-    isEmpty(result = commentService.findById(Number(req.params.id))) ? res.status(404).end('NOT FOUND') : res.status(200).json(result).end();
+    isEmpty(result = commentService.findOne(Number(req.params.id), Number(req.params.postId))) ? res.status(404).end('NOT FOUND') : res.status(200).json(result).end();
 });
 router.post("/posts/:postId/comments", (req, res) => {
     if (req.body && req.body.id === undefined) {

@@ -1,4 +1,4 @@
-import {assign, omit} from 'lodash';
+import {assign, omit, isEmpty} from 'lodash';
 import {post, postToPosts} from '../database';
 import * as Entities from '../../client/entities';
 
@@ -44,19 +44,16 @@ export class Post<T extends Entities.Post> {
             return omit(post.update(assign({}, foundEntity, entity) as T), omitKeys) as T;
         }
 
-        throw `There is no entity with giver id : ${entity.id}`;
+        throw `There is no entity with given id : ${entity.id}`;
     }
 
-    public findById(id: number): T {
+    public findOne(id?: number, parentId?: number): T {
+        if (parentId !== undefined && isEmpty(postToPosts.findOne({ parentId, childId: id }))) {
+            // throw `There is no entity with given id : ${id} and related parentId : ${parentId}`;
+            return;
+        }
+
         return omit(post.findOne({ id }), omitKeys) as T;
-    }
-
-    public findByParentId<T extends Entities.Post>(parentId: number): T[] {
-        return postToPosts
-            .eqJoin(post.find(), "childId", "id")
-            .where(it => it.left.parentId === parentId)
-            .data()
-            .map(it => omit(it.right, omitKeys)) as T[];
     }
 
     public remove(id: number): T {
