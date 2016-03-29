@@ -1,29 +1,54 @@
 import * as React from "react";
+import { assign } from 'lodash';
 import * as Entities from '../../../entities';
-import { MarkdownViewer } from '../../../components';
+import { Editor, MarkdownViewer } from '../../../components';
 
 
-interface QuestionProps extends Entities.Question {
-    onEdit?: () => void;
-    onDelete?: () => void;
+interface QuestionProps {
+    onCreate?: (answer: Entities.Question) => void;
 }
 
-export class Question extends React.Component<QuestionProps, any> {
+export class Question extends React.Component<QuestionProps, Entities.Question> {
+    public componentWillMount() {
+        this.state = { title: "", content: "", tags: [] };
+    }
+
     public render() {
-        // const { title, tags, content, createdBy } = this.props;
+        const {content, title, tags} = this.state;
 
         return (
-            <div>
-            </div>
+            <section>
+                <div className = {"page-header"}>
+                    <h1>Ask Question</h1>
+                </div>
+                <div>
+                    <label htmlFor={"title"}>Title</label>
+                    <input name = {"title"} onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
+                    <label>Content</label>
+                    <Editor onChange = { it => this.onContentChange(it) } content = { content }/>
+                    <MarkdownViewer className = {"well"} content = { content }/>
+                    <label htmlFor={"tags"}>Tags</label>
+                    <input name = {"tags"} onChange = { it => this.onTagsChanged((it.currentTarget as HTMLInputElement).value) } value = { tags.join(" ") }/>
+                    <button className = {"btn btn-default"} type = {"button"} onClick = { () => this.onCreate() }>Create</button>
+                </div>
+            </section>
         );
     }
 
-    private onEdit() {
-        this.props.onEdit();
+    private onTitleChange(title: string) {
+        this.setState(assign({}, this.state, { title }) as Entities.Question);
     }
 
-    private onDelete() {
-        this.props.onDelete();
+    private onTagsChanged(inlineTags: string) {
+        this.setState(assign({}, this.state, { tags: inlineTags.split(/[,|\s]/ig).filter(it => !!it.trim().length) }) as Entities.Question);
+    }
+
+    private onContentChange(content: string) {
+        this.setState(assign({}, this.state, { content }) as Entities.Question);
+    }
+
+    private onCreate() {
+        this.props.onCreate(assign({}, this.state) as Entities.Question);
     }
 }
 

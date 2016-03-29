@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-export class NavBar extends React.Component<{}, void> {
+interface NavBarProps extends React.Props<NavBar> { }
+
+export class NavBar extends React.Component<NavBarProps, void> {
     public render() {
         return (
             <nav className="navbar navbar-default" role="navigation">
@@ -15,6 +17,11 @@ export class NavBar extends React.Component<{}, void> {
                         <a className="navbar-brand" href="#/">
                             <span className="navbar-version">v0.0.1</span>
                         </a>
+                    </div>
+                    <div className = { "collapse navbar-collapse" }>
+                        <ul className = { "nav navbar-nav navbar-right" }>
+                            {(this.props.children as []).map(it => (<li ui-sref-active="active">{it}</li>)) }
+                        </ul>
                     </div>
                 </div>
             </nav>

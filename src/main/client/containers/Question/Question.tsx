@@ -11,7 +11,7 @@ import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 
 interface QestionRoutingProps {
-    id: number;
+    id: string;
 }
 
 interface QuestionProps extends React.Props<Question>, RouteComponentProps<QestionRoutingProps, QestionRoutingProps> {
@@ -36,9 +36,9 @@ interface QuestionState {
 export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
-        this.state = { edit: false, create: false, question: this.props.question };
-
-        if (id === undefined) {
+        this.state = { edit: false, create: id === "ask", question: this.props.question };
+        console.log(id === "ask");
+        if (id === undefined || this.state.create) {
             return;
         }
 
@@ -50,14 +50,21 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     public render() {
-        if (isEmpty(this.state.question)) {
+        const {edit, create, question} = this.state;
+
+        if (!create && isEmpty(question)) {
             return (<div>Loading...</div>);
         }
 
-        const {edit, create, question} = this.state;
         const component = edit ? (<Components.Question.Edit {...question} onSave = { it => this.onSave(it) }/>) :
-            create ? (<Components.Question.Create {...question}/>) :
+            create ? (<Components.Question.Create {...question} onCreate = { it => this.onSave(it) }/>) :
                 (<Components.Question.Default {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+
+        if (create) {
+            return (<div>
+                { component }
+            </div>);
+        }
 
         return (
             <div>
@@ -95,7 +102,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
             this.props.update(question);
         }
 
-        this.setState(assign({}, this.state, { edit: false, question }) as QuestionState);
+        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
     }
 
     private onDelete() {
