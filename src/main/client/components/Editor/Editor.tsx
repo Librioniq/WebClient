@@ -35,7 +35,9 @@ export class Editor extends React.Component<EditorProps, EditorState> {
         const {onChange} = this.props;
 
         this.setState({ content });
-        onChange(content);
+        if (onChange) {
+            onChange(content);
+        }
     };
 }
 

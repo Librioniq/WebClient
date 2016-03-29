@@ -10,6 +10,10 @@ interface CommentProps extends Entities.Comment {
 }
 
 export class Comment extends React.Component<CommentProps, any> {
+    private test() {
+        console.log('aaa');
+    }
+
     public render() {
         const { content, createdBy, createdDate } = this.props;
 
@@ -19,18 +23,12 @@ export class Comment extends React.Component<CommentProps, any> {
                 <span>{content} - </span>
                 <a href="#" className={css.link}>{createdBy}</a>
                 <span className={css.helper}> {createdDate}</span>
-                <span className={css.addButton}>ttt</span>
-                <button onClick={() => console.log('aaa') } className={css.addButton}>Add</button>
+                <button onClick={this.test}>edit</button>
             </div>
         );
 
         return (
-            <div className={css.comment}>
-                <span>{content} - </span>
-                <a href="#" className={css.link}>{createdBy}</a>
-                <span className={css.helper}> {createdDate}</span>
-                <button onClick={() => this.edit() }>edit</button>
-            </div>
+            element
         );
     }
 

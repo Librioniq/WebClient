@@ -1,6 +1,7 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {assign} from 'lodash';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
 import * as Components from '../../components';
@@ -11,11 +12,13 @@ interface CommentProps extends React.Props<Comment>, Entities.Comment {
     create?: (parentId: number, comment: Entities.Comment) => void;
     update?: (parentId: number, comment: Entities.Comment) => void;
     delete?: (parentId: number, commentId: number) => void;
+    comment?: Entities.Comment;
 }
 
 interface CommentState {
-    edit: boolean;
-    create: boolean;
+    edit?: boolean;
+    create?: boolean;
+    comment?: Entities.Comment;
 }
 
 @connect(
@@ -27,6 +30,14 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         super(props, context);
 
         this.state = { edit: false, create: false };
+    }
+
+    public componentWillMount() {
+        this.state = { edit: false, create: false, comment: this.props.comment };
+    }
+
+    public componentWillReceiveProps(props) {
+        this.setState(assign({}, this.state, { comment: props.comment }) as CommentState);
     }
 
     private onEdit() {
@@ -48,12 +59,12 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     }
 
     public render() {
-        const {edit, create} = this.state;
+        const { edit, create, comment } = this.state;
         const component = edit
-            ? (<Components.Editor onChange={() => (console.log('a'))}/>)
+            ? (<Components.Comment.Update content={'asd'}/>)
             : create
-                ? (<section/>)
-                : (<Components.Comment {...(this.props as any) } onEdit={() => this.onEdit() }/>);
+                ? (<section />)
+                : (<Components.Comment.Read {...(this.props as any) } onEdit={() => this.onEdit() }/>);
 
         return (
             <div>

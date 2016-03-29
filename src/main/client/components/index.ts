@@ -1,6 +1,7 @@
 import Answer from './Answer';
+import Comment from './Comment';
 
-export {Comment} from './Comment/Comment';
+export {Comment};
 export {Question} from './Question/Question';
 export {MarkdownViewer} from './MarkdownViewer/MarkdownViewer';
 export {NavBar} from './NavBar/NavBar';

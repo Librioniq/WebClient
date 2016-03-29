@@ -21,7 +21,7 @@ export class Answer extends React.Component<AnswerProps, any> {
                     <button className = {"btn btn-link"} type = {"button"} onClick = {() => this.onEdit() }>Edit</button>
                     <button className = {"btn btn-link"} type = {"button"} onClick = {() => this.onDelete() }>Delete</button>
                 </div>
-            </div >
+            </div>
         );
     }
 
