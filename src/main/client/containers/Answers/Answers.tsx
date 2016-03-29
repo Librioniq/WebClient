@@ -28,7 +28,7 @@ export class Answers extends React.Component<AnswersProps, any> {
         const {answers, parentId} = this.props;
 
         return (
-            <div className = { "container" }>
+            <div>
                 {answers && answers.map(answer => <Containers.Answer answer = { answer } parentId = { parentId }/>) }
             </div>
         );

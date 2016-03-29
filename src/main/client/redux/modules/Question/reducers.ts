@@ -6,8 +6,8 @@ import * as Constants from './constants';
 export function list(state = [], action) {
     if (action.status === Status.SUCCESS && action.questions && action.type === Constants.LIST) {
         return [
-            ...action.questions,
-            ...state
+            ...state.filter(it => !action.questions.some(that => that.id === it.id)),
+            ...action.questions
         ];
     }
 

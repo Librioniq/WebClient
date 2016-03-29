@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from  '../../redux/modules/Question';
@@ -31,11 +31,12 @@ interface QuestionState {
 
 @connect(
     (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} }),
-    dispatch => bindActionCreators({ get: Actions.get }, dispatch)
+    dispatch => bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
 )
 export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
+        this.state = { edit: false, create: false, question: this.props.question };
 
         if (id === undefined) {
             return;
@@ -44,15 +45,24 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
         get(id);
     }
 
+    public componentWillReceiveProps(props) {
+        this.setState(assign({}, this.state, { question: props.question }) as QuestionState);
+    }
+
     public render() {
+        if (isEmpty(this.state.question)) {
+            return (<div>Loading...</div>);
+        }
+
         const {edit, create, question} = this.state;
         const component = edit ? (<Components.Question.Edit {...question} onSave = { it => this.onSave(it) }/>) :
             create ? (<Components.Question.Create {...question}/>) :
                 (<Components.Question.Default {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+
         return (
             <div>
                 <div>
-                    <Components.Question {...this.props.question}/>
+                    { component }
                     {this.renderComments() }
                 </div>
                 <div>

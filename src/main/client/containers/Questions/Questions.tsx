@@ -33,7 +33,7 @@ export class Questions extends React.Component<QuestionsProps, void> {
                     <span className={css.title}>All questions</span>
                 </header>
                 <div>
-                    {questions && questions.map(question => <Components.Question {...question}/>) }
+                    {questions && questions.map(question => <Components.Question.ListItem {...question}/>) }
                 </div>
             </div>
         );
