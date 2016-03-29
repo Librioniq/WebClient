@@ -60,16 +60,22 @@ export class Comment extends React.Component<CommentProps, CommentState> {
 
     public render() {
         const { edit, create, comment } = this.state;
+        const EditState = (
+            <Components.Comment.Update content={'asd'} />
+        );
+        const ReadState = (
+            <Components.Comment.Read {...(this.props as any) } onEdit={this.onEdit.bind(this)} onDelete = {this.onDelete.bind(this)}/>
+        );
+        const CreateState = (<section />);
         const component = edit
-            ? (<Components.Comment.Update content={'asd'}/>)
+            ? (EditState)
             : create
-                ? (<section />)
-                : (<Components.Comment.Read {...(this.props as any) } onEdit={() => this.onEdit() }/>);
+                ? (CreateState)
+                : (ReadState);
 
         return (
             <div>
                 {component}
-                <button onClick={() => this.onDelete() }>delete </button>
             </div>
         );
     }
