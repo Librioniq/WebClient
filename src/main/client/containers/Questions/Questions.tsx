@@ -26,16 +26,19 @@ export class Questions extends React.Component<QuestionsProps, void> {
     }
 
     private create() {
-        this.props.create({});
+        this.props.create({
+            content: "ttest",
+            title: "more test"
+        });
     }
 
     public render() {
         const {questions} = this.props;
 
         let element;
-        if (questions.length === 0) {
-            element = (<Components.Question.Create onCreate={() => this.create()}/>)
-        }
+        // if (questions.length === 0) {
+        //     element = (<Components.Question.Create onCreate={() => this.create()}/>)
+        // }
 
         return (
             <div className={css.container}>

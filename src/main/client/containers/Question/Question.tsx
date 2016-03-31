@@ -4,6 +4,7 @@ import { assign, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from  '../../redux/modules/Question';
+import { Actions as CommentActions } from  '../../redux/modules/Comment';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
@@ -21,22 +22,24 @@ interface QuestionProps extends React.Props<Question>, RouteComponentProps<Qesti
     update?: (question: Entities.Question) => void;
     delete?: (questionId: number) => void;
     question?: Entities.Question;
+    createComment?: (elem: any) => void;
 }
 
 interface QuestionState {
     edit: boolean;
     create: boolean;
     question: Entities.Question;
+    addComment?: boolean;
 }
 
 @connect(
     (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} }),
-    dispatch => bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
+    dispatch => bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove, createComment: CommentActions.create }, dispatch)
 )
 export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
-        this.state = { edit: false, create: id === "ask", question: this.props.question };
+        this.state = { edit: false, create: id === "ask", question: this.props.question, addComment: false };
 
         if (id === undefined || this.state.create) {
             return;
@@ -66,17 +69,32 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
             </div>);
         }
 
+        let addCom;
+
+        if (this.state.addComment) {
+            let com: Entities.Comment = {
+                content: 'test'
+            }
+            addCom = (<Components.Comment.Create comment={com} onCreate={() => this.addComment()}/>)
+        }
+
         return (
             <div>
                 <div>
                     { component }
                     {this.renderComments() }
+                    {addCom}
                 </div>
                 <div>
                     {this.renderAnswers() }
                 </div>
             </div>
         );
+    }
+
+    private addComment() {
+        console.log('a');
+        this.setState({ edit: false, create: false, question: this.props.question, addComment: true })
     }
 
     private renderComments() {

@@ -25,12 +25,12 @@ export function list(parentId: number) {
     };
 }
 
-export function create(parentId: number, comment: Comment) {
+export function create(comment: Comment) {
     return {
         type: Constants.CREATE,
         payload: {
-            request: () => api.post(parentId, comment),
-            body: { comment, parentId }
+            request: () => api.post(comment),
+            body: { comment }
         }
     };
 }

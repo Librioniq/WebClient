@@ -8,6 +8,7 @@ interface CommentProps extends Entities.Comment {
     onAddComment?: Function;
     onEdit?: Function;
     onDelete?: Function;
+    onCreate?: Function;
 }
 
 export class Comment extends React.Component<CommentProps, any> {

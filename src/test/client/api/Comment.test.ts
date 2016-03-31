@@ -71,13 +71,12 @@ describe("Redux Api", () => {
         });
 
         it("#post method should respond", (done) => {
-            commentsApi.post(0, stubRequestData)
+            commentsApi.post(stubRequestData)
                 .then((res) => {
                     expect(res.status).to.be.equal(201);
 
                     res.json().then(data => {
                         expect(data).is.not.empty;
-                        expect(data).to.have.property("id");
                         expect(data.content).to.be.equal(stubRequestData.content);
 
                         done();
