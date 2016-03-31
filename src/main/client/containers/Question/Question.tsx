@@ -93,7 +93,6 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     private addComment() {
-        console.log('a');
         this.setState({ edit: false, create: false, question: this.props.question, addComment: true })
     }
 

@@ -16,7 +16,7 @@ router.get("/posts/:postId/comments/:id", (req, res) => {
 router.post("/posts/:postId/comments", (req, res) => {
     if (req.body && req.body.id === undefined) {
         try {
-            res.status(201).json(commentService.add(Number(req.params.postId), req.body)).end();
+            res.status(201).json(commentService.add(req.body)).end();
         } catch (e) {
             res.status(500).end(e);
         }
