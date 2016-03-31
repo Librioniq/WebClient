@@ -28,7 +28,7 @@ export function get(state = [], action) {
 export function create(state = [], action) {
     if (Constants.CREATE === action.type && action.status === Status.SUCCESS) {
         return [
-            ...state,
+            ...state.filter(it => it.id !== action.question.id),
             action.question
         ];
     }

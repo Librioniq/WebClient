@@ -14,5 +14,5 @@ export class Question extends Post<Entities.Question> {
 
     public findOne(id: number): Entities.Question {
         return super.findOne(id);
-    }   
+    }
 }

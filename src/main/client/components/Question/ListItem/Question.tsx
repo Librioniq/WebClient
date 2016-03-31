@@ -13,7 +13,7 @@ export class Question extends React.Component<Entities.Question, any> {
         return (
             <div className={css.root}>
                 <header>
-                    <Link to = { `/question/${id}` } className = { css.title }>{ title }</Link>
+                    <Link to = { `/questions/${id}` } className = { css.title }>{ title }</Link>
                     <section>{tags && tags.map(tag => <a href="#" className={css.tag}>{tag}</a>) }</section>
                 </header>
                 <MarkdownViewer className = { css.content } content = { content.slice(0, 100).concat("...") }/>
