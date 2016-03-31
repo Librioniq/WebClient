@@ -29,7 +29,7 @@ app.use("/dist", express.static(path.join(dir, "static", "dist"), {
 app.use("/", express.static(path.join(__dirname, ".."), {
 }));
 
-app.get("/*", (req, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(dir, "webpack-assets.json"), "utf-8")))));
+app.get("/*", ({}, res) => res.contentType("text/html; charset=utf8").end(render(JSON.parse(fs.readFileSync(path.resolve(dir, "webpack-assets.json"), "utf-8")))));
 
 export const run = () => {
     if (environment.client.port) {

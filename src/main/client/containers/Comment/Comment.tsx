@@ -13,6 +13,7 @@ interface CommentProps extends React.Props<Comment>, Entities.Comment {
     update?: (parentId: number, comment: Entities.Comment) => void;
     delete?: (parentId: number, commentId: number) => void;
     comment?: Entities.Comment;
+    parentId?: number;
 }
 
 interface CommentState {
@@ -45,13 +46,13 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     }
 
     private onSave(content) {
-        this.setState({ edit: false, create: false });
         this.props.content = content;
         if (this.state.create) {
             this.props.create(0, { content } as any);
         } else if (this.state.edit) {
             this.props.update(0, { content, id: 2 } as any);
         }
+        this.setState({ edit: false, create: false });
     }
 
     private onDelete() {
@@ -61,10 +62,13 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     public render() {
         const { edit, create, comment } = this.state;
         const EditState = (
-            <Components.Comment.Update content={'asd'} />
+            <Components.Comment.Update content={'asd'} onSave={this.onSave.bind(this)}/>
         );
         const ReadState = (
-            <Components.Comment.Read {...(this.props as any) } onEdit={this.onEdit.bind(this)} onDelete = {this.onDelete.bind(this)}/>
+            <Components.Comment.Read {...(this.props as any)}
+                                    onEdit={this.onEdit.bind(this)}
+                                    onDelete={this.onDelete.bind(this)}
+            />
         );
         const CreateState = (<section />);
         const component = edit

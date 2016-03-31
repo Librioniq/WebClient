@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { assign, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from  '../../redux/modules/Question';
@@ -10,48 +11,65 @@ import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 
 interface QestionRoutingProps {
-    id: number;
+    id: string;
 }
 
 interface QuestionProps extends React.Props<Question>, RouteComponentProps<QestionRoutingProps, QestionRoutingProps> {
     children?: React.ReactElement<any>;
     get: (questionId) => void;
-    create?: (id, comment) => void;
+    create?: (question) => void;
+    update?: (question: Entities.Question) => void;
+    delete?: (questionId: number) => void;
     question?: Entities.Question;
+}
+
+interface QuestionState {
+    edit: boolean;
+    create: boolean;
+    question: Entities.Question;
 }
 
 @connect(
     (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} }),
-    dispatch => bindActionCreators({ get: Actions.get }, dispatch)
+    dispatch => bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
 )
-export class Question extends React.Component<QuestionProps, void> {
+export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
-
-        if (id === undefined) {
+        this.state = { edit: false, create: id === "ask", question: this.props.question };
+        console.log(id === "ask");
+        if (id === undefined || this.state.create) {
             return;
         }
 
         get(id);
     }
 
-    private renderComments() {
-        const {question: {id}} = this.props;
-
-        return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
-    }
-
-    private renderAnswers() {
-        const {id} = this.props.question;
-
-        return id !== undefined ? (<Containers.Answers parentId = {id}/>) : (<div>Loading...</div>);
+    public componentWillReceiveProps(props) {
+        this.setState(assign({}, this.state, { question: props.question }) as QuestionState);
     }
 
     public render() {
+        const {edit, create, question} = this.state;
+
+        if (!create && isEmpty(question)) {
+            return (<div>Loading...</div>);
+        }
+
+        const component = edit ? (<Components.Question.Edit {...question} onSave = { it => this.onSave(it) }/>) :
+            create ? (<Components.Question.Create {...question} onCreate = { it => this.onSave(it) }/>) :
+                (<Components.Question.Default {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+
+        if (create) {
+            return (<div>
+                { component }
+            </div>);
+        }
+
         return (
             <div>
                 <div>
-                    <Components.Question {...this.props.question}/>
+                    { component }
                     {this.renderComments() }
                 </div>
                 <div>
@@ -59,6 +77,36 @@ export class Question extends React.Component<QuestionProps, void> {
                 </div>
             </div>
         );
+    }
+
+    private renderComments() {
+        const {question: {id}} = this.props;
+
+        return id !== undefined ? (<Containers.Comments parentId = { id }/>) : (<div>Loading...</div>);
+    }
+
+    private renderAnswers() {
+        const {id} = this.props.question;
+
+        return id !== undefined ? (<Containers.Answers parentId = { id }/>) : (<div>Loading...</div>);
+    }
+
+    private onEdit() {
+        this.setState(assign({}, this.state, { edit: true }) as QuestionState);
+    }
+
+    private onSave(question: Entities.Question) {
+        if (this.state.create) {
+            this.props.create(question);
+        } else if (this.state.edit) {
+            this.props.update(question);
+        }
+
+        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
+    }
+
+    private onDelete() {
+        this.props.delete(this.state.question.id);
     }
 }
 

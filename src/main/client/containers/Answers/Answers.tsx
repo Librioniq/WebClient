@@ -25,11 +25,11 @@ export class Answers extends React.Component<AnswersProps, any> {
     }
 
     public render() {
-        const {answers} = this.props;
+        const {answers, parentId} = this.props;
 
         return (
-            <div className="container">
-                {answers && answers.map(answer => <Containers.Answer answer = {answer}/>) }
+            <div>
+                {answers && answers.map(answer => <Containers.Answer answer = { answer } parentId = { parentId }/>) }
             </div>
         );
     }

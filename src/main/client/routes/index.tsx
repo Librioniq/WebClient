@@ -6,8 +6,11 @@ import { App, Home, Questions, Question }  from '../containers';
 export const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Questions}/>
-        <Route path="questions" component={Questions}/>
-        <Route path="question/:id" component={Question}/>
+        <Route path="questions/">
+            <IndexRoute component={Questions}/>
+            <Route path=":id" component={Question}/>
+            <Route path="ask" component={Question}/>
+        </Route>
         <Route path="about" component={Home}/>
     </Route>
 );

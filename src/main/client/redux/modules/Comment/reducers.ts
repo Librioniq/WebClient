@@ -5,8 +5,8 @@ import * as Constants from './constants';
 export function list(state = [], action) {
     if (action.status === Status.SUCCESS && action.comments && action.type === Constants.LIST) {
         return [
-            ...action.comments.map(it => merge(it, { parentId: action.payload.body.parentId })),
-            ...state
+            ...state.filter(it => !action.comments.some(that => that.id === it.id)),
+            ...action.comments.map(it => merge(it, { parentId: action.payload.body.parentId }))
         ];
     }
 

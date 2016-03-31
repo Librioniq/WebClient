@@ -9,6 +9,7 @@ import * as bodyParser from 'body-parser';
 import {createServer} from 'http';
 import routers from './routers';
 import environment from './environment';
+import {dbInit} from './utils/dbInit';
 
 // const pretty = new PrettyError();
 const app = express();
@@ -35,6 +36,8 @@ export const run = () => {
             if (err) {
                 console.error(err);
             }
+
+            dbInit(); // initialize database with dummy data;
 
             console.info('----\n==> 🌎  API is running on port %s', environment.server.port);
             console.info('==> 💻  Send requests to http://%s:%s', environment.server.host, environment.server.port);

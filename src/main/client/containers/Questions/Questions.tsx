@@ -12,20 +12,30 @@ const css = require('./Questions.scss');
 interface QuestionsProps extends React.Props<Questions> {
     questions: Array<Entities.Question>;
     list: () => any;
+    create: (elem: any) => void;
 }
 
 
 @connect(
     state => ({ questions: state.questions }),
-    dispatch => bindActionCreators({ list: Actions.list }, dispatch)
+    dispatch => bindActionCreators({ list: Actions.list, create: Actions.create }, dispatch)
 )
 export class Questions extends React.Component<QuestionsProps, void> {
     public componentWillMount() {
         this.props.list();
     }
 
+    private create() {
+        this.props.create({});
+    }
+
     public render() {
         const {questions} = this.props;
+
+        let element;
+        if (questions.length === 0) {
+            element = (<Components.Question.Create onCreate={() => this.create()}/>)
+        }
 
         return (
             <div className={css.container}>
@@ -33,8 +43,9 @@ export class Questions extends React.Component<QuestionsProps, void> {
                     <span className={css.title}>All questions</span>
                 </header>
                 <div>
-                    {questions && questions.map(question => <Components.Question {...question}/>) }
+                    {questions && questions.map(question => <Components.Question.ListItem {...question}/>) }
                 </div>
+                {element}
             </div>
         );
     }

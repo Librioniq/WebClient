@@ -10,6 +10,7 @@ import * as Containers from '../../containers';
 /* tslint:enable:no-unused-variable */
 
 interface AnswerProps extends React.Props<Answer> {
+    parentId: number;
     create?: (parentId: number, answer: Entities.Answer) => void;
     update?: (parentId: number, answer: Entities.Answer) => void;
     delete?: (parentId: number, answerId: number) => void;
@@ -46,17 +47,21 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 
     private onSave(answer: Entities.Answer) {
+        const {create, update, parentId} = this.props;
+
         if (this.state.create) {
-            this.props.create(0, answer);
+            create(parentId, answer);
         } else if (this.state.edit) {
-            this.props.update(0, answer);
+            update(parentId, answer);
         }
 
         this.setState(assign({}, this.state, { edit: false, answer }) as AnswerState);
     }
 
     private onDelete() {
-        this.props.delete(0, this.state.answer.id);
+        const {parentId} = this.props;
+
+        this.props.delete(parentId, this.state.answer.id);
     }
 
     public render() {

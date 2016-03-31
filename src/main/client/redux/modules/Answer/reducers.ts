@@ -1,13 +1,13 @@
 import {Status} from '../../middleware/Status';
-import {assign, merge} from 'lodash';
+import {assign, merge, union} from 'lodash';
 import * as Constants from './constants';
 
 
 export function list(state = [], action) {
     if (action.status === Status.SUCCESS && action.answers && action.type === Constants.LIST) {
         return [
-            ...action.answers.map(it => merge(it, { parentId: action.payload.body.parentId })),
-            ...state
+            ...state.filter(it => !action.answers.some(that => that.id === it.id)),
+            ...action.answers.map(it => merge(it, { parentId: action.payload.body.parentId }))
         ];
     }
 

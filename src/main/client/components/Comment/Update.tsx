@@ -18,7 +18,7 @@ export class Comment extends React.Component<CommentProps, Entities.Comment> {
         return (
             <div>
                 <Editor onChange = {it => this.onChange(it) } content = {content}/>
-                <button className = {"btn btn-default"} type = {"button"} onClick = {() => this.onSave() }>Save</button>
+                <button className = {"btn btn-default"} type = {"button"} onClick = {() => this.onSave()}>Save</button>
             </div>
         );
     }
