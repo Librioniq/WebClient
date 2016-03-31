@@ -37,7 +37,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
         this.state = { edit: false, create: id === "ask", question: this.props.question };
-        console.log(id === "ask");
+
         if (id === undefined || this.state.create) {
             return;
         }
@@ -100,9 +100,9 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
             this.props.create(question);
         } else if (this.state.edit) {
             this.props.update(question);
+        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
         }
 
-        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
     }
 
     private onDelete() {
