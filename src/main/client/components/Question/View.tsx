@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Link} from 'react-router';
-import * as Entities from '../../../entities';
-import {MarkdownViewer} from '../../../components';
+import * as Entities from '../../entities';
+import {MarkdownViewer} from '../../components';
 
 const css = require('./Question.scss');
 

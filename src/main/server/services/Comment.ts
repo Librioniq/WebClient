@@ -14,5 +14,5 @@ export class Comment extends Post<Entities.Comment> {
 
     public findOne(id: number, parentId: number): Entities.Comment {
         return super.findOne(id, parentId);
-    }   
+    }
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
-import * as Entities from '../../../entities';
-import { MarkdownViewer } from '../../../components';
+import * as Entities from '../../entities';
+import { MarkdownViewer } from '../../components';
 
 const css: any = require('./Answer.scss');
 

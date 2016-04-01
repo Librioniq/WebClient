@@ -13,10 +13,10 @@ interface CommentsProps extends React.Props<Comments> {
     list?: (id: number) => void;
 }
 
-@connect(
-    (s, p) => ({ comments: s.comments.filter(it => it.parentId === p.parentId) }),
-    dispatch => bindActionCreators({ list: Actions.list }, dispatch)
-)
+@(connect<CommentsProps, CommentsProps, CommentsProps>(
+    (s, p) => ({ comments: s.comments.filter(it => it.parentId === p.parentId) } as any),
+    dispatch => bindActionCreators({ list: Actions.list }, dispatch) as any
+) as ClassDecorator)
 export class Comments extends React.Component<CommentsProps, any> {
     public componentWillMount() {
         const {parentId, list} = this.props;

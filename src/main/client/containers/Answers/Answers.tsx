@@ -13,10 +13,10 @@ interface AnswersProps extends React.Props<Answers> {
     list?: (id: number) => any;
 }
 
-@connect(
-    (s, p) => ({ answers: s.answers.filter(it => it.parentId === p.parentId) }),
-    dispatch => bindActionCreators({ list: Actions.list }, dispatch)
-)
+@(connect<AnswersProps, AnswersProps, AnswersProps>(
+    (s, p) => ({ answers: s.answers.filter(it => it.parentId === p.parentId) } as any),
+    dispatch => bindActionCreators({ list: Actions.list }, dispatch) as any
+) as ClassDecorator)
 export class Answers extends React.Component<AnswersProps, any> {
     public componentWillMount() {
         const {parentId, list} = this.props;

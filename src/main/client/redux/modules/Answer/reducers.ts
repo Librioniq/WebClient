@@ -1,5 +1,5 @@
 import {Status} from '../../middleware/Status';
-import {assign, merge, union} from 'lodash';
+import {assign, merge} from 'lodash';
 import * as Constants from './constants';
 
 

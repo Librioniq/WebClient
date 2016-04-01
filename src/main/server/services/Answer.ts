@@ -1,4 +1,4 @@
-import {assign, omit} from 'lodash';
+import {assign} from 'lodash';
 import * as Entities from '../../client/entities';
 import {Post} from './Post';
 

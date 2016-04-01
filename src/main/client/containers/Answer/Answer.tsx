@@ -23,10 +23,11 @@ interface AnswerState {
     answer: Entities.Answer;
 }
 
-@connect(
-    ({answers}, {answer, params: {id} = { id: undefined }}) => ({ answer: assign({}, answer, answers.filter(it => it.id === Number(id))[0]) }),
-    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
-)
+@(connect<AnswerProps, AnswerProps, AnswerProps>(
+    () => ({} as any),
+    // ({answers}, {answer, params: {id} = { id: undefined }}) => ({ answer: assign({}, answer, answers.filter(it => it.id === Number(id))[0]) } as AnswerProps),
+    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
+) as ClassDecorator)
 export class Answer extends React.Component<AnswerProps, AnswerState> {
     public componentWillMount() {
         this.state = { edit: false, create: false, answer: this.props.answer };
@@ -40,7 +41,7 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
         const {edit, create, answer} = this.state;
         const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
             create ? (<Components.Answer.Create {...answer}/>) :
-                (<Components.Answer.Default {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+                (<Components.Answer.Read {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         return (
             <div>
@@ -81,4 +82,4 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 }
 
-export default Comment; 
+export default Answer; 

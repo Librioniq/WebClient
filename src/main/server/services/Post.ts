@@ -7,8 +7,6 @@ type PostType = "QUESTION" | "ANSWER" | "COMMENT";
 const lokiKey = "$loki";
 const omitKeys = [lokiKey, "meta", "type"];
 
-//todo: add checking of relationships
-
 export class Post<T extends Entities.Post> {
     public list(value?: any, postType?: PostType): T[] {
         let query;

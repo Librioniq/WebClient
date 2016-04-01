@@ -29,10 +29,10 @@ interface QuestionState {
     question: Entities.Question;
 }
 
-@connect(
-    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} }),
-    dispatch => bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
-)
+@(connect<QuestionProps, QuestionProps, QuestionProps>(
+    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} } as any),
+    dispatch => (bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as QuestionProps)
+) as ClassDecorator)
 export class Question extends React.Component<QuestionProps, QuestionState> {
     public componentWillMount() {
         const {get, params: {id}} = this.props;
@@ -46,7 +46,9 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     public componentWillReceiveProps(props) {
-        this.setState(assign({}, this.state, { question: props.question }) as QuestionState);
+        const {params: {id}, question} = props;
+
+        this.setState(assign({}, this.state, { question, create: id === "ask" }) as QuestionState);
     }
 
     public render() {
@@ -58,7 +60,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
 
         const component = edit ? (<Components.Question.Edit {...question} onSave = { it => this.onSave(it) }/>) :
             create ? (<Components.Question.Create {...question} onCreate = { it => this.onSave(it) }/>) :
-                (<Components.Question.Default {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+                (<Components.Question.Read {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         if (create) {
             return (<div>
@@ -100,9 +102,10 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
             this.props.create(question);
         } else if (this.state.edit) {
             this.props.update(question);
-        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
         }
 
+
+        this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
     }
 
     private onDelete() {

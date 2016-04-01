@@ -1,7 +1,7 @@
 import * as React from "react";
 import { assign } from 'lodash';
-import * as Entities from '../../../entities';
-import { Editor, MarkdownViewer } from '../../../components';
+import * as Entities from '../../entities';
+import { Editor, MarkdownViewer } from '../../components';
 
 interface AnswerProps extends Entities.Answer {
     onSave?: (answer: Entities.Answer) => void;

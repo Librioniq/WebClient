@@ -1,9 +1,9 @@
-import {Answer as Default} from './Default/Answer';
-import {Answer as Edit} from './Edit/Answer';
-import {Answer as Create} from './Create/Answer';
+import Read from './Read';
+import Edit from './Edit';
+import Create from './Create';
 
-export {Default};
-export {Edit};
-export {Create};
+export { Read };
+export { Edit };
+export { Create };
 
-export default { Default, Edit, Create };
+export default { Read, Edit, Create };

@@ -6,7 +6,7 @@ import {DevTools} from '../../containers';
 interface AppProps extends React.Props<App> {
 }
 
-export class App extends React.Component<AppProps, void> {
+export class App extends React.Component<AppProps, any> {
     public render() {
         return (
             <section className="main">

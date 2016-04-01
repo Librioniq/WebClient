@@ -19,10 +19,10 @@ interface CommentState {
     create: boolean;
 }
 
-@connect(
-    () => ({}),
-    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch)
-)
+@(connect<CommentProps, CommentProps, CommentProps>(
+    () => ({} as any),
+    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
+) as ClassDecorator)
 export class Comment extends React.Component<CommentProps, CommentState> {
     constructor(props: CommentProps, context) {
         super(props, context);

@@ -10,7 +10,6 @@ export default ({dispatch}) => next => action => { // can be used with sotre lik
         return next(action);
     }
 
-    console.log("entered", action);
     next(action);
     dispatch(push(`/questions/${action.question.id}`));
 }

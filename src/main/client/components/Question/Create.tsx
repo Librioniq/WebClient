@@ -1,7 +1,7 @@
 import * as React from "react";
 import { assign } from 'lodash';
-import * as Entities from '../../../entities';
-import { Editor, MarkdownViewer } from '../../../components';
+import * as Entities from '../../entities';
+import { Editor, MarkdownViewer } from '../../components';
 
 
 interface QuestionProps {
@@ -23,13 +23,16 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
                 </div>
                 <div>
                     <label htmlFor={"title"}>Title</label>
-                    <input name = {"title"} onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
+                    <input className = { "form-control" } name = { "title" } onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
+                    <br/>
                     <label>Content</label>
                     <Editor onChange = { it => this.onContentChange(it) } content = { content }/>
-                    <MarkdownViewer className = {"well"} content = { content }/>
-                    <label htmlFor={"tags"}>Tags</label>
-                    <input name = {"tags"} onChange = { it => this.onTagsChanged((it.currentTarget as HTMLInputElement).value) } value = { tags.join(" ") }/>
-                    <button className = {"btn btn-default"} type = {"button"} onClick = { () => this.onCreate() }>Create</button>
+                    <MarkdownViewer className = { "well" } content = { content }/>
+                    <br/>
+                    <label htmlFor={ "tags" }>Tags</label>
+                    <input className = { "form-control" } name = { "tags" } onChange = { it => this.onTagsChanged((it.currentTarget as HTMLInputElement).value) } value = { tags.join(" ") }/>
+                    <br/>
+                    <button className = { "btn btn-default" } type = { "button" } onClick = { () => this.onCreate() }>Create</button>
                 </div>
             </section>
         );

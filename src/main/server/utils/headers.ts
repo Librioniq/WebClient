@@ -1,5 +1,5 @@
 export const headers = (header: any) => {
-    return (req, res, next) => {
+    return ({}, res, next) => {
         res.header(header);
 
         next();

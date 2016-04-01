@@ -10,16 +10,15 @@ import * as Components from '../../components';
 const css = require('./Questions.scss');
 
 interface QuestionsProps extends React.Props<Questions> {
-    questions: Array<Entities.Question>;
-    list: () => any;
+    questions?: Array<Entities.Question>;
+    list?: () => void;
 }
 
-
-@connect(
-    state => ({ questions: state.questions }),
-    dispatch => bindActionCreators({ list: Actions.list }, dispatch)
-)
-export class Questions extends React.Component<QuestionsProps, void> {
+@(connect<QuestionsProps, QuestionsProps, QuestionsProps>(
+    state => ({ questions: state.questions } as any),
+    dispatch => (bindActionCreators({ list: Actions.list }, dispatch) as any)
+) as ClassDecorator)
+export class Questions extends React.Component<QuestionsProps, any> {
     public componentWillMount() {
         this.props.list();
     }
@@ -30,10 +29,10 @@ export class Questions extends React.Component<QuestionsProps, void> {
         return (
             <div className={css.container}>
                 <header>
-                    <span className={css.title}>All questions</span>
+                    <span className = { css.title }>All questions</span>
                 </header>
                 <div>
-                    {questions && questions.map(question => <Components.Question.ListItem {...question}/>) }
+                    {questions && questions.map(question => <Components.Question.View {...question}/>) }
                 </div>
             </div>
         );

@@ -1,11 +1,11 @@
-import {Question as Default} from './Default/Question';
-import {Question as Edit} from './Edit/Question';
-import {Question as Create} from './Create/Question';
-import {Question as ListItem} from './ListItem/Question';
+import Read from './Read';
+import Edit from './Edit';
+import Create from './Create';
+import View from './View';
 
-export {Default};
-export {Edit};
-export {Create};
-export {ListItem};
+export { Read };
+export { Edit };
+export { Create };
+export { View };
 
-export default { Default, Edit, Create, ListItem };
+export default { Read, Edit, Create, View };

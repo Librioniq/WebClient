@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Entities from '../../../entities';
+import * as Entities from '../../entities';
 
 
 export class Answer extends React.Component<Entities.Answer, any> {

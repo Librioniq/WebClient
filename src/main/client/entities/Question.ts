@@ -1,4 +1,4 @@
-import {Post, Comment} from '../entities';
+import {Post} from '../entities';
 
 export interface Question extends Post {
     tags?: string[];
