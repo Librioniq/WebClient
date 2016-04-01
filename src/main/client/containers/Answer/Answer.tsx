@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {assign} from 'lodash';
+import {assign, isEmpty} from 'lodash';
 import {Actions} from  '../../redux/modules/Answer';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
@@ -30,18 +30,30 @@ interface AnswerState {
 ) as ClassDecorator)
 export class Answer extends React.Component<AnswerProps, AnswerState> {
     public componentWillMount() {
-        this.state = { edit: false, create: false, answer: this.props.answer };
+        const {answer, answer: {id}} = this.props;
+
+        this.state = { edit: false, create: (!isEmpty(answer) && id === undefined), answer };
     }
 
     public componentWillReceiveProps(props) {
-        this.setState(assign({}, this.state, { answer: props.answer }) as AnswerState);
+        const {answer, answer: {id}} = props;
+
+        this.setState(assign({}, this.state, { create: (!isEmpty(answer) && id === undefined), answer }) as AnswerState);
     }
 
     public render() {
         const {edit, create, answer} = this.state;
         const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
-            create ? (<Components.Answer.Create {...answer}/>) :
+            create ? (<Components.Answer.Create onCreate = { it => this.onSave(it) }/>) :
                 (<Components.Answer.Read {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
+
+        if (create) {
+            return (
+                <div>
+                    { component }
+                </div>
+            );
+        }
 
         return (
             <div>
@@ -72,7 +84,7 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
             update(parentId, answer);
         }
 
-        this.setState(assign({}, this.state, { edit: false, answer }) as AnswerState);
+        this.setState(assign({}, this.state, { edit: false, create: false, answer }) as AnswerState);
     }
 
     private onDelete() {

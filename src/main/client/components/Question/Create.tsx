@@ -5,7 +5,7 @@ import { Editor, MarkdownViewer } from '../../components';
 
 
 interface QuestionProps {
-    onCreate?: (answer: Entities.Question) => void;
+    onCreate?: (question: Entities.Question) => void;
 }
 
 export class Question extends React.Component<QuestionProps, Entities.Question> {
