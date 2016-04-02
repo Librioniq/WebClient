@@ -1,17 +1,13 @@
-@import "../../theme/color.scss";
+@import "../../../theme/color.scss";
 
 .comment {
     border-bottom: solid 1px #DEE2E7;
     padding: 2vw 5vw 2vw;
 }
 
-.addButton {
-    // background-color: #4CA3D7;
-    // color: #fff;
-    // margin: 1em 0 2em 1em;
-    // float: right;
-    // box-shadow: 0 3px 0 0 #086586;
-    display: none;
+.controlBar {
+    display: flex;
+    flex-direction: row;
 }
 
 @media screen and (min-width: 481px) {

@@ -32,7 +32,7 @@ export class Comments extends React.Component<CommentsProps, any> {
         }
 
         let newComment = (
-            <Containers.Comment edit={false} parentId = {parentId} comment={comment} />
+            <Containers.Comment edit={true} parentId = {parentId} comment={comment} />
         )
 
         return (
