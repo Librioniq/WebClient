@@ -27,12 +27,22 @@ export class Comments extends React.Component<CommentsProps, any> {
     public render() {
         const {comments, parentId} = this.props;
 
+        let comment: Entities.Comment = {
+            content: 'ttest'
+        }
+
+        let newComment = (
+            <Containers.Comment edit={false} parentId = {parentId} comment={comment} />
+        )
+
         return (
             <div className = { "container" }>
-                { comments && comments.map(comment => <Containers.Comment { ...comment } parentId = { parentId }/>) }
+                {newComment}
+                { comments && comments.map(comment => <Containers.Comment comment={comment} parentId = { parentId }/>) }
             </div>
         );
     }
+
 }
 
 export default Comments;
