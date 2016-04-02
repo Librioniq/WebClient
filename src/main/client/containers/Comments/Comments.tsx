@@ -7,6 +7,8 @@ import * as Entities from '../../entities';
 import * as Containers from '../../containers';
 /* tslint:enable:no-unused-variable */
 
+const css: any = require('./css/Comments.scss');
+
 interface CommentsProps extends React.Props<Comments> {
     parentId: number;
     comments?: Array<Entities.Comment>;
@@ -36,7 +38,7 @@ export class Comments extends React.Component<CommentsProps, any> {
         )
 
         return (
-            <div className = { "container" }>
+            <div className = {css.container}>
                 { comments && comments.map(comment => <Containers.Comment comment={comment} parentId = { parentId }/>) }
                 {newComment}
             </div>

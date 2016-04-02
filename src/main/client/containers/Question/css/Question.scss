@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.answers {
+    display: flex;
+
+    header {
+        background-color: #E9EEF5;
+        padding: 3vw 1.5vw;
+        overflow: hidden;
+        width: 100%;
+        border-bottom: 1px solid #DDE1E6;
+        font-size: 3vw;
+        color: #444;
+    }
+}

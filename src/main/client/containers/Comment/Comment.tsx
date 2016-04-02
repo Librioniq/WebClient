@@ -50,30 +50,44 @@ export class Comment extends React.Component<CommentProps, CommentState> {
 
         let ReadState = (
             <div className={css.comment}>
-                <span>{comment.content} - </span>
-                <a href="#" className={css.link}>{comment.createdBy}</a>
-                <span className={css.helper}>{comment.createdDate}</span>
+                <span className={css.content}>{comment.content}</span>
+                <section className={css.info}>
+                    <a href="#" className={css.link}>{comment.createdBy}</a>
+                    <span className={css.helper}>{comment.createdDate}</span>
+                </section>
             </div>
         )
 
+        let controls;
+        if (edit) {
+            controls = (
+                <div>
+                    <button onClick={() => this.onCreate()} className={css.link}>Save</button>
+                    <button onClick={() => this.setEdit(false)} className={css.link}>Cancel</button>
+                </div>
+            )
+        } else {
+            controls = (
+                <div>
+                    <button onClick={() => this.setEdit(true)} className={css.link}>Edit</button>
+                    <button onClick={() => this.onDelete()} className={css.link}>Delete</button>
+                </div>
+            )
+        }
+
         let controlBar = (
             <section className={css.controlBar}>
-                <button onClick={() => this.onCreate()} className={css.link}>Save</button>
-                <button onClick={() => this.onUpdate()} className={css.link}>update</button>
-                <button onClick={() => this.setEdit(false)} className={css.link}>Cancel</button>
-                <button onClick={() => this.setEdit(true)} className={css.link}>Edit</button>
-                <button onClick={() => this.onDelete()} className={css.link}>Delete</button>
+                {controls}
             </section>
         )
 
         const component = edit ? EditState : ReadState
 
         return (
-            <div>
-                id = {this.props.comment.id}
+            <section className={css.container}>
                 {component}
                 {controlBar}
-            </div>
+            </section>
         );
     }
 

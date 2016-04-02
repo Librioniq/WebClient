@@ -10,6 +10,8 @@ import * as Containers from '../../containers';
 import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 
+const css: any = require('./css/Question.scss');
+
 interface QestionRoutingProps {
     id: string;
 }
@@ -69,12 +71,12 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
         }
 
         return (
-            <div>
+            <div className={css.container}>
                 <div>
                     { component }
                     {this.renderComments() }
                 </div>
-                <div>
+                <div className={css.answers}>
                     {this.renderAnswers() }
                 </div>
             </div>
@@ -90,7 +92,12 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     private renderAnswers() {
         const {id} = this.props.question;
 
-        return id !== undefined ? (<Containers.Answers parentId = { id }/>) : (<div>Loading...</div>);
+        return id !== undefined ? (
+            <section>
+                <header>(Amount) answers</header>
+                <Containers.Answers parentId = { id }/>
+            </section>
+        ) : (<div>Loading...</div>)
     }
 
     private onEdit() {

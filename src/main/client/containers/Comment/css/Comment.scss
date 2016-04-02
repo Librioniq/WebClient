@@ -1,14 +1,39 @@
 @import "../../../theme/color.scss";
+.container {
+    border-bottom: solid 1px #DEE2E7;
+}
+
+.hide {
+    display: none;
+}
 
 .comment {
-    border-bottom: solid 1px #DEE2E7;
+    display: flex;
     padding: 2vw 5vw 2vw;
+}
+
+.content {
+    margin-right: 3vw;
+    border: 0;
+    color: #686C6E;
+    padding: 3vw 2vw;
+    font-size: 3vw;
+    -ms-word-break: break-word;
+    word-break: break-word;
+}
+
+.info {
+    display: flex;
 }
 
 .controlBar {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+
+    div, section, article {
+        display: flex;
+    }
 }
 
 .link {
@@ -25,8 +50,7 @@
     display: flex;
     background: none;
     margin: 0;
-    // composes: link from "../../../theme/color.scss";
-    color: color.link;
+    composes: link from "../../../theme/color.scss";
 }
 
 @media screen and (min-width: 481px) {

@@ -1,8 +1,7 @@
 .root {
     display: flex;
     flex-direction: column;
-    padding-top: 2vw;
-    padding-bottom: 2vw;
+    box-shadow: 0 2px 3px rgba(100, 100, 100, 0.1);
 
     > * {
         display: flex;
@@ -33,25 +32,55 @@
     border-radius: 14px;
 
     font-size: 3vw;
-    font-weight: normal;    
+    font-weight: normal;
     color: #566e76;
     text-align: center;
 }
 
 .content {
-    padding: 2vw;
-    border-bottom: 1px solid #DEE6EF;
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 4vw 4vw;
     font-size: 4vw;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    border-bottom: 1px solid #DEE6EF;
 }
 
 .owner {
     padding: 2vw;
     border-bottom: 1px solid #DEE6EF;
     background: #E3F8FF;
+    color: #0077CC;
+    font-weight: bold;
+    font-size: 2vw;
 }
 
 .comments {
     flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.link {
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 1.5vw 3vw;
+    font-size: 3vw;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    background: none;
+    margin: 0;
+    composes: link from "../../theme/color.scss";
 }
 
 @media screen and (min-width: 841px) {
