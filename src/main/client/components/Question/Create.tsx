@@ -1,7 +1,7 @@
 import * as React from "react";
 import { assign } from 'lodash';
 import * as Entities from '../../entities';
-import { Editor, MarkdownViewer } from '../../components';
+import { Editor, MarkdownViewer, TagsInput } from '../../components';
 
 
 interface QuestionProps {
@@ -14,7 +14,7 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
     }
 
     public render() {
-        const {content, title, tags} = this.state;
+        const {content, title} = this.state;
 
         return (
             <section>
@@ -30,7 +30,7 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
                     <MarkdownViewer className = { "well" } content = { content }/>
                     <br/>
                     <label htmlFor={ "tags" }>Tags</label>
-                    <input className = { "form-control" } name = { "tags" } onChange = { it => this.onTagsChanged((it.currentTarget as HTMLInputElement).value) } value = { tags.join(" ") }/>
+                    <TagsInput onTagsChange = { it => this.onTagsChange(it) }/>
                     <br/>
                     <button className = { "btn btn-default" } type = { "button" } onClick = { () => this.onCreate() }>Create</button>
                 </div>
@@ -42,8 +42,8 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
         this.setState(assign({}, this.state, { title }) as Entities.Question);
     }
 
-    private onTagsChanged(inlineTags: string) {
-        this.setState(assign({}, this.state, { tags: inlineTags.split(/[,|\s]/ig).filter(it => !!it.trim().length) }) as Entities.Question);
+    private onTagsChange(tags: string[]) {
+        this.setState(assign({}, this.state, { tags }) as Entities.Question);
     }
 
     private onContentChange(content: string) {

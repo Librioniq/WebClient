@@ -12,6 +12,10 @@ export class NavBar extends React.Component<NavBarProps, NavBarState> {
         this.state = { expanded: false };
     }
 
+    public componentWillReceiveProps() {
+        this.setState({ expanded: false });
+    }
+
     public render() {
         const { expanded } = this.state;
 
