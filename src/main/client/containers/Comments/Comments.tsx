@@ -37,8 +37,8 @@ export class Comments extends React.Component<CommentsProps, any> {
 
         return (
             <div className = { "container" }>
-                {newComment}
                 { comments && comments.map(comment => <Containers.Comment comment={comment} parentId = { parentId }/>) }
+                {newComment}
             </div>
         );
     }

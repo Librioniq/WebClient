@@ -45,7 +45,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         const { comment } = this.props;
 
         let EditState = (
-            <Components.Editor content={comment.content} onChange={(content) => this.onChange(content)}/>
+            <Components.Editor content={comment.content} onChange={(content) => this.onChange(content)} />
         )
 
         let ReadState = (
@@ -57,12 +57,12 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         )
 
         let controlBar = (
-            <section className={css.contorlBar}>
-                <button onClick={this.onCreate.bind(this)}>Save</button>
-                <button onClick={this.update.bind(this)}>update</button>
-                <button onClick={this.read.bind(this)}>Cancel</button>
-                <button onClick={() => this.goEdit()}>Edit</button>
-                <button onClick={this.onDelete.bind(this)}>Delete</button>
+            <section className={css.controlBar}>
+                <button onClick={() => this.onCreate()} className={css.link}>Save</button>
+                <button onClick={() => this.onUpdate()} className={css.link}>update</button>
+                <button onClick={() => this.setEdit(false)} className={css.link}>Cancel</button>
+                <button onClick={() => this.setEdit(true)} className={css.link}>Edit</button>
+                <button onClick={() => this.onDelete()} className={css.link}>Delete</button>
             </section>
         )
 
@@ -81,12 +81,8 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         this.props.comment.content = content;
     }
 
-    private read() {
-        this.setState({ edit: false });
-    }
-
-    private goEdit() {
-        this.setState({ edit: true });
+    private setEdit(edit: boolean) {
+        this.setState({ edit: edit });
     }
 
     private onCreate() {
@@ -94,13 +90,12 @@ export class Comment extends React.Component<CommentProps, CommentState> {
             content: this.props.comment.content
         }
         this.props.create(this.props.parentId, comment);
+        this.setEdit(false);
     }
 
-    private update() {
-        let comment: Entities.Comment = assign(this.props.comment, {
-            content: 'this.props.comment.content'
-        }) as Entities.Comment;
-        this.props.update(this.props.parentId, comment);
+    private onUpdate() {
+        this.props.update(this.props.parentId, this.props.comment);
+        this.setEdit(false);
     }
 
     private onDelete() {
