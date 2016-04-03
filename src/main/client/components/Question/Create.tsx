@@ -1,7 +1,7 @@
 import * as React from "react";
 import { assign } from 'lodash';
 import * as Entities from '../../entities';
-import { Editor, MarkdownViewer } from '../../components';
+import { Editor, MarkdownViewer, TagsInput } from '../../components';
 
 const css: any = require('./Question.scss');
 
@@ -16,7 +16,7 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
     }
 
     public render() {
-        const {content, title, tags} = this.state;
+        const {content, title,  tags} = this.state;
 
         return (
             <section className={css.askContainer}>
@@ -41,8 +41,8 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
         this.setState(assign({}, this.state, { title }) as Entities.Question);
     }
 
-    private onTagsChanged(inlineTags: string) {
-        this.setState(assign({}, this.state, { tags: inlineTags.split(/[,|\s]/ig).filter(it => !!it.trim().length) }) as Entities.Question);
+    private onTagsChange(tags: string[]) {
+        this.setState(assign({}, this.state, { tags }) as Entities.Question);
     }
 
     private onContentChange(content: string) {
