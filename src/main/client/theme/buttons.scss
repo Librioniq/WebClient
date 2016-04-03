@@ -1,0 +1,23 @@
+.link {
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 1.5vw 3vw;
+    font-size: 3vw;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    background: none;
+    margin: 0;
+    composes: link from "./color.scss";
+
+    @media screen and (min-width: 481px) {
+        & {
+            padding: 0;
+            font-size: 1vw;
+        }
+    }
+}
