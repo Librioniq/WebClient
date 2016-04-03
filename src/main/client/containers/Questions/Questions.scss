@@ -6,9 +6,23 @@
         padding: 1vw;
         background-color: #E9EEF5;
     }
+
+    @media screen and (min-width: 841px) {
+        & {
+            width: 66.66vw;
+            margin: 0 auto;
+        }
+    }
 }
 
 .title {
     font-weight: bold;
     color: #000;
+}
+
+
+@media screen and (min-width: 841px) {
+    .item {
+        margin-bottom: 2vw;
+    }
 }

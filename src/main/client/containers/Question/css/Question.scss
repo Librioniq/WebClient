@@ -1,6 +1,13 @@
 .container {
     display: flex;
     flex-direction: column;
+
+    @media screen and (min-width: 841px) {
+        & {
+            width: 66.66vw;
+            margin: 0 auto;
+        }
+    }
 }
 
 .answers {
@@ -15,5 +22,14 @@
         border-bottom: 1px solid #DDE1E6;
         font-size: 3vw;
         color: #444;
+
+        @media screen and (min-width: 841px) {
+            & {
+                background-color: #fff;
+                padding: 0 0 1vw 0;
+                font-size: 1.5vw;
+                border-bottom: none;
+            }
+        }
     }
 }

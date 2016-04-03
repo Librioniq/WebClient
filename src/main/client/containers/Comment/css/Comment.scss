@@ -37,30 +37,41 @@
 }
 
 .link {
-    touch-action: manipulation;
-    cursor: pointer;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 1.5vw 3vw;
-    font-size: 3vw;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    display: flex;
-    background: none;
-    margin: 0;
-    composes: link from "../../../theme/color.scss";
+    composes: link from "../../../theme/buttons.scss";
 }
 
 @media screen and (min-width: 481px) {
+    .container {
+        padding: 0;
+    }
+
     .comment {
-        padding: 2vw 3vw 2vw;
+        padding: 0;
+    }
+
+    .content {
+        font-size: 1vw;
+        color: #222426;
     }
 }
 
 @media screen and (min-width: 841px) {
+    .container {
+        padding: 1vw;
+    }
+
     .comment {
-        padding: 1vw 3vw 1vw;
+        padding: 0;
+    }
+
+    .content {
+        padding: 0;
+    }
+
+    .link {
+        font-size: 1vw;
+        padding: 0;
+        padding-right: 1vw;
+        margin: 0;
     }
 }

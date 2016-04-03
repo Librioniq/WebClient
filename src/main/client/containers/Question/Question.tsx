@@ -65,9 +65,9 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
                 (<Components.Question.Read {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         if (create) {
-            return (<div>
+            return <div>
                 { component }
-            </div>);
+            </div>;
         }
 
         return (

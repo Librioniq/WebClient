@@ -10,4 +10,27 @@
     float: right;
     box-shadow: 0 3px 0 0 #086586;
     font-size: 3vw;
+
+    @media screen and (min-width: 841px) {
+        & {
+            display: inline-block;
+            position: relative;
+            padding: .61538462em 1em;
+            vertical-align: middle;
+            min-height: 2.46153846em;
+            box-sizing: border-box;
+            font-weight: 400;
+            font-family: inherit;
+            line-height: 1;
+            text-align: center;
+            text-decoration: none;
+            background-color: transparent;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            outline: none;
+            touch-action: manipulation;
+            transition: all .1s ease-in;
+        }
+    }
 }

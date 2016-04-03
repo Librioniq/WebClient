@@ -21,6 +21,7 @@ h1 {
     font-size: 5vw;
 }
 
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
@@ -200,10 +201,6 @@ ul#strength {
     }
 }
 
-/* end of Custom alerts for notification */
-
-/* entity tables helpers */
-
 /* Remove Bootstrap padding from the element
    http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
 @mixin no-padding($side) {
@@ -245,3 +242,8 @@ ul#strength {
 /* end of entity tables helpers */
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+// Functions
+@function desktopSize(value) {
+    @return (value : 12) + 'vw';
+}

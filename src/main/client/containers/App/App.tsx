@@ -3,6 +3,8 @@ import {Link} from 'react-router';
 import {NavBar} from '../../components';
 import {DevTools} from '../../containers';
 
+const css: any = require('./css/App.scss');
+
 interface AppProps extends React.Props<App> {
 }
 

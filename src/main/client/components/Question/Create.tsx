@@ -37,6 +37,10 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
         );
     }
 
+    private onTagsChanged(value) {
+        console.log(value);
+    }
+
     private onTitleChange(title: string) {
         this.setState(assign({}, this.state, { title }) as Entities.Question);
     }
