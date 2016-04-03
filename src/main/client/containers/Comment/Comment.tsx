@@ -17,6 +17,7 @@ interface CommentProps extends React.Props<Comment> {
     create?: (parentId: number, comment: Entities.Comment) => void;
     update?: (parentId: number, comment: Entities.Comment) => void;
     delete?: (parentId: number, commentId: number) => void;
+    onCancel?: Function;
 }
 
 interface CommentState {
@@ -59,6 +60,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         )
 
         let controls;
+
         if (edit) {
             controls = (
                 <div>
@@ -113,6 +115,9 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     }
 
     private onDelete() {
+        if (this.props.onCancel) {
+            this.props.onCancel(event);
+        }
         this.props.delete(this.props.parentId, this.props.comment.id);
     }
 }

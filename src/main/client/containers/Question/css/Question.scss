@@ -5,6 +5,7 @@
 
 .answers {
     display: flex;
+    flex-direction: column;
 
     header {
         background-color: #E9EEF5;

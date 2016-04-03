@@ -15,34 +15,61 @@ interface CommentsProps extends React.Props<Comments> {
     list?: (id: number) => void;
 }
 
+interface CommentState {
+    addComment: boolean;
+}
+
 @(connect<CommentsProps, CommentsProps, CommentsProps>(
     (s, p) => ({ comments: s.comments.filter(it => it.parentId === p.parentId) } as any),
     dispatch => bindActionCreators({ list: Actions.list }, dispatch) as any
 ) as ClassDecorator)
-export class Comments extends React.Component<CommentsProps, any> {
+export class Comments extends React.Component<CommentsProps, CommentState> {
     public componentWillMount() {
         const {parentId, list} = this.props;
+        this.state = { addComment: false }
 
         list(parentId);
+    }
+
+    public componentWillReceiveProps(props) {
+        // const {comment, comment: {id}} = props;
+
+        // this.setState(assign({}, this.state, { edit: this.props.edit }) as CommentState);
     }
 
     public render() {
         const {comments, parentId} = this.props;
 
         let comment: Entities.Comment = {
-            content: 'ttest'
+            content: ''
         }
 
-        let newComment = (
-            <Containers.Comment edit={true} parentId = {parentId} comment={comment} />
-        )
+        let classes = comments;
+        let newComment;
+
+        if (this.state.addComment) {
+            newComment = (
+                <Containers.Comment edit={true} parentId={parentId} comment={comment} onCancel={this.hideComment}/>
+            );
+        } else {
+            newComment = (<div></div>);
+        }
 
         return (
             <div className = {css.container}>
                 { comments && comments.map(comment => <Containers.Comment comment={comment} parentId = { parentId }/>) }
+                <button className={css.link} onClick={() => this.showComment()}>add comment</button>
                 {newComment}
             </div>
         );
+    }
+
+    private showComment() {
+        this.setState({ addComment: true });
+    }
+
+    private hideComment(event) {
+        this.setState({ addComment: false });
     }
 
 }

@@ -3,6 +3,8 @@ import { assign } from 'lodash';
 import { Editor, MarkdownViewer } from '../../components';
 import * as Entities from '../../entities';
 
+const css: any = require('./Answer.scss');
+
 interface AnswerProps {
     onCreate?: (answer: Entities.Answer) => void;
 }
@@ -17,9 +19,9 @@ export class Answer extends React.Component<AnswerProps, Entities.Answer> {
 
         return (
             <div>
-                <Editor onChange = {it => this.onContentChange(it) } content = {content}/>
+                <Editor onChange = {it => this.onContentChange(it)} content = {content}/>
                 <MarkdownViewer className = {"well"} content = {content}/>
-                <button className = {"btn btn-default"} type = {"button"} onClick = {() => this.onCreate() }>Save</button>
+                <button className = {css.actionButton} type = {"button"} onClick = {() => this.onCreate() }>Give your answer</button>
             </div>
         );
     }
