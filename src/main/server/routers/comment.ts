@@ -2,7 +2,6 @@ import {Router} from 'express';
 import {isEmpty} from 'lodash';
 import * as Services from '../services';
 
-
 const commentService = new Services.Comment();
 
 export const router = Router();

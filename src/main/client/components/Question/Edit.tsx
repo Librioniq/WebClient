@@ -3,6 +3,8 @@ import { assign } from 'lodash';
 import * as Entities from '../../entities';
 import { Editor, MarkdownViewer } from '../../components';
 
+const css: any = require('./Question.scss');
+
 
 interface QuestionProps extends Entities.Question {
     onSave?: (answer: Entities.Question) => void;
@@ -18,10 +20,10 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
 
         return (
             <div>
-                <input onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
+                <input onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title } className={css.input} />
                 <Editor onChange = { it => this.onContentChange(it) } content = { content }/>
                 <MarkdownViewer className = {"well"} content = { content }/>
-                <button className = {"btn btn-default"} type = {"button"} onClick = { () => this.onSave() }>Save</button>
+                <button className = {css.actionButton} type = {"button"} onClick = { () => this.onSave() }>Save</button>
             </div>
         );
     }

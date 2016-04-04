@@ -31,8 +31,28 @@
     flex-direction: column;
 }
 
+.actionButton {
+    -webkit-appearance: none;
+    padding: .8em .7em .6em .7em;
+    border-radius: 3px;
+    color: #FFF;
+    background-color: #4CA3D7;
+    font-weight: normal;
+    border: 0;
+    margin: 1em 0 2em 1em;
+    float: right;
+    box-shadow: 0 3px 0 0 #086586;
+    font-size: 13px;
+    line-height: 1;
+}
+
 @media screen and (min-width: 841px) {
     .content {
-        font-size: 2vw;
+        font-size: 1vw;
+    }
+
+    .owner {
+        padding: 0.5vw;
+        font-size: 1vw;
     }
 }

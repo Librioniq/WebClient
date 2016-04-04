@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 841px) {
+        & {
+            width: 66.66vw;
+            margin: 0 auto;
+        }
+    }
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+
+    header {
+        background-color: #E9EEF5;
+        padding: 3vw 1.5vw;
+        overflow: hidden;
+        width: 100%;
+        border-bottom: 1px solid #DDE1E6;
+        font-size: 3vw;
+        color: #444;
+
+        @media screen and (min-width: 841px) {
+            & {
+                background-color: #fff;
+                padding: 0 0 1vw 0;
+                font-size: 1.5vw;
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 841px) {
+    .main {
+        margin-bottom: 2vw;
+    }
+}

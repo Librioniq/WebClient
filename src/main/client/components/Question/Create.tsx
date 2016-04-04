@@ -3,6 +3,8 @@ import { assign } from 'lodash';
 import * as Entities from '../../entities';
 import { Editor, MarkdownViewer, TagsInput } from '../../components';
 
+const css: any = require('./Question.scss');
+
 
 interface QuestionProps {
     onCreate?: (question: Entities.Question) => void;
@@ -14,25 +16,22 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
     }
 
     public render() {
-        const {content, title} = this.state;
+        const {content, title,  tags} = this.state;
 
         return (
-            <section>
+            <section className={css.askContainer}>
                 <div className = {"page-header"}>
-                    <h1>Ask Question</h1>
+                    <h1>Ask your question</h1>
                 </div>
                 <div>
-                    <label htmlFor={"title"}>Title</label>
-                    <input className = { "form-control" } name = { "title" } onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
-                    <br/>
-                    <label>Content</label>
-                    <Editor onChange = { it => this.onContentChange(it) } content = { content }/>
+                    <label htmlFor={"title"} className={css.title}>Title</label>
+                    <input className = {css.input} name = { "title" } onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
+                    <label className={css.title}>Question</label>
+                    <Editor onChange = { it => this.onContentChange(it) } content = { content } />
                     <MarkdownViewer className = { "well" } content = { content }/>
-                    <br/>
-                    <label htmlFor={ "tags" }>Tags</label>
-                    <TagsInput onTagsChange = { it => this.onTagsChange(it) }/>
-                    <br/>
-                    <button className = { "btn btn-default" } type = { "button" } onClick = { () => this.onCreate() }>Create</button>
+                    <label htmlFor={ "tags" } className={css.title}>Tags</label>
+                    <TagsInput onTagsChange = { it => this.onTagsChange(it)} />
+                    <button className = {css.actionButton} type = { "button" } onClick = { () => this.onCreate() }>Ask your question</button>
                 </div>
             </section>
         );

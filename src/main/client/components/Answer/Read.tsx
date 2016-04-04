@@ -15,11 +15,23 @@ export class Answer extends React.Component<AnswerProps, any> {
 
         return (
             <div className={css.root}>
-                <MarkdownViewer className = {css.content} content = {content}/>
+                <MarkdownViewer className={css.content} content={content} />
                 <section className={css.owner}>{createdBy}</section>
                 <div className = {"btn-group btn-group-xs"} role = {"group"}>
-                    <button className = {"btn btn-link"} type = {"button"} onClick = {() => this.onEdit() }>Edit</button>
-                    <button className = {"btn btn-link"} type = {"button"} onClick = {() => this.onDelete() }>Delete</button>
+                    <button
+                        className = {"btn btn-link"}
+                        type = {"button"}
+                        onClick = {() => this.onEdit()}
+                        >
+                        Edit
+                    </button>
+                    <button
+                        className = {"btn btn-link"}
+                        type = {"button"}
+                        onClick = {() => this.onDelete()}
+                        >
+                        Delete
+                    </button>
                 </div>
             </div>
         );

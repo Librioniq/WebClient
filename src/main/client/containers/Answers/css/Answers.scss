@@ -1,0 +1,7 @@
+.actionButton {
+    composes: action from "../../../theme/buttons.scss";
+}
+
+.test {
+    background: red;
+}

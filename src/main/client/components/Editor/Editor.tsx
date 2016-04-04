@@ -23,9 +23,12 @@ export class Editor extends React.Component<EditorProps, EditorState> {
 
         return (
             <section>
-                <div>
-                    <textarea className={`form-control ${css.editor__textarea}`} rows={3} onChange={(e: Event) => this.onChangeContent(e) } value={content}/>
-                </div>
+                <textarea
+                    className={`form-control ${css.editor__textarea}`}
+                    rows={3}
+                    onChange={(e: Event) => this.onChangeContent(e) }
+                    value={content}
+                />
             </section>
         );
     }
@@ -35,7 +38,9 @@ export class Editor extends React.Component<EditorProps, EditorState> {
         const {onChange} = this.props;
 
         this.setState({ content });
-        onChange(content);
+        if (onChange) {
+            onChange(content);
+        }
     };
 }
 

@@ -25,7 +25,6 @@ interface AnswerState {
 
 @(connect<AnswerProps, AnswerProps, AnswerProps>(
     () => ({} as any),
-    // ({answers}, {answer, params: {id} = { id: undefined }}) => ({ answer: assign({}, answer, answers.filter(it => it.id === Number(id))[0]) } as AnswerProps),
     dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
 ) as ClassDecorator)
 export class Answer extends React.Component<AnswerProps, AnswerState> {
@@ -94,4 +93,4 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 }
 
-export default Answer; 
+export default Answer;

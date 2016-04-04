@@ -1,0 +1,57 @@
+.link {
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 1.5vw 3vw;
+    font-size: 3vw;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    background: none;
+    margin: 0;
+    composes: link from "./color.scss";
+
+    @media screen and (min-width: 481px) {
+        & {
+            padding: 0;
+            font-size: 1vw;
+        }
+    }
+}
+
+
+.action {
+    -webkit-appearance: none;
+    padding: .8em .7em .6em .7em;
+    border-radius: 3px;
+    color: #FFF;
+    background-color: #4CA3D7;
+    font-weight: normal;
+    border: 0;
+    margin: 1em 0 2em 1em;
+    float: right;
+    box-shadow: 0 3px 0 0 #086586;
+    font-size: 3vw;
+
+    @media screen and (min-width: 841px) {
+        & {
+            padding: .61538462em 1em;
+            box-sizing: border-box;
+            font-weight: 400;
+            font-family: inherit;
+            line-height: 1;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 2px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            outline: none;
+            touch-action: manipulation;
+            transition: all .1s ease-in;
+            font-size: 1vw;
+        }
+    }
+}

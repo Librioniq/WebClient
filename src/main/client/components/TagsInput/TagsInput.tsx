@@ -21,7 +21,13 @@ export class TagsInput extends React.Component<TagsInputProps, TagsInputState> {
             <div>
                 <div className="input-group">
                     { tags.map(it => (<span className = { "input-group-addon" }>{ it }</span>)) }
-                    <input type = { "text" } value = { content } className = { "form-control" } onChange = { e => this.onInputChange((e.currentTarget as HTMLInputElement).value) } aria-label = { "Tags" }/>
+                    <input
+                        type = { "text" }
+                        value = { content }
+                        className = { "form-control" }
+                        onChange = { e => this.onInputChange((e.currentTarget as HTMLInputElement).value) }
+                        aria-label = { "Tags" }
+                    />
                 </div>
             </div>
         );

@@ -1,8 +1,7 @@
 .root {
     display: flex;
     flex-direction: column;
-    padding-top: 2vw;
-    padding-bottom: 2vw;
+    box-shadow: 0 2px 3px rgba(100, 100, 100, 0.1);
 
     > * {
         display: flex;
@@ -12,6 +11,12 @@
         flex-direction: column;
         padding: 2vw;
         border-bottom: 1px solid #DEE6EF;
+
+        @media screen and (min-width: 841px) {
+            & {
+                padding: 0;
+            }
+        }
     }
 }
 
@@ -33,33 +38,129 @@
     border-radius: 14px;
 
     font-size: 3vw;
-    font-weight: normal;    
+    font-weight: normal;
     color: #566e76;
     text-align: center;
 }
 
 .content {
-    padding: 2vw;
-    border-bottom: 1px solid #DEE6EF;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 4vw;
     font-size: 4vw;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    border-bottom: 1px solid #DEE6EF;
 }
 
 .owner {
     padding: 2vw;
     border-bottom: 1px solid #DEE6EF;
     background: #E3F8FF;
+    color: #0077CC;
+    font-weight: bold;
+    font-size: 2vw;
 }
 
 .comments {
     flex-direction: column;
 }
 
+.controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.link {
+    composes: link from "../../theme/buttons.scss";
+}
+
+// Create styles
+.askContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+}
+
+.title {
+    font-size: 3vw;
+    font-weight: 700;
+    margin: 0 0 3vw 0;
+    color: #77808F;
+}
+
+.input {
+    padding: 2.5vw;
+    width: 100%;
+    margin: 0 0 4vw 0;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+}
+
+
 @media screen and (min-width: 841px) {
+    .root {
+        box-shadow: none;
+        margin-bottom: 2vw;
+    }
+
     .title {
-        font-size: 3vw;
+        font-size: 1vw;
+        font-weight: 400;
+        color: #222426;
+        margin: 0;
     }
 
     .content {
-        font-size: 2vw;
+        font-size: 1vw;
+        padding: 0.5vw;
+    }
+
+    .tag {
+        font-size: 0.7vw;
+        padding: 0.5vw;
+        color: #39739d;
+        white-space: nowrap;
+        background: #E1ECF4;
+        border: 1px solid #E1ECF4;
+        margin: 2px 2px 2px 0;
+        border-radius: 0;
+        transition: color .15s ease,background .15s ease,border .15s ease;
+    }
+
+    .controls {
+        justify-content: flex-end;
+    }
+
+    .link {
+        font-size: 1vw;
+        padding: 0;
+        padding-right: 1vw;
+        margin: 0;
+    }
+
+    .owner {
+        padding: 0.5vw;
+        border-bottom: 1px solid #DEE6EF;
+        font-weight: normal;
+        font-size: 1vw;
+    }
+
+    .input {
+        padding: 0.5vw;
+        margin: 0 0 1vw 0;
+        box-shadow: 0 1px 2px rgba(34,36,38,0.1) inset;
+    }
+
+    .actionButton {
+        composes: action from "../../theme/buttons.scss";
+    }
+
+    .askContainer {
+        width: 66.66vw;
+        margin: 0 auto;
+        padding: 0;
     }
 }

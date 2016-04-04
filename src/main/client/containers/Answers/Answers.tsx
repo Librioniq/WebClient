@@ -7,6 +7,9 @@ import * as Entities from '../../entities';
 import * as Containers from '../../containers';
 /* tslint:enable:no-unused-variable */
 
+const css: any = require('./css/Answers.scss');
+
+
 interface AnswersProps extends React.Props<Answers> {
     parentId: number;
     answers?: Array<Entities.Answer>;
@@ -51,11 +54,7 @@ export class Answers extends React.Component<AnswersProps, AnswersState> {
 
     private renderAddAnswerButton() {
         return (
-            <div className="btn-group btn-group-justified" role="group" aria-label="...">
-                <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-default" onClick = { () => this.onAddAnswer() }>Add Answer</button>
-                </div>
-            </div>
+            <button type="button" className={css.actionButton} onClick = { () => this.onAddAnswer() }>Add Answer</button>
         );
     }
 
