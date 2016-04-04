@@ -16,7 +16,7 @@ export class App extends React.Component<AppProps, any> {
                     <Link to = {"/questions/"}>Questions</Link>
                     <Link to = {"/questions/ask"}>Ask Question</Link>
                 </NavBar>
-                <div>
+                <div className={css.test}>
                     {this.props.children}
                 </div>
                 <DevTools/>
