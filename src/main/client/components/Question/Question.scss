@@ -45,6 +45,7 @@
 
 .content {
     display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 0;
     padding: 4vw;
@@ -98,23 +99,15 @@
     border: 1px solid #ccc;
 }
 
-.actionButton {
-    -webkit-appearance: none;
-    padding: .8em .7em .6em .7em;
-    border-radius: 3px;
-    color: #FFF;
-    background-color: #4CA3D7;
-    font-weight: normal;
-    border: 0;
-    margin: 1em 0 2em 1em;
-    float: right;
-    box-shadow: 0 3px 0 0 #086586;
-    font-size: 3vw;
-}
 
 @media screen and (min-width: 841px) {
+    .root {
+        box-shadow: none;
+        margin-bottom: 2vw;
+    }
+
     .title {
-        font-size: 2vw;
+        font-size: 1vw;
         font-weight: 400;
         color: #222426;
         margin: 0;
@@ -126,8 +119,15 @@
     }
 
     .tag {
-        font-size: 1vw;
+        font-size: 0.5vw;
         padding: 0 0.5vw;
+        color: #39739d;
+        white-space: nowrap;
+        background: #E1ECF4;
+        border: 1px solid #E1ECF4;
+        margin: 2px 2px 2px 0;
+        border-radius: 0;
+        transition: color .15s ease,background .15s ease,border .15s ease;
     }
 
     .controls {
@@ -151,26 +151,16 @@
     .input {
         padding: 0.5vw;
         margin: 0 0 1vw 0;
+        box-shadow: 0 1px 2px rgba(34,36,38,0.1) inset;
     }
 
     .actionButton {
-        display: inline-block;
-        position: relative;
-        padding: .61538462em 1em;
-        vertical-align: middle;
-        min-height: 2.46153846em;
-        box-sizing: border-box;
-        font-weight: 400;
-        font-family: inherit;
-        line-height: 1;
-        text-align: center;
-        text-decoration: none;
-        background-color: transparent;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        cursor: pointer;
-        outline: none;
-        touch-action: manipulation;
-        transition: all .1s ease-in;
+        composes: action from "../../theme/buttons.scss";
+    }
+
+    .askContainer {
+        width: 66.66vw;
+        margin: 0 auto;
+        padding: 0;
     }
 }

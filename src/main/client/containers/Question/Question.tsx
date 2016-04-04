@@ -72,7 +72,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
 
         return (
             <div className={css.container}>
-                <div>
+                <div className={css.main}>
                     { component }
                     {this.renderComments() }
                 </div>
