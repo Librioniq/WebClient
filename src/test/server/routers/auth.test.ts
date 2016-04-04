@@ -21,10 +21,14 @@ describe("Routers", () => {
         clear();
     });
 
-    describe("User Router", () => {
-        it("should respond with user", (done) => {
+    describe("Auth Router", () => {
+        it("should authorize user", (done) => {
             request(url)
-                .get('/users/1')
+                .post('/auth')
+                .send({
+                    login: "admin",
+                    password: "admin"
+                })
                 .expect(200) // Status code
                 .expect('Content-Type', /json/)
                 .end(function(err, res) {
@@ -35,8 +39,7 @@ describe("Routers", () => {
                     }
 
                     expect(res.body).to.be.not.empty;
-                    expect(res.body).have.property('firstName').equals("Oleh");
-                    expect(res.body).have.property('lastName').equals("Dokuka");
+                    expect(res.body).have.property('userId').equals(1);
 
                     done();
                 });

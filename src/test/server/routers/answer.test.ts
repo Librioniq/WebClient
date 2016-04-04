@@ -1,6 +1,6 @@
 /// <reference path='../../../../typings/main.d.ts'/>
 
-import {post, postToPosts} from '../../../main/server/database';
+import {clear} from '../../../main/server/database';
 import {expect} from 'chai';
 import * as request from 'supertest';
 import environment from '../../../main/server/environment';
@@ -19,8 +19,7 @@ describe("Routers", function() {
 
     after(() => {
         server.close();
-        post.clear();
-        postToPosts.clear();
+        clear();
     });
 
     describe("Answers Router", function() {
