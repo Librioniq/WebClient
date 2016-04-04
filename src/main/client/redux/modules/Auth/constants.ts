@@ -1,0 +1,1 @@
+export const AUTH = 'api/AUTH:POST';

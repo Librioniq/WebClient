@@ -1,9 +1,9 @@
 import * as React from "react";
 
-interface HomeProperties extends React.Props<Home> {
+interface HomeProps extends React.Props<Home> {
 }
 
-export class Home extends React.Component<HomeProperties, any> {
+export class Home extends React.Component<HomeProps, any> {
     public render() {
         return (
             <div className="container">

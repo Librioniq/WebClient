@@ -1,4 +1,5 @@
-import {Post, Response} from './Post';
+import {Post} from './Post';
+import {Response} from './Api';
 import {post, get, put, remove} from './utils/request';
 import * as Entities from '../entities';
 

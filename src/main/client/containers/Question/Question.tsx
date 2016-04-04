@@ -17,10 +17,11 @@ interface QestionRoutingProps {
 interface QuestionProps extends React.Props<Question>, RouteComponentProps<QestionRoutingProps, QestionRoutingProps> {
     children?: React.ReactElement<any>;
     get: (questionId) => void;
-    create?: (question) => void;
+    create?: (question: Entities.Question) => void;
     update?: (question: Entities.Question) => void;
     delete?: (questionId: number) => void;
     question?: Entities.Question;
+    user?: Entities.User;
 }
 
 interface QuestionState {
@@ -30,7 +31,10 @@ interface QuestionState {
 }
 
 @(connect<QuestionProps, QuestionProps, QuestionProps>(
-    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} } as any),
+    (s, {params: {id} = { id: undefined }}) => ({
+        question: s.questions.filter(it => it.id === Number(id))[0] || {},
+        user: s.users[s.auth.userId]
+    } as any),
     dispatch => (bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as QuestionProps)
 ) as ClassDecorator)
 export class Question extends React.Component<QuestionProps, QuestionState> {
@@ -63,9 +67,11 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
                 (<Components.Question.Read {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         if (create) {
-            return (<div>
-                { component }
-            </div>);
+            return (
+                <div>
+                    { component }
+                </div>
+            );
         }
 
         return (
@@ -98,10 +104,12 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     private onSave(question: Entities.Question) {
+        const { user: { id } } = this.props;
+
         if (this.state.create) {
-            this.props.create(question);
+            this.props.create(question = assign({}, question, { createdBy: id }) as Entities.Question);
         } else if (this.state.edit) {
-            this.props.update(question);
+            this.props.update(question = assign({}, question, { modifiedBy: id }) as Entities.Question);
         }
 
 

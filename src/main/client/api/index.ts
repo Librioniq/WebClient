@@ -1,3 +1,5 @@
-export {Answer} from './Answer'
-export {Question} from './Question'
-export {Comment} from './Comment'
+export { Answer } from './Answer';
+export { Question } from './Question';
+export { Comment } from './Comment';
+export { User } from './User';
+export { Auth } from './Auth';

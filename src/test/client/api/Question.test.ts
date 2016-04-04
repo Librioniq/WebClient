@@ -1,6 +1,6 @@
 /// <reference path='../../../../typings/main.d.ts'/>
 
-import {post, postToPosts} from '../../../main/server/database';
+import {clear} from '../../../main/server/database';
 import {expect} from 'chai';
 import * as Api from '../../../../src/main/client/api';
 import * as Entities from '../../../../src/main/client/entities';
@@ -28,8 +28,7 @@ describe("Redux Api", () => {
     });
     after(() => {
         server.close();
-        post.clear();
-        postToPosts.clear();
+        clear();
     });
 
     describe(`Question`, () => {
