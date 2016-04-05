@@ -13,3 +13,10 @@ export function authorize(login: string, password: string) {
         }
     };
 }
+
+export function restore(auth: any) {
+    return {
+        type: Constants.RESTORE,
+        auth
+    };
+}
