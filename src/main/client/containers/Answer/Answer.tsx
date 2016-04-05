@@ -28,6 +28,11 @@ interface AnswerState {
     dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
 ) as ClassDecorator)
 export class Answer extends React.Component<AnswerProps, AnswerState> {
+    public static contextTypes: React.ValidationMap<any> = {
+        auth: React.PropTypes.object,
+        user: React.PropTypes.object
+    };
+
     public componentWillMount() {
         const {answer, answer: {id}} = this.props;
 
@@ -58,14 +63,14 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
             <div>
                 { component }
                 <section>
-                    {this.renderComments() }
+                    { this.renderComments() }
                 </section>
             </div>
         );
     }
 
     private renderComments() {
-        const {answer: {id}} = this.state;
+        const { answer: { id } } = this.state;
 
         return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
     }
@@ -75,12 +80,13 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 
     private onSave(answer: Entities.Answer) {
-        const {create, update, parentId} = this.props;
+        const { create, update, parentId } = this.props;
+        const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
         if (this.state.create) {
-            create(parentId, answer);
+            create(parentId, answer = assign({}, answer, { createdBy: `${firstName} ${lastName}` }) as Entities.Answer);
         } else if (this.state.edit) {
-            update(parentId, answer);
+            update(parentId, answer = assign({}, answer, { lastModifiedBy: `${firstName} ${lastName}` }) as Entities.Answer);
         }
 
         this.setState(assign({}, this.state, { edit: false, create: false, answer }) as AnswerState);

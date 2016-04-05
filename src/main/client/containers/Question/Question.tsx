@@ -23,7 +23,6 @@ interface QuestionProps extends React.Props<Question>, RouteComponentProps<Qesti
     update?: (question: Entities.Question) => void;
     delete?: (questionId: number) => void;
     question?: Entities.Question;
-    user?: Entities.User;
 }
 
 interface QuestionState {
@@ -33,13 +32,15 @@ interface QuestionState {
 }
 
 @(connect<QuestionProps, QuestionProps, QuestionProps>(
-    (s, {params: {id} = { id: undefined }}) => ({
-        question: s.questions.filter(it => it.id === Number(id))[0] || {},
-        user: s.users[s.auth.userId]
-    } as any),
+    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} } as any),
     dispatch => (bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as QuestionProps)
 ) as ClassDecorator)
 export class Question extends React.Component<QuestionProps, QuestionState> {
+    public static contextTypes: React.ValidationMap<any> = {
+        auth: React.PropTypes.object,
+        user: React.PropTypes.object
+    };
+
     public componentWillMount() {
         const {get, params: {id}} = this.props;
         this.state = { edit: false, create: id === "ask", question: this.props.question };
@@ -75,13 +76,13 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
         }
 
         return (
-            <div className={css.container}>
-                <div className={css.main}>
+            <div className = { css.container }>
+                <div className = { css.main }>
                     { component }
-                    {this.renderComments() }
+                    { this.renderComments() }
                 </div>
-                <div className={css.answers}>
-                    {this.renderAnswers() }
+                <div className = { css.answers }>
+                    { this.renderAnswers() }
                 </div>
             </div>
         );
@@ -101,7 +102,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
                 <header>(Amount) answers</header>
                 <Containers.Answers parentId = { id }/>
             </section>
-        ) : (<div>Loading...</div>)
+        ) : (<div>Loading...</div>);
     }
 
     private onEdit() {
@@ -109,14 +110,13 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     private onSave(question: Entities.Question) {
-        const { user: { id } } = this.props;
+        const { user: {firstName, lastName} } = this.context as { user: Entities.User };
 
         if (this.state.create) {
-            this.props.create(question = assign({}, question, { createdBy: id }) as Entities.Question);
+            this.props.create(question = assign({}, question, { createdBy: `${firstName} ${lastName}` }) as Entities.Question);
         } else if (this.state.edit) {
-            this.props.update(question = assign({}, question, { modifiedBy: id }) as Entities.Question);
+            this.props.update(question = assign({}, question, { lastModifiedBy: `${firstName} ${lastName}` }) as Entities.Question);
         }
-
 
         this.setState(assign({}, this.state, { edit: false, create: false, question }) as QuestionState);
     }

@@ -7,4 +7,5 @@ export { Question } from './Question/Question';
 export { Comment } from './Comment/Comment';
 export { Answer } from './Answer/Answer';
 export { SignIn } from './SignIn/SignIn';
+export { UserProvider } from './UserProvider/UserProvider';
 export { DevTools } from './DevTools/DevTools';

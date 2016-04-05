@@ -16,7 +16,7 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
     }
 
     public render() {
-        const {content, title,  tags} = this.state;
+        const {content, title} = this.state;
 
         return (
             <section className={css.askContainer}>
@@ -26,11 +26,11 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
                 <div>
                     <label htmlFor={"title"} className={css.title}>Title</label>
                     <input className = {css.input} name = { "title" } onChange = { it => this.onTitleChange((it.currentTarget as HTMLInputElement).value) } value = { title }/>
-                    <label className={css.title}>Question</label>
+                    <label className = {css.title}>Question</label>
                     <Editor onChange = { it => this.onContentChange(it) } content = { content } />
                     <MarkdownViewer className = { "well" } content = { content }/>
-                    <label htmlFor={ "tags" } className={css.title}>Tags</label>
-                    <TagsInput onTagsChange = { it => this.onTagsChange(it)} />
+                    <label htmlFor = { "tags" } className = {css.title}>Tags</label>
+                    <TagsInput onTagsChange = { it => this.onTagsChange(it) } />
                     <button className = {css.actionButton} type = { "button" } onClick = { () => this.onCreate() }>Ask your question</button>
                 </div>
             </section>

@@ -18,7 +18,7 @@ export class Question extends React.Component<QuestionProps, any> {
             <div className={css.root}>
                 <header>
                     <a href="#" className={css.title}>{title}</a>
-                    <section>{tags && tags.map(tag => <a href="#" className={css.tag}>{tag}</a>)}</section>
+                    <section className = { css.tags }>{tags && tags.map(tag => <a href="#" className={css.tag}>{tag}</a>)}</section>
                 </header>
                 <MarkdownViewer className={css.content} content = {content}/>
                 <div className = {css.controls} role = {"group"}>
