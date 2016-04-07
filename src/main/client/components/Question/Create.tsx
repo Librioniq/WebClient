@@ -30,15 +30,11 @@ export class Question extends React.Component<QuestionProps, Entities.Question> 
                     <Editor onChange = { it => this.onContentChange(it) } content = { content } />
                     <MarkdownViewer className = { "well" } content = { content }/>
                     <label htmlFor={ "tags" } className={css.title}>Tags</label>
-                    <input className = {css.input} name = { "tags" } onChange = { it => this.onTagsChanged((it.currentTarget as HTMLInputElement).value) } value = { tags.join(" ") }/>
+                    <TagsInput onTagsChange = { it => this.onTagsChange(it)} />
                     <button className = {css.actionButton} type = { "button" } onClick = { () => this.onCreate() }>Ask your question</button>
                 </div>
             </section>
         );
-    }
-
-    private onTagsChanged(value) {
-        console.log(value);
     }
 
     private onTitleChange(title: string) {

@@ -1,10 +1,23 @@
+import {assign} from 'lodash';
+import {user, passport} from '../database';
 import {Post} from '../services/Post';
-import {Answer, Comment, Question} from '../../client/entities';
+import {Answer, Comment, Question, User} from '../../client/entities';
 
 type PostType = { type: "QUESTION" | "ANSWER" | "COMMENT" };
 
 const postService = new Post();
 
+const dummyPassport = {
+    id: 1,
+    login: "admin",
+    password: "admin"
+};
+const dummyUser: User = {
+    id: 1,
+    firstName: "Oleh",
+    lastName: "Dokuka",
+    avatar: "/images/test.png"
+};
 const dummyAnswer: Answer & PostType = {
     content: "So you should do that or this or anythings",
     createdBy: "Oleh Dokuka",
@@ -41,4 +54,7 @@ export function dbInit() {
 
     postService.add(question.id, dummyComment);
     postService.add(answer.id, dummyComment);
+
+    user.insertOne(assign({}, dummyUser) as any);
+    passport.insertOne(assign({}, dummyPassport) as any);
 }

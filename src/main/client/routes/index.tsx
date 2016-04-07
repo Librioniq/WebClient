@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, Home, Questions, Question }  from '../containers';
+import { App, Home, Questions, Question, SignIn }  from '../containers';
 
 export const routes = (
     <Route path="/" component={App}>
@@ -12,6 +12,7 @@ export const routes = (
             <Route path="ask" component={Question}/>
         </Route>
         <Route path="about" component={Home}/>
+        <Route path="signin" component={SignIn}/>
     </Route>
 );
 
