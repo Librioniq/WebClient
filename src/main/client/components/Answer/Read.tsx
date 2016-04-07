@@ -9,41 +9,65 @@ interface AnswerProps extends Entities.Answer {
     onDelete?: () => void;
 }
 
-export class Answer extends React.Component<AnswerProps, any> {
-    public render() {
-        const { createdBy, createdDate, content} = this.props;
+// export class Answer extends React.Component<AnswerProps, any> {
+//     public render() {
+//         const { createdBy, createdDate, content} = this.props;
+//
+//         return (
+//             <div className={css.root}>
+//                 <MarkdownViewer className={css.content} content={content} />
+//                 <section className={css.owner}>{createdBy}</section>
+//                 <div className = {"btn-group btn-group-xs"} role = {"group"}>
+//                     <button
+//                         className = {"btn btn-link"}
+//                         type = {"button"}
+//                         onClick = {() => this.onEdit()}
+//                         >
+//                         Edit
+//                     </button>
+//                     <button
+//                         className = {"btn btn-link"}
+//                         type = {"button"}
+//                         onClick = {() => this.onDelete()}
+//                         >
+//                         Delete
+//                     </button>
+//                 </div>
+//             </div>
+//         );
+//     }
+//
+//     private onEdit() {
+//         this.props.onEdit();
+//     }
+//
+//     private onDelete() {
+//         this.props.onDelete();
+//     }
+// }
 
-        return (
-            <div className={css.root}>
-                <MarkdownViewer className={css.content} content={content} />
-                <section className={css.owner}>{createdBy}</section>
-                <div className = {"btn-group btn-group-xs"} role = {"group"}>
-                    <button
-                        className = {"btn btn-link"}
-                        type = {"button"}
-                        onClick = {() => this.onEdit()}
-                        >
+function Answer (props) {
+    const { createdBy, createdDate, content, onEdit, onDelete } = props;
+    return (
+        <div className={css.root}>
+            <MarkdownViewer className={css.content} content={content} />
+            <section className={css.owner}>{createdBy}</section>
+            <div className = {"btn-group btn-group-xs"} role = {"group"}>
+                <button
+                    className={"btn btn-link"}
+                    type={"button"}
+                    onClick={onEdit} >
                         Edit
-                    </button>
-                    <button
-                        className = {"btn btn-link"}
-                        type = {"button"}
-                        onClick = {() => this.onDelete()}
-                        >
+                </button>
+                <button
+                    className={"btn btn-link"}
+                    type={"button"}
+                    onClick={onDelete}>
                         Delete
-                    </button>
-                </div>
+                </button>
             </div>
-        );
-    }
-
-    private onEdit() {
-        this.props.onEdit();
-    }
-
-    private onDelete() {
-        this.props.onDelete();
-    }
-}
+        </div>
+    );
+};
 
 export default Answer;
