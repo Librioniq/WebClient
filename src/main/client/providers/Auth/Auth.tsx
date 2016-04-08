@@ -9,18 +9,18 @@ import * as Entities from '../../entities';
 import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 
-interface UserProviderProps {
+interface AuthProps {
     auth?: any;
     user?: Entities.User;
     get?: (id) => void;
     restore?: (auth) => void;
 }
 
-@(connect<UserProviderProps, UserProviderProps, UserProviderProps>(
+@(connect<AuthProps, AuthProps, AuthProps>(
     ({auth, users}) => ({ auth, user: users.filter(it => it.id === auth.userId)[0] }),
     dispatch => bindActionCreators({ get: Modules.User.Actions.get, restore: Modules.Auth.Actions.restore }, dispatch)
 ) as ClassDecorator)
-export class UserProvider extends React.Component<UserProviderProps, any> {
+export class Auth extends React.Component<AuthProps, any> {
     public static childContextTypes: React.ValidationMap<any> = {
         auth: React.PropTypes.object,
         user: React.PropTypes.object
@@ -35,13 +35,15 @@ export class UserProvider extends React.Component<UserProviderProps, any> {
         }
     }
 
-    public componentWillReceiveProps(props: UserProviderProps) {
+    public componentWillReceiveProps(props: AuthProps) {
         const { auth, user, get } = props;
 
         if (isEmpty(user) && !isEmpty(auth)) {
             Cookies.set("auth", auth, { path: "" });
 
             get(auth.userId);
+        } else if (isEmpty(auth) && isEmpty(Cookies.get("auth"))) {
+            Cookies.remove("auth");
         }
     }
 
@@ -61,4 +63,4 @@ export class UserProvider extends React.Component<UserProviderProps, any> {
     }
 }
 
-export default UserProvider;
+export default Auth;
