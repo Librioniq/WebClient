@@ -1,4 +1,4 @@
-@import "../../../theme/color.scss";
+@import "../../theme/color.scss";
 .container {
     border-bottom: solid 1px #DEE2E7;
 }
@@ -37,7 +37,7 @@
 }
 
 .link {
-    composes: link from "../../../theme/buttons.scss";
+    composes: link from "../../theme/buttons.scss";
 }
 
 @media screen and (min-width: 481px) {

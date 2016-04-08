@@ -1,20 +1,19 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {assign, isEmpty} from 'lodash';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
 import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 import {Actions} from '../../redux/modules/Comment';
 
-const css: any = require('./css/Comment.scss');
-import {assign, isEmpty} from 'lodash';
+const css: any = require('./Comment.scss');
 
 interface CommentProps extends React.Props<Comment> {
     parentId: number;
     comment?: Entities.Comment;
     edit?: boolean;
-    create?: (parentId: number, comment: Entities.Comment) => void;
     update?: (parentId: number, comment: Entities.Comment) => void;
     delete?: (parentId: number, commentId: number) => void;
     onCancel?: Function;
@@ -64,7 +63,6 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         if (edit) {
             controls = (
                 <div>
-                    <button onClick={() => this.onCreate()} className={css.link}>Save</button>
                     <button onClick={() => this.setEdit(false)} className={css.link}>Cancel</button>
                 </div>
             )
@@ -101,13 +99,13 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         this.setState({ edit: edit });
     }
 
-    private onCreate() {
-        let comment: Entities.Comment = {
-            content: this.props.comment.content
-        }
-        this.props.create(this.props.parentId, comment);
-        this.setEdit(false);
-    }
+    // private onCreate() {
+    //     let comment: Entities.Comment = {
+    //         content: this.props.comment.content
+    //     }
+    //     this.props.create(this.props.parentId, comment);
+    //     this.setEdit(false);
+    // }
 
     private onUpdate() {
         this.props.update(this.props.parentId, this.props.comment);

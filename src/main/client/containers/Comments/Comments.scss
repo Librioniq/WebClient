@@ -6,5 +6,5 @@
 }
 
 .link {
-    composes: link from "../../../theme/buttons.scss";
+    composes: link from "../../theme/buttons.scss";
 }

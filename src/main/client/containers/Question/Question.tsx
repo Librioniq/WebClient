@@ -10,7 +10,8 @@ import * as Containers from '../../containers';
 import * as Components from '../../components';
 /* tslint:enable:no-unused-variable */
 
-const css: any = require('./css/Question.scss');
+const css: any = require('./Question.scss');
+const emptyQuestion: Entities.Question = { content: "" };
 
 interface QestionRoutingProps {
     id: string;
@@ -32,7 +33,7 @@ interface QuestionState {
 }
 
 @(connect<QuestionProps, QuestionProps, QuestionProps>(
-    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || {} } as any),
+    (s, {params: {id} = { id: undefined }}) => ({ question: s.questions.filter(it => it.id === Number(id))[0] || emptyQuestion } as any),
     dispatch => (bindActionCreators({ get: Actions.get, create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as QuestionProps)
 ) as ClassDecorator)
 export class Question extends React.Component<QuestionProps, QuestionState> {
@@ -42,8 +43,9 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     };
 
     public componentWillMount() {
-        const {get, params: {id}} = this.props;
-        this.state = { edit: false, create: id === "ask", question: this.props.question };
+        const {get, route: { path }, params: { id }} = this.props;
+
+        this.state = { edit: false, create: path === "ask", question: this.props.question };
 
         if (id === undefined || this.state.create) {
             return;
@@ -53,56 +55,27 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     public componentWillReceiveProps(props) {
-        const {params: {id}, question} = props;
+        const { params: {id}, question } = props;
 
         this.setState(assign({}, this.state, { question, create: id === "ask" }) as QuestionState);
     }
 
     public render() {
-        const {edit, create, question} = this.state;
-
-        if (!create && isEmpty(question)) {
-            return (<div>Loading...</div>);
-        }
+        const { edit, create, question, question: { id } } = this.state;
 
         const component = edit ? (<Components.Question.Edit {...question} onSave = { it => this.onSave(it) }/>) :
             create ? (<Components.Question.Create {...question} onCreate = { it => this.onSave(it) }/>) :
                 (<Components.Question.Read {...question} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
-        if (create) {
-            return <div>
-                { component }
-            </div>;
-        }
-
         return (
             <div className = { css.container }>
                 <div className = { css.main }>
                     { component }
-                    { this.renderComments() }
+                    <Containers.Comments parentId = { id }/>
                 </div>
-                <div className = { css.answers }>
-                    { this.renderAnswers() }
-                </div>
+                <Containers.Answers parentId = { id }/>
             </div>
         );
-    }
-
-    private renderComments() {
-        const {question: {id}} = this.props;
-
-        return id !== undefined ? (<Containers.Comments parentId = { id }/>) : (<div>Loading...</div>);
-    }
-
-    private renderAnswers() {
-        const {id} = this.props.question;
-
-        return id !== undefined ? (
-            <section>
-                <header>(Amount) answers</header>
-                <Containers.Answers parentId = { id }/>
-            </section>
-        ) : (<div>Loading...</div>);
     }
 
     private onEdit() {

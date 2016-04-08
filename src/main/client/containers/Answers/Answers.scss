@@ -1,13 +1,9 @@
-.container {
-    display: flex;
-    flex-direction: column;
+.actionButton {
+    composes: action from "../../theme/buttons.scss";
+}
 
-    @media screen and (min-width: 841px) {
-        & {
-            width: 66.66vw;
-            margin: 0 auto;
-        }
-    }
+.test {
+    background: red;
 }
 
 .answers {
@@ -31,12 +27,5 @@
                 border-bottom: none;
             }
         }
-    }
-}
-
-
-@media screen and (min-width: 841px) {
-    .main {
-        margin-bottom: 2vw;
     }
 }

@@ -11,7 +11,7 @@ interface AnswerProps extends Entities.Answer {
 
 export class Answer extends React.Component<AnswerProps, any> {
     public render() {
-        const { createdBy, createdDate, content} = this.props;
+        const { createdBy, createdDate, content, onEdit, onDelete} = this.props;
 
         return (
             <div className={css.root}>
@@ -21,28 +21,20 @@ export class Answer extends React.Component<AnswerProps, any> {
                     <button
                         className = {"btn btn-link"}
                         type = {"button"}
-                        onClick = {() => this.onEdit()}
+                        onClick = { onEdit }
                         >
                         Edit
                     </button>
                     <button
                         className = {"btn btn-link"}
                         type = {"button"}
-                        onClick = {() => this.onDelete()}
+                        onClick = { onDelete }
                         >
                         Delete
                     </button>
                 </div>
             </div>
         );
-    }
-
-    private onEdit() {
-        this.props.onEdit();
-    }
-
-    private onDelete() {
-        this.props.onDelete();
     }
 }
 

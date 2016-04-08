@@ -11,7 +11,6 @@ import * as Containers from '../../containers';
 
 interface AnswerProps extends React.Props<Answer> {
     parentId: number;
-    create?: (parentId: number, answer: Entities.Answer) => void;
     update?: (parentId: number, answer: Entities.Answer) => void;
     delete?: (parentId: number, answerId: number) => void;
     answer?: Entities.Answer;
@@ -19,13 +18,12 @@ interface AnswerProps extends React.Props<Answer> {
 
 interface AnswerState {
     edit: boolean;
-    create: boolean;
     answer: Entities.Answer;
 }
 
 @(connect<AnswerProps, AnswerProps, AnswerProps>(
     () => ({} as any),
-    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
+    dispatch => bindActionCreators({ update: Actions.update, delete: Actions.remove }, dispatch) as any
 ) as ClassDecorator)
 export class Answer extends React.Component<AnswerProps, AnswerState> {
     public static contextTypes: React.ValidationMap<any> = {
@@ -34,9 +32,9 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     };
 
     public componentWillMount() {
-        const {answer, answer: {id}} = this.props;
+        const { answer } = this.props;
 
-        this.state = { edit: false, create: (!isEmpty(answer) && id === undefined), answer };
+        this.state = { edit: false, answer };
     }
 
     public componentWillReceiveProps(props) {
@@ -46,33 +44,16 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 
     public render() {
-        const {edit, create, answer} = this.state;
+        const {edit, answer, answer: { id }} = this.state;
         const component = edit ? (<Components.Answer.Edit {...answer} onSave = { it => this.onSave(it) }/>) :
-            create ? (<Components.Answer.Create onCreate = { it => this.onSave(it) }/>) :
-                (<Components.Answer.Read {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
-
-        if (create) {
-            return (
-                <div>
-                    { component }
-                </div>
-            );
-        }
+            (<Components.Answer.Read {...answer} onEdit = { () => this.onEdit() } onDelete = { () => this.onDelete() }/>);
 
         return (
             <div>
                 { component }
-                <section>
-                    { this.renderComments() }
-                </section>
+                <Containers.Comments parentId = {id}/>
             </div>
         );
-    }
-
-    private renderComments() {
-        const { answer: { id } } = this.state;
-
-        return id !== undefined ? (<Containers.Comments parentId = {id}/>) : (<div>Loading...</div>);
     }
 
     private onEdit() {
@@ -80,16 +61,12 @@ export class Answer extends React.Component<AnswerProps, AnswerState> {
     }
 
     private onSave(answer: Entities.Answer) {
-        const { create, update, parentId } = this.props;
+        const { update, parentId } = this.props;
         const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
-        if (this.state.create) {
-            create(parentId, answer = assign({}, answer, { createdBy: `${firstName} ${lastName}` }) as Entities.Answer);
-        } else if (this.state.edit) {
-            update(parentId, answer = assign({}, answer, { lastModifiedBy: `${firstName} ${lastName}` }) as Entities.Answer);
-        }
+        update(parentId, answer = assign({}, answer, { lastModifiedBy: `${firstName} ${lastName}` }) as Entities.Answer);
 
-        this.setState(assign({}, this.state, { edit: false, create: false, answer }) as AnswerState);
+        this.setState(assign({}, this.state, { edit: false, answer }) as AnswerState);
     }
 
     private onDelete() {
