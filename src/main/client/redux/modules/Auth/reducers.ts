@@ -11,6 +11,14 @@ export function authorize(state = {}, action) {
     return state;
 }
 
+export function signOut(state = {}, action) {
+    if (action.type === Constants.SIGN_OUT) {
+        return {};
+    }
+
+    return state;
+}
+
 export function failure(state = {}, action) {
     if (action.type === Constants.AUTH && action.status === Status.FAILURE) {
         return assign({}, state, { error: action.error });

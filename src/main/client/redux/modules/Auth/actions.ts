@@ -14,6 +14,12 @@ export function authorize(login: string, password: string) {
     };
 }
 
+export function signOut() {
+    return {
+        type: Constants.SIGN_OUT
+    };
+}
+
 export function restore(auth: any) {
     return {
         type: Constants.RESTORE,

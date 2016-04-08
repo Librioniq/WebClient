@@ -13,6 +13,7 @@ import { Reducers as AuthReducers } from './Auth';
 export default combineReducers({
     routing,
     auth: reduceReducers(
+        AuthReducers.signOut,
         AuthReducers.authorize,
         AuthReducers.failure
     ),

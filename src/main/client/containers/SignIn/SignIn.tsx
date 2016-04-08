@@ -14,7 +14,7 @@ interface SignInProps extends RouteComponentProps<any, any> {
 
 @(connect<SignInProps, SignInProps, SignInProps>(
     () => ({}),
-    dispatch => bindActionCreators({ get: Modules.User.Actions.get, authorize: Modules.Auth.Actions.authorize }, dispatch)
+    dispatch => bindActionCreators({ authorize: Modules.Auth.Actions.authorize }, dispatch)
 ) as ClassDecorator)
 export class SignIn extends React.Component<SignInProps, any> {
     public static contextTypes: React.ValidationMap<any> = {
