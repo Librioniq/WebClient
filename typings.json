@@ -9,7 +9,6 @@
     "express-session": "registry:dt/express-session#0.0.0+20160227204118",
     "highlightjs": "registry:dt/highlightjs#9.1.0+20160317120654",
     "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160218094246",
-    "js-cookie": "registry:dt/js-cookie#2.0.0+20160317120654",
     "lodash": "registry:dt/lodash#3.10.0+20160330154726",
     "lokijs": "registry:dt/lokijs#0.0.0+20160316155526",
     "marked": "registry:dt/marked#0.0.0+20160316155526",

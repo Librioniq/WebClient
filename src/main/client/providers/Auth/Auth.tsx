@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
@@ -28,7 +27,7 @@ export class Auth extends React.Component<AuthProps, any> {
 
     public componentWillMount() {
         const { restore } = this.props;
-        const auth = Cookies.getJSON("auth");
+        const auth = JSON.parse(localStorage.getItem("auth"));
 
         if (!isEmpty(auth)) {
             restore(auth);
@@ -36,14 +35,14 @@ export class Auth extends React.Component<AuthProps, any> {
     }
 
     public componentWillReceiveProps(props: AuthProps) {
-        const { auth, user, get } = props;
+        const { auth, get } = props;
 
-        if (isEmpty(user) && !isEmpty(auth)) {
-            Cookies.set("auth", auth, { path: "" });
+        if (!isEmpty(auth) && isEmpty(this.props.auth)) {
+            localStorage.setItem("auth", JSON.stringify(auth));
 
             get(auth.userId);
-        } else if (isEmpty(auth) && isEmpty(Cookies.get("auth"))) {
-            Cookies.remove("auth");
+        } else if (isEmpty(auth) && !isEmpty(this.props.auth)) {
+            localStorage.removeItem("auth");
         }
     }
 
