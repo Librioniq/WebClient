@@ -1,8 +1,10 @@
-import {assign} from 'lodash';
-import {Status} from './Status';
+import { assign } from 'lodash';
+import { Status } from './Status';
+import { ResponseStrategy } from './support';
+import { find } from 'lodash';
 
 
-export default () => next => action => { // can be used with sotre like store=>next=>actoion=>...
+export default ({dispatch}) => next => action => { // can be used with sotre like store=>next=>actoion=>...
     const regex = /^api\/(\w+|\d+):(GET|POST|PUT|DELETE|LIST)?$/i;
     const isAPICall = regex.test(action.type);
 
@@ -22,13 +24,8 @@ export default () => next => action => { // can be used with sotre like store=>n
 
     next(actionWith({ status: Status.REQUEST }));
 
-    return (action.payload.request() as Promise<IResponse>)
-        .then(response => (response.status === 200 || response.status === 201) ? response.json().then(data => next(actionWith({
-            [regex.exec(action.type)[1].toLocaleLowerCase()]: data,
-            status: Status.SUCCESS
-        }))) : next(actionWith({ status: Status.SUCCESS })),
-        error => next(actionWith({
-            status: Status.FAILURE,
-            error: error.message || 'Something bad happened'
-        })));
+    return (action.payload.request() as Promise<IResponse>).then(
+        response => (find(ResponseStrategy, it => it.support(response.status)) || ResponseStrategy[0]).apply(response, action, dispatch),
+        error => ResponseStrategy[0].apply(error, action, dispatch)
+    ).then(it => next(actionWith(it)));
 }

@@ -8,7 +8,7 @@ import reducer from './modules/reducer';
 import {DevTools} from '../containers';
 
 const enhancer = compose(
-    applyMiddleware(thunk, middleware.post, middleware.question, middleware.auth, routerMiddleware(browserHistory)),
+    applyMiddleware(thunk, middleware.post, /*middleware.question,*/ middleware.auth, routerMiddleware(browserHistory)),
     persistState(
         String(window.location.href.match(
             /[?&]debug_session=([^&#]+)\b/
