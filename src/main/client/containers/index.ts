@@ -9,3 +9,4 @@ export { Answer } from './Answer/Answer';
 export { SignIn } from './SignIn/SignIn';
 export { SignOut } from './SignOut/SignOut';
 export { DevTools } from './DevTools/DevTools';
+export { NotFound } from './NotFound/NotFound';
