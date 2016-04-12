@@ -55,9 +55,9 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     public componentWillReceiveProps(props) {
-        const { params: {id}, question } = props;
+        const { route: { path }, question } = props;
 
-        this.setState(assign({}, this.state, { question, create: id === "ask" }) as QuestionState);
+        this.setState(assign({}, this.state, { question, create: path === "ask" }) as QuestionState);
     }
 
     public render() {

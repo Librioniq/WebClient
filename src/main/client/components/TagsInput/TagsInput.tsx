@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 interface TagsInputProps {
+    tags?: string[];
     onTagsChange?: (tags: string[]) => void;
 }
 
@@ -11,7 +12,9 @@ interface TagsInputState {
 
 export class TagsInput extends React.Component<TagsInputProps, TagsInputState> {
     public componentWillMount() {
-        this.state = { tags: [], content: "" };
+        const { tags } = this.props;
+
+        this.state = { tags: tags || [], content: "" };
     }
 
     public render() {
@@ -25,12 +28,24 @@ export class TagsInput extends React.Component<TagsInputProps, TagsInputState> {
                         type = { "text" }
                         value = { content }
                         className = { "form-control" }
+                        onKeyDown = { e => this.onKeyDown(e) }
                         onChange = { e => this.onInputChange((e.currentTarget as HTMLInputElement).value) }
                         aria-label = { "Tags" }
-                    />
+                        />
                 </div>
             </div>
         );
+    }
+
+    private onKeyDown(e: React.KeyboardEvent) {
+        const { tags, content } = this.state;
+        const key = e.keyCode || e.charCode;
+
+        if ((key === 8 || key === 46) && !content.length) {
+            this.setState({ tags: tags.slice(0, tags.length - 1), content: tags[tags.length - 1] });
+
+            e.preventDefault();
+        }
     }
 
     private onInputChange(content: string) {

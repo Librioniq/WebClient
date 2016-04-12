@@ -11,8 +11,7 @@ interface QuestionProps extends Entities.Question {
 
 export class Question extends React.Component<QuestionProps, any> {
     public render() {
-        let { title, tags, content, createdBy } = this.props;
-        createdBy = createdBy || 'Vladimir Puchkov';
+        const { title, tags, content, createdBy } = this.props;
 
         return (
             <div className={css.root}>
