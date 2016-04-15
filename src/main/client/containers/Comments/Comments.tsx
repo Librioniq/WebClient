@@ -28,9 +28,11 @@ interface CommentsState {
 ) as ClassDecorator)
 export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillMount() {
-        const {parentId, list} = this.props;
+        const { parentId, list } = this.props;
 
-        this.state = { create: false, comments: [] };
+        this.state = { create: true, comments: [] };
+
+        console.log('will mount');
 
         list(parentId);
     }
@@ -38,35 +40,43 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillReceiveProps(props) {
         const { create, comments } = this.state;
 
-        this.setState({ comments: create ? comments : props.comments, create: false });
+        console.log('willReceiveProps: create - ' + create);
+
+        this.setState({ comments: create ? comments : props.comments, create: true });
     }
 
     public render() {
         const { parentId } = this.props;
-        const { comments } = this.state;
+        const { comments, create } = this.state;
+
+        console.log('render: create - ' + create);
+
+        const commentsToRender = this.renderComments(comments, parentId);
+        const addButton = this.renderAddCommentButton(create, this.onAddComment.bind(this));
 
         return (
-            <section>
-                { parentId !== undefined && comments && this.renderComments() }
-            </section>
+            <div className={css.comments}>
+                {commentsToRender}
+                {addButton}
+            </div>
+
         );
     }
 
-    private renderComments() {
-        const { parentId } = this.props;
-        const { create, comments } = this.state;
-
+    private renderComments(comments, parentId) {
+        console.log('render comments');
         return (
+            !parentId ? <div>test</div> :
             <div className = {css.container}>
-                { comments && comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
-                { !create && this.renderAddCommentButton() }
+                { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
             </div>
         );
     }
 
-    private renderAddCommentButton() {
+    private renderAddCommentButton(create: boolean, action: Function) {
+        console.log('render button');
         return (
-            <button type="button" className = { css.link } onClick = { () => this.onAddComment() }>Add Comment</button>
+            !create ? 'no button :[]' : <button type="button" className = { css.link } onClick = { () => action() }>Add Comment</button>
         );
     }
 
