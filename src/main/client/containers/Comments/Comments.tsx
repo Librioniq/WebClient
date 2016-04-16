@@ -6,6 +6,7 @@ import {assign} from 'lodash';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
+import * as Comment from '../../components/Comment';
 /* tslint:enable:no-unused-variable */
 
 const css: any = require('./Comments.scss');
@@ -13,7 +14,7 @@ const css: any = require('./Comments.scss');
 interface CommentsProps extends React.Props<Comments> {
     parentId: number;
     comments?: Array<Entities.Comment>;
-    create?: (parentId: number, comment: Entities.Comment) => void;
+    handleCreate?: (parentId: number, comment: Entities.Comment) => void;
     list?: (id: number) => void;
 }
 
@@ -32,7 +33,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
         this.state = { create: true, comments: [] };
 
-        console.log('will mount');
+        console.log('will mount', this.props);
 
         list(parentId);
     }
@@ -40,7 +41,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillReceiveProps(props) {
         const { create, comments } = this.state;
 
-        console.log('willReceiveProps: create - ' + create);
+        console.log('willReceiveProps: create - ', props);
 
         this.setState({ comments: create ? comments : props.comments, create: true });
     }
@@ -49,14 +50,18 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         const { parentId } = this.props;
         const { comments, create } = this.state;
 
-        console.log('render: create - ' + create);
+        console.log('render: - ', this.props);
 
         const commentsToRender = this.renderComments(comments, parentId);
-        const addButton = this.renderAddCommentButton(create, this.onAddComment.bind(this));
+        const addButton = this.renderAddCommentButton(this.toggleNewComment.bind(this));
+        const newComment = create
+                            ? this.renderNewComment(this.onCreate.bind(this))
+                            : '';
 
         return (
             <div className={css.comments}>
                 {commentsToRender}
+                {newComment}
                 {addButton}
             </div>
 
@@ -64,33 +69,43 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     }
 
     private renderComments(comments, parentId) {
-        console.log('render comments');
+        console.log('render comments', comments);
         return (
-            !parentId ? <div>test</div> :
-            <div className = {css.container}>
-                { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
-            </div>
+            !parentId
+                ? <div>no id for parent</div>
+                : <div className = {css.container}>
+                    { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
+                </div>
         );
     }
 
-    private renderAddCommentButton(create: boolean, action: Function) {
-        console.log('render button');
+    private renderNewComment(onSave: Function) {
         return (
-            !create ? 'no button :[]' : <button type="button" className = { css.link } onClick = { () => action() }>Add Comment</button>
+            <Comment.Edit content='' onSave={onSave}/>
+        )
+    }
+
+    private renderAddCommentButton(action: Function) {
+        return (
+            <button type="button" className = { css.link } onClick = { () => action() }>Add Comment</button>
         );
     }
 
-    private onCreate(answer: Entities.Answer) {
-        const { create, parentId } = this.props;
-        const { user: { firstName, lastName } } = this.context as { user: Entities.User };
+    private onCreate(comment: Entities.Comment) {
+        const { handleCreate, parentId } = this.props;
+        // const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
-        create(parentId, answer = assign({}, answer, { createdBy: `${firstName} ${lastName}` }) as Entities.Answer);
+        handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
 
         this.setState(assign({}, this.state, { create: false }) as CommentsState);
     }
 
     private onAddComment(): void {
-        this.setState(assign({}, this.state, { create: true }) as CommentsState);
+
+    }
+
+    private toggleNewComment(): void {
+        this.setState(assign({}, this.state, { create: !this.state.create }) as CommentsState);
     }
 }
 

@@ -45,17 +45,11 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         const { comment } = this.props;
 
         let EditState = (
-            <Components.Editor content={comment.content} onChange={(content) => this.onChange(content)} />
+            <Components.Comment.Edit content={comment.content} onSave={(content) => this.onChange(content)} />
         )
 
         let ReadState = (
-            <div className={css.comment}>
-                <span className={css.content}>{comment.content}</span>
-                <section className={css.info}>
-                    <a href="#" className={css.link}>{comment.createdBy}</a>
-                    <span className={css.helper}>{comment.createdDate}</span>
-                </section>
-            </div>
+            <Components.Comment.Read comment={comment} />
         )
 
         let controls;

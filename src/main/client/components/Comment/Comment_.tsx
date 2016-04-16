@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Entities from '../../entities';
 import {  } from '../../components';
 
-const css: any = require('./Comment.scss');
+const css: any = require('./css/Comment.scss');
 
 interface CommentProps extends Entities.Comment {
     onAddComment?: Function;
