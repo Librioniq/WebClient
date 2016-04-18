@@ -33,15 +33,11 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
         this.state = { create: true, comments: [] };
 
-        console.log('will mount', this.props);
-
         list(parentId);
     }
 
     public componentWillReceiveProps(props) {
         const { create, comments } = this.state;
-
-        console.log('willReceiveProps: create - ', props);
 
         this.setState({ comments: create ? comments : props.comments, create: true });
     }
@@ -49,8 +45,6 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public render() {
         const { parentId } = this.props;
         const { comments, create } = this.state;
-
-        console.log('render: - ', this.props);
 
         const commentsToRender = this.renderComments(comments, parentId);
         const addButton = this.renderAddCommentButton(this.toggleNewComment.bind(this));
@@ -69,7 +63,6 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     }
 
     private renderComments(comments, parentId) {
-        console.log('render comments', comments);
         return (
             !parentId
                 ? <div>no id for parent</div>
