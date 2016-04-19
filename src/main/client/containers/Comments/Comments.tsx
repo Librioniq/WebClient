@@ -14,13 +14,13 @@ const css: any = require('./Comments.scss');
 interface CommentsProps extends React.Props<Comments> {
     parentId: number;
     comments?: Array<Entities.Comment>;
-    handleCreate?: (parentId: number, comment: Entities.Comment) => void;
     list?: (id: number) => void;
+    createNew?: boolean;
 }
 
 interface CommentsState {
     comments: Array<Entities.Comment>;
-    create: boolean;
+    createNew: boolean;
 }
 
 @(connect<CommentsProps, CommentsProps, CommentsProps>(
@@ -31,24 +31,24 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillMount() {
         const { parentId, list } = this.props;
 
-        this.state = { create: true, comments: [] };
+        this.state = { createNew: true, comments: [] };
 
         list(parentId);
     }
 
     public componentWillReceiveProps(props) {
-        const { create, comments } = this.state;
+        const { createNew, comments } = this.props;
 
-        this.setState({ comments: create ? comments : props.comments, create: true });
+        this.setState({ comments: createNew ? comments : props.comments, createNew: true });
     }
 
     public render() {
         const { parentId } = this.props;
-        const { comments, create } = this.state;
+        const { comments, createNew } = this.state;
 
         const commentsToRender = this.renderComments(comments, parentId);
         const addButton = this.renderAddCommentButton(this.toggleNewComment.bind(this));
-        const newComment = create
+        const newComment = createNew
                             ? this.renderNewComment(this.onCreate.bind(this))
                             : '';
 
@@ -85,12 +85,12 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     }
 
     private onCreate(comment: Entities.Comment) {
-        const { handleCreate, parentId } = this.props;
+        // const { handleCreate, parentId } = this.props;
         // const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
-        handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
+        // handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
 
-        this.setState(assign({}, this.state, { create: false }) as CommentsState);
+        this.setState(assign({}, this.state, { createNew: false }) as CommentsState);
     }
 
     private onAddComment(): void {
@@ -98,7 +98,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     }
 
     private toggleNewComment(): void {
-        this.setState(assign({}, this.state, { create: !this.state.create }) as CommentsState);
+        this.setState(assign({}, this.state, { createNew: !this.state.createNew }) as CommentsState);
     }
 }
 

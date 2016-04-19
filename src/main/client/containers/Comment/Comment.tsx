@@ -14,8 +14,8 @@ interface CommentProps extends React.Props<Comment> {
     parentId: number;
     comment?: Entities.Comment;
     edit?: boolean;
-    update?: (parentId: number, comment: Entities.Comment) => void;
-    delete?: (parentId: number, commentId: number) => void;
+    handleUpdate?: (parentId: number, comment: Entities.Comment) => void;
+    handleDelete?: (parentId: number, commentId: number) => void;
     onCancel?: Function;
 }
 
@@ -25,7 +25,7 @@ interface CommentState {
 
 @(connect<CommentProps, CommentProps, CommentProps>(
     () => ({} as any),
-    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
+    dispatch => bindActionCreators({ create: Actions.create, handleUpdate: Actions.update, handleDelete: Actions.remove }, dispatch) as any
 ) as ClassDecorator)
 export class Comment extends React.Component<CommentProps, CommentState> {
     public componentWillMount() {
@@ -102,7 +102,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     // }
 
     private onUpdate() {
-        this.props.update(this.props.parentId, this.props.comment);
+        this.props.handleUpdate(this.props.parentId, this.props.comment);
         this.setEdit(false);
     }
 
@@ -110,7 +110,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         if (this.props.onCancel) {
             this.props.onCancel(event);
         }
-        this.props.delete(this.props.parentId, this.props.comment.id);
+        this.props.handleDelete(this.props.parentId, this.props.comment.id);
     }
 }
 
