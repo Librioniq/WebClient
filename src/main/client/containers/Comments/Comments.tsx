@@ -16,6 +16,7 @@ interface CommentsProps extends React.Props<Comments> {
     comments?: Array<Entities.Comment>;
     list?: (id: number) => void;
     createNew?: boolean;
+    handleCreate?: Function;
 }
 
 interface CommentsState {
@@ -25,7 +26,7 @@ interface CommentsState {
 
 @(connect<CommentsProps, CommentsProps, CommentsProps>(
     (s, p) => ({ comments: s.comments.filter(it => it.parentId === p.parentId) } as any),
-    dispatch => bindActionCreators({ list: Actions.list }, dispatch) as any
+    dispatch => bindActionCreators({ list: Actions.list, handleCreate: Actions.create }, dispatch) as any
 ) as ClassDecorator)
 export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillMount() {
@@ -64,17 +65,17 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
     private renderComments(comments, parentId) {
         return (
-            !parentId
-                ? <div>no id for parent</div>
-                : <div className = {css.container}>
+            parentId
+                ? <div className = {css.container}>
                     { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
                 </div>
+                : <div>no id for parent</div>
         );
     }
 
     private renderNewComment(onSave: Function) {
         return (
-            <Comment.Edit content='' onSave={onSave}/>
+            <Comment.Edit content='' onSave={onSave.bind(this)}/>
         )
     }
 
@@ -85,10 +86,12 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     }
 
     private onCreate(comment: Entities.Comment) {
-        // const { handleCreate, parentId } = this.props;
+        const { handleCreate, parentId } = this.props;
         // const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
-        // handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
+        handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
+
+        console.log(comment);
 
         this.setState(assign({}, this.state, { createNew: false }) as CommentsState);
     }

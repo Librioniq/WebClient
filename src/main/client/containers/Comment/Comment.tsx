@@ -25,7 +25,7 @@ interface CommentState {
 
 @(connect<CommentProps, CommentProps, CommentProps>(
     () => ({} as any),
-    dispatch => bindActionCreators({ create: Actions.create, handleUpdate: Actions.update, handleDelete: Actions.remove }, dispatch) as any
+    dispatch => bindActionCreators({ create: Actions.create, update: Actions.update, delete: Actions.remove }, dispatch) as any
 ) as ClassDecorator)
 export class Comment extends React.Component<CommentProps, CommentState> {
     public componentWillMount() {

@@ -65,8 +65,7 @@ export class Answers extends React.Component<AnswersProps, AnswersState> {
                 <header>{ answers.length } answers</header>
                 <div>
                     { answers.map(answer => <Containers.Answer answer = { answer } parentId = { parentId }/>) }
-                    { create && this.renderNewAnswer() }
-                    { !create && this.renderAddAnswerButton() }
+                    { create ? this.renderNewAnswer() : this.renderAddAnswerButton() }
                 </div>
             </section>
         );
