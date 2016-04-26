@@ -71,7 +71,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
             <div className = { css.container }>
                 <div className = { css.main }>
                     { component }
-                    <Containers.Comments parentId = { id }/>
+                    <Containers.Comments parentId = { id } createNew={true} />
                 </div>
                 <Containers.Answers parentId = { id }/>
             </div>

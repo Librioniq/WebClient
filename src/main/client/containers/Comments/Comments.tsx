@@ -33,15 +33,14 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillMount() {
         const { parentId, list } = this.props;
 
-        this.state = { createNew: true, comments: [] };
+        this.state = { createNew: false, comments: [] };
 
         list(parentId);
     }
 
     public componentWillReceiveProps(props) {
-        const { createNew, comments } = this.props;
 
-        this.setState({ comments: comments, createNew: createNew });
+        this.setState({ comments: props.comments, createNew: props.createNew });
     }
 
     public render() {

@@ -45,14 +45,6 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         const { edit } = this.state;
         const { comment } = this.props;
 
-        let EditState = (
-            <Components.Comment.Edit content={comment.content} onSave={(content) => this.onChange(content)} />
-        )
-
-        let ReadState = (
-            <Components.Comment.Read comment={comment} />
-        )
-
         let controls;
 
         if (edit) {
@@ -76,7 +68,9 @@ export class Comment extends React.Component<CommentProps, CommentState> {
             </section>
         )
 
-        const component = edit ? EditState : ReadState
+        const component = edit
+        ? <Components.Comment.Edit content={comment.content} onSave={(content) => this.onChange(content)} />
+        : <Components.Comment.Read comment={comment} />
 
         return (
             <section className={css.container}>

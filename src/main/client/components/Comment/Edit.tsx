@@ -39,7 +39,7 @@ export class EditComment extends React.Component<Props, State> {
             let comment = {
                 content: this.state.content
             } as Entities.Comment;
-
+            
             this.props.onSave(comment);
         }
     }
