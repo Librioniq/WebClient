@@ -27,7 +27,6 @@ export class Comment extends Post<Entities.Comment> {
      * Create special element from given entity
      */
     public post(postId: number, element: Entities.Comment): Promise<Response<Entities.Comment>> {
-        console.log(element);
         return fetch(expand(this.endpoint, { postId }), post(element));
     }
     /**
