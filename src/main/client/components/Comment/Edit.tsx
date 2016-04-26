@@ -35,20 +35,17 @@ export class EditComment extends React.Component<Props, State> {
     }
 
     private save() {
-        let comment = {
-            content: this.state.content,
-            parentId: 1
-        } as Entities.Comment;
+        if (this.state.content.length > 0) {
+            let comment = {
+                content: this.state.content
+            } as Entities.Comment;
 
-        console.log(this.state.content);
-
-        this.props.onSave(1, comment);
+            this.props.onSave(1, comment);
+        }
     }
 
     private handleChange(content) {
-        if (content.length > 0) {
-            this.setState({ content: content });
-        }
+        this.setState({content: content});
     }
 }
 
