@@ -14,8 +14,9 @@ const css: any = require('./Comments.scss');
 interface CommentsProps extends React.Props<Comments> {
     parentId: number;
     comments?: Array<Entities.Comment>;
-    list?: (id: number) => void;
     createNew?: boolean;
+
+    list?: (id: number) => void;
     handleCreate?: Function;
 }
 
@@ -40,7 +41,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
     public componentWillReceiveProps(props) {
         const { createNew, comments } = this.props;
 
-        this.setState({ comments: createNew ? comments : props.comments, createNew: true });
+        this.setState({ comments: comments, createNew: createNew });
     }
 
     public render() {
@@ -49,17 +50,14 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
         const commentsToRender = this.renderComments(comments, parentId);
         const addButton = this.renderAddCommentButton(this.toggleNewComment.bind(this));
-        const newComment = createNew
-                            ? this.renderNewComment(this.onCreate.bind(this))
-                            : '';
+        const newComment = this.renderNewComment(this.onCreate.bind(this))
 
         return (
             <div className={css.comments}>
-                {commentsToRender}
-                {newComment}
-                {addButton}
+                { commentsToRender }
+                { createNew ? newComment : '' }
+                { addButton }
             </div>
-
         );
     }
 
@@ -67,7 +65,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         return (
             parentId
                 ? <div className = {css.container}>
-                    { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId }/>) }
+                    { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId } />) }
                 </div>
                 : <div>no id for parent</div>
         );
@@ -92,10 +90,6 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         handleCreate(parentId, comment);
 
         this.setState(assign({}, this.state, { createNew: false }) as CommentsState);
-    }
-
-    private onAddComment(): void {
-
     }
 
     private toggleNewComment(): void {
