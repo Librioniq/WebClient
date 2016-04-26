@@ -75,7 +75,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
     private renderNewComment(onSave: Function) {
         return (
-            <Comment.Edit content='' onSave={onSave.bind(this)}/>
+            <Comment.Edit content='' onSave={onSave} />
         )
     }
 
@@ -89,9 +89,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         const { handleCreate, parentId } = this.props;
         // const { user: { firstName, lastName } } = this.context as { user: Entities.User };
 
-        handleCreate(parentId, comment = assign({}, comment) as Entities.Comment);
-
-        console.log(comment);
+        handleCreate(parentId, comment);
 
         this.setState(assign({}, this.state, { createNew: false }) as CommentsState);
     }

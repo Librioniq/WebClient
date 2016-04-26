@@ -18,7 +18,7 @@ export class Comment extends Post<Entities.Comment> {
     }
     /**
      * Get special element from web storage
-     * @param id identifier of element 
+     * @param id identifier of element
      */
     public get(postId: number, id: number): Promise<Response<Entities.Comment>> {
         return fetch(get(`${expand(this.endpoint, { postId })}/${id}`));
