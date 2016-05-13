@@ -30,6 +30,11 @@ interface CommentsState {
     dispatch => bindActionCreators({ list: Actions.list, handleCreate: Actions.create }, dispatch) as any
 ) as ClassDecorator)
 export class Comments extends React.Component<CommentsProps, CommentsState> {
+    public static contextTypes: React.ValidationMap<any> = {
+        auth: React.PropTypes.object,
+        user: React.PropTypes.object
+    }
+
     public componentWillMount() {
         const { parentId, list } = this.props;
 
