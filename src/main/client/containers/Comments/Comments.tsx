@@ -6,7 +6,8 @@ import {assign} from 'lodash';
 import * as Entities from '../../entities';
 /* tslint:disable:no-unused-variable */
 import * as Containers from '../../containers';
-import * as Comment from '../../components/Comment';
+// import * as Comment from '../../components/Comment';
+import Comment from '../../feature/Comment/Comment';
 /* tslint:enable:no-unused-variable */
 
 const css: any = require('./Comments.scss');
@@ -54,12 +55,13 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
 
         const commentsToRender = this.renderComments(comments, parentId);
         const addButton = this.renderAddCommentButton(this.toggleNewComment.bind(this));
-        const newComment = this.renderNewComment(this.onCreate.bind(this))
+        // const newComment = this.renderNewComment(this.onCreate.bind(this))
+        //{ createNew ? newComment : '' }
 
         return (
             <div className={css.comments}>
                 { commentsToRender }
-                { createNew ? newComment : '' }
+
                 { addButton }
             </div>
         );
@@ -75,11 +77,11 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         );
     }
 
-    private renderNewComment(onSave: Function) {
-        return (
-            <Comment.Edit content='' onSave={onSave} />
-        )
-    }
+    // private renderNewComment(onSave: Function) {
+    //     return (
+    //         <Comment.Edit content='' onSave={onSave} />
+    //     )
+    // }
 
     private renderAddCommentButton(action: Function) {
         return (

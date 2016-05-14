@@ -1,4 +1,4 @@
-export interface model {
+export interface Model {
     id?: number;
     content: string;
     createdDate?: Date;

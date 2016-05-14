@@ -1,13 +1,13 @@
-import * as React from "react";
+import {Model} from './Model';
+import {Edit} from './stateEdit';
+// import {Read} from './stateRead';
+import {Update} from './stateUpdate';
+import {Actions} from './redux/';
+
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {assign, isEmpty} from 'lodash';
-// import * as Entities from '../../entities';
-import Model from 'model';
-/* tslint:disable:no-unused-variable */
-import * as Components from '../../components';
-/* tslint:enable:no-unused-variable */
-import {Actions} from '../../redux/modules/Comment';
 
 const css: any = require('./Comment.scss');
 
@@ -70,8 +70,8 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         )
 
         const component = edit
-        ? <Components.Comment.Edit content={comment.content} onSave={(content) => this.onChange(content)} />
-        : <Components.Comment.Read comment={comment} />
+        ? <Edit content={comment.content} onSave={(content) => this.onChange(content)} />
+        : <Update comment={comment} />
 
         return (
             <section className={css.container}>
