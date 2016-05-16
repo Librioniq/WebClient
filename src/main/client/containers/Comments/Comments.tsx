@@ -1,14 +1,11 @@
-import * as React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Actions} from  '../../redux/modules/Comment';
-import {assign} from 'lodash';
-import * as Entities from '../../entities';
-/* tslint:disable:no-unused-variable */
-import * as Containers from '../../containers';
-// import * as Comment from '../../components/Comment';
 import Comment from '../../feature/Comment/Comment';
-/* tslint:enable:no-unused-variable */
+import * as Entities from '../../entities';
+import { Actions } from  '../../redux/modules/Comment';
+
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { assign } from 'lodash';
 
 const css: any = require('./Comments.scss');
 
@@ -71,7 +68,7 @@ export class Comments extends React.Component<CommentsProps, CommentsState> {
         return (
             parentId
                 ? <div className = {css.container}>
-                    { comments.map(comment => <Containers.Comment comment = { comment } parentId = { parentId } />) }
+                    { comments.map(comment => <Comment comment = { comment } parentId = { parentId } />) }
                 </div>
                 : <div>no id for parent</div>
         );

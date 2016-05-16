@@ -1,20 +1,25 @@
-import * as React from 'react';
-import { assign } from 'lodash';
 import { Model } from './Model';
 import { Editor } from '../editor/Editor';
+
+import * as React from 'react';
+import { assign } from 'lodash';
 
 interface CommentProps {
     onSave?: (comment: Model) => void;
     comment?: Model;
 }
 
-export class Update extends React.Component<CommentProps, Model> {
+export class Update extends React.Component<CommentProps, any> {
     public componentWillMount() {
         this.state = assign({}, this.props) as Model;
     }
 
+    private componentWillReceiveProps(props) {
+        this.state = assign({}, this.props) as Model;
+    }
+
     public render() {
-        const {content} = this.state;
+        const {content} = this.state.content;
 
         return (
             <div>

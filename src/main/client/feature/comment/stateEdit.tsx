@@ -1,7 +1,8 @@
-import {Model} from './Model';
+import { Model } from './Model';
 import Editor from '../editor/Editor';
+
 import * as React from 'react';
-import {assign} from 'lodash';
+import { assign } from 'lodash';
 
 const css: any = require('./Comment.scss');
 

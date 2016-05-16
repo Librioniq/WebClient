@@ -1,4 +1,4 @@
-import {Model} from './Model';
+import { Model } from './Model';
 import Editor from '../editor/Editor'
 
 import * as React from 'react';
@@ -9,7 +9,7 @@ interface Props {
     comment: Model;
 }
 
-function Read(props: Props) {
+export function Read(props: Props) {
     return (
         <div className={css.comment}>
             <span className={css.content}>{props.comment.content}</span>
@@ -20,5 +20,3 @@ function Read(props: Props) {
         </div>
     )
 }
-
-export default Read;

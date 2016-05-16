@@ -1,13 +1,13 @@
-import {Model} from './Model';
-import {Edit} from './stateEdit';
-// import {Read} from './stateRead';
-import {Update} from './stateUpdate';
-import {Actions} from './redux/';
+import { Model } from './Model';
+import { Edit } from './stateEdit';
+import { Read } from './stateRead';
+import { Update } from './stateUpdate';
+import { Actions } from './redux/';
 
 import * as React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {assign, isEmpty} from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { assign, isEmpty } from 'lodash';
 
 const css: any = require('./Comment.scss');
 
@@ -31,7 +31,7 @@ interface CommentState {
 ) as ClassDecorator)
 export class Comment extends React.Component<CommentProps, CommentState> {
     public componentWillMount() {
-        const {comment, comment: {id}} = this.props;
+        // const {comment, comment: {id}} = this.props;
 
         this.state = { edit: this.props.edit };
     }
@@ -39,7 +39,7 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     public componentWillReceiveProps(props) {
         const {comment, comment: {id}} = props;
 
-        this.setState(assign({}, this.state, { edit: this.props.edit }) as CommentState);
+        this.setState(assign({}, this.state, { edit: props.edit }) as CommentState);
     }
 
     public render() {
@@ -70,8 +70,8 @@ export class Comment extends React.Component<CommentProps, CommentState> {
         )
 
         const component = edit
-        ? <Edit content={comment.content} onSave={(content) => this.onChange(content)} />
-        : <Update comment={comment} />
+            ? <Edit content={comment.content} onSave={(content) => this.onChange(content)} />
+            : Read({comment: comment});
 
         return (
             <section className={css.container}>
@@ -103,10 +103,8 @@ export class Comment extends React.Component<CommentProps, CommentState> {
     }
 
     private onDelete() {
-        // if (this.props.onCancel) {
-        //     this.props.onCancel(event);
-        // }
         this.props.handleDelete(this.props.parentId, this.props.comment.id);
+        this.setEdit(false);
     }
 }
 
